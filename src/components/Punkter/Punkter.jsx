@@ -1,6 +1,7 @@
 /* eslint-disable react/jsx-pascal-case */ //Pascal case ved TilføjPunkt ???
 import React, { useEffect } from "react";
 import Checkbox from "../Checkbox/index";
+import moment from "moment";
 import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
 import { samletPunkter } from "../../constants";
@@ -26,7 +27,6 @@ const Punkter = () => {
   useEffect(() => {
     document.title = `${listeNavn}`;
   });
-
   return (
     <div className="punkter" data-testid="punkter">
       <h2 data-testid="liste-navn">
@@ -37,8 +37,11 @@ const Punkter = () => {
           // mapper i gennem punkterne - identifier for hver enkelt punkt.
           <li key={`${punkt.id}`}>
             <Checkbox id={punkt.id} indhold={punkt.punkt} />
-            <span>{punkt.punkt} </span>
-            <span>- (id="{punkt.listeId}")</span>
+            <span className="punkt-punkt">{punkt.punkt} </span>
+            <span className="punkt-dato">
+              ~ {moment([punkt.dato], "YYYY/MM/DD HH:mm").fromNow()}
+              {listeNavn === "ALLE" ? " @ " + punkt.listeId : ""}
+            </span>
           </li>
         ))}
       </ul>

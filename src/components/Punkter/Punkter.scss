@@ -1,7 +1,9 @@
+@import "../Styles/mixins.scss";
+
 .punkter {
   width: 344px;
   background-color: white;
-  margin-left: 180px;
+  margin-left: 169px;
   border-right: 1px solid #f1f1f1;
   min-height: calc(100vh);
   vertical-align: top;
@@ -14,20 +16,47 @@
   width: auto;
 
   h2 {
-    font-size: 25px;
-    font-weight: 400;
+    font-size: 26px;
+    font-weight: 600;
     margin: 0 30px 20px 0;
+    display: block;
+    text-transform: lowercase;
+    &:first-letter {
+      // Virkede ikke uden denne af en eller anden grund...
+      text-transform: capitalize; // overskriften var all caps før.
+    }
   }
 
   //Styling af punkter ->
   &__liste li {
+    // color: $bgc-generic();
+    color: rgb(66, 66, 66);
+
     display: flex;
     line-height: 15px;
-    color: #333;
     padding-top: 7px;
     padding-bottom: 7px;
     font-size: 14px;
     list-style-type: none;
-    border-bottom: 1px solid #f0f0f0;
+    border-top: 1px solid #f0f0f0;
+
+    span {
+      // punkt texten
+      &.punkt-punkt {
+        position: relative;
+        width: 72%;
+      }
+
+      &.punkt-dato {
+        // time ago
+        color: rgb(161, 154, 154);
+        font-style: italic;
+        display: inline-block;
+        text-align: right;
+        font-size: 10px;
+        width: 28%;
+        text-transform: lowercase;
+      }
+    }
   }
 }

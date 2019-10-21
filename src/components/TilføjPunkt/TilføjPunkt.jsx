@@ -10,7 +10,8 @@ const TilføjPunkt = () => {
 
   const tilføjPunkt = () => {
     // const valgtListe = "ALLE";
-    let dato = moment().format("DD/MM/YYYY LT"); // Sætter dato til dagens dato.
+    // let dato = moment().format("DD/MM/YYYY LT"); // Sætter dato til dagens dato.
+    let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
 
     return (
       punkt &&
