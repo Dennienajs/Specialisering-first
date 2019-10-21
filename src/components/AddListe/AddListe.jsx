@@ -9,7 +9,6 @@ const AddListe = ({ defaultVis = false }) => {
   const [listeNavn, setListeNavn] = useState("");
 
   const { lister, setLister } = useListerValue();
-
   const listeId = uuid();
 
   const addListe = () =>
@@ -24,6 +23,13 @@ const AddListe = ({ defaultVis = false }) => {
         setVis(false);
       });
 
+  //Tilføj via enter
+  const keyPressed = event => {
+    if (event.key === "Enter" && listeNavn.length > 0) {
+      addListe();
+    }
+  };
+
   return (
     <div className="add-liste">
       {vis && (
@@ -34,6 +40,7 @@ const AddListe = ({ defaultVis = false }) => {
             type="text"
             className="add-liste__navn"
             placeholder="Navn på listen"
+            onKeyPress={keyPressed}
           />
           <button
             className="add-liste__submit"

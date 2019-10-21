@@ -1,3 +1,7 @@
+/*
+    Brugte denne i starten, men tror godt den efterhånden kan undlades.
+*/
+
 export const samletPunkter = [
   {
     key: "ALLE",
@@ -12,19 +16,15 @@ export const samletPunkter = [
     navn: "denneUge"
   },
   {
-    key: "ARKIVERET",
-    navn: "arkiveret"
-  },
-  {
     key: "TODO",
     navn: "todo"
   },
   {
     key: "BUGS",
     navn: "bugs"
-  },
-  {
-    key: "INDKØB",
-    navn: "indkøb"
   }
+  // {
+  //   key: "INDKØB",
+  //   navn: "indkøb"
+  // }
 ];

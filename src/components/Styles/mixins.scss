@@ -1,5 +1,12 @@
+// SCSS / SASS - fortrækker faktisk SCSS syntax'en.
+// https://sass-lang.com/documentation/at-rules/mixin
+
+// Disse mixins kan bruges af andre scss filer via @import './mixins.scss
+
+// Samme blå "tema farve" (header, markering af liste, liste pil, checkbox border)
 $bgc-generic: #8092e2;
 
+// Tilføj knap - punkter + lister
 @mixin btnStyle() {
   cursor: pointer;
   width: 75px;
@@ -22,6 +29,7 @@ $bgc-generic: #8092e2;
   text-align: center;
 }
 
+// kan ikke markeres
 @mixin no-select {
   -webkit-touch-callout: none;
   -webkit-user-select: none;
@@ -30,6 +38,7 @@ $bgc-generic: #8092e2;
   user-select: none;
 }
 
+// align - center/left (hugget)
 @mixin verticalalign($va-align: center) {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -54,6 +63,7 @@ $bgc-generic: #8092e2;
   border: 0;
 }
 
+// react-fa-icons i sidebar + header.
 @mixin svgStyle {
   width: 20px;
   height: 20px;
@@ -63,4 +73,5 @@ $bgc-generic: #8092e2;
   }
 }
 
+// bruges flere steder, så siden ikke bliver for stor.
 $maxWidth: 700px;

@@ -4,22 +4,17 @@ import Checkbox from "../Checkbox/index";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
-import { samletPunkter } from "../../constants";
-import {
-  getListeNavn,
-  getSamletListeNavn,
-  samletPunkterFundet
-} from "../../helpers";
-import { useValgtListeValue, useListerValue } from "../../context";
+import { useValgtListeValue } from "../../context";
 
 const Punkter = () => {
   const { valgtListe } = useValgtListeValue();
-  const { lister } = useListerValue();
+
+  // const { lister } = useListerValue();
+  // const { arkiveretPunkter } = usePunkter(valgtListe);
 
   // i usePunkter("SØGE-ID") - kan man insætte fx 1 for at vise alle puntker med listeId = 1.
   // tomme ("") - vil vise punkter ligegyldigt id. (stadig kun !arkiveret)
   const { punkter } = usePunkter(valgtListe); // viser alle punkter med "listeId = "1"...
-  const { arkiveretPunkter } = usePunkter(valgtListe);
 
   let listeNavn = valgtListe;
 

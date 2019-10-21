@@ -9,8 +9,6 @@ const TilføjPunkt = () => {
   const { valgtListe } = useValgtListeValue();
 
   const tilføjPunkt = () => {
-    // const valgtListe = "ALLE";
-    // let dato = moment().format("DD/MM/YYYY LT"); // Sætter dato til dagens dato.
     let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
 
     return (
@@ -20,10 +18,10 @@ const TilføjPunkt = () => {
         .collection("punkter")
         .add({
           arkiveret: false,
-          brugerId: "1234567890",
-          dato: dato,
+          brugerId: "1234567890", // eneste bruger.
+          dato, //dato:dato
           listeId: valgtListe,
-          punkt
+          punkt // punkt:punkt
         })
         .then(() => {
           setPunkt("");
@@ -31,6 +29,7 @@ const TilføjPunkt = () => {
     );
   };
 
+  //Tilføj via enter
   const keyPressed = event => {
     if (event.key === "Enter" && punkt.length > 0) {
       tilføjPunkt();
