@@ -1,0 +1,33 @@
+.punkter {
+  width: 344px;
+  background-color: white;
+  margin-left: 180px;
+  border-right: 1px solid #f1f1f1;
+  min-height: calc(100vh);
+  vertical-align: top;
+  padding-left: 30px;
+  padding-right: 30px;
+  padding-top: 75px;
+  padding-bottom: 60px;
+
+  max-width: 600px;
+  width: auto;
+
+  h2 {
+    font-size: 25px;
+    font-weight: 400;
+    margin: 0 30px 20px 0;
+  }
+
+  //Styling af punkter ->
+  &__liste li {
+    display: flex;
+    line-height: 15px;
+    color: #333;
+    padding-top: 7px;
+    padding-bottom: 7px;
+    font-size: 14px;
+    list-style-type: none;
+    border-bottom: 1px solid #f0f0f0;
+  }
+}

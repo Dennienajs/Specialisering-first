@@ -1,0 +1,66 @@
+$bgc-generic: #8092e2;
+
+@mixin btnStyle() {
+  cursor: pointer;
+  width: 75px;
+  color: white !important;
+  background-color: $bgc-generic;
+  border: 3px solid transparent;
+  font-weight: bolder;
+
+  margin-top: 10px;
+  margin-right: 5px;
+  font-size: 13px;
+  line-height: 18px;
+  padding: 6px 12px 7px 12px;
+
+  position: relative;
+  display: inline-block;
+  white-space: nowrap;
+  border-radius: 5px !important;
+  text-decoration: none !important;
+  text-align: center;
+}
+
+@mixin no-select {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+@mixin verticalalign($va-align: center) {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+
+  @if $va-align != center {
+    -webkit-box-pack: left;
+    -ms-flex-pack: left;
+    justify-content: left;
+  } @else {
+    -webkit-box-pack: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+  }
+}
+
+@mixin transparent-button() {
+  background-color: transparent;
+  border: 0;
+}
+
+@mixin svgStyle {
+  width: 20px;
+  height: 20px;
+  color: black;
+  &:hover {
+    color: white;
+  }
+}
+
+$maxWidth: 700px;

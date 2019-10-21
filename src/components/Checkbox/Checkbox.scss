@@ -1,0 +1,18 @@
+.checkbox-holder {
+  margin-right: 27px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  line-height: 20px;
+
+  .checkbox {
+    cursor: pointer;
+    border-color: #333;
+    color: #343434;
+    height: 15px;
+    width: 15px;
+    display: block;
+    border: 1px solid grey;
+    border-radius: 15px;
+  }
+}

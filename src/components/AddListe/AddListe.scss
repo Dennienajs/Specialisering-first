@@ -1,0 +1,48 @@
+@import "../Styles/mixins.scss";
+
+.add-liste {
+  @include no-select;
+
+  border-top: 1px solid #f1f1f1;
+  padding-top: 13px;
+
+  padding-left: 12px;
+  padding-right: 20px;
+  margin-top: 20px;
+
+  &__input {
+    margin-bottom: 19px;
+  }
+
+  &__navn {
+    width: 100%;
+    border: 2px solid #8092e2;
+    background-color: white !important;
+    border-radius: 3.5px;
+    height: 30px;
+    padding-right: 15px;
+    padding-left: 15px;
+  }
+
+  &__fortryd,
+  &__submit {
+    @include no-select;
+  }
+
+  &__submit {
+    @include btnStyle();
+  }
+
+  &__fortryd {
+    color: #555;
+    cursor: pointer;
+    font-size: 14px;
+    margin: 2px 5px;
+  }
+
+  &__setVis {
+    padding-left: 10px;
+    font-size: 14px;
+    color: grey;
+  }
+}

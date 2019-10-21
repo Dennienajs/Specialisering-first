@@ -1,0 +1,74 @@
+@import "../../components/Styles/mixins.scss";
+
+header {
+  border-bottom: solid 1px $bgc-generic;
+  background-color: $bgc-generic;
+  -webkit-transition: height 200ms ease-in;
+  transition: height 200ms ease-in;
+  height: 45px;
+  z-index: 400;
+  position: fixed;
+  top: 0;
+  width: 100%;
+
+  nav {
+    display: grid;
+    -webkit-box-align: center;
+    -ms-flex-align: center;
+    align-items: center;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr;
+    grid-column-gap: 0px;
+    grid-row-gap: 0px;
+    max-width: $maxWidth;
+    margin: auto;
+    height: 50px;
+
+    div {
+      &.logo {
+        padding-left: 1px;
+        grid-area: 1 / 1;
+
+        img {
+          width: 50px;
+        }
+      }
+
+      &.settings {
+        grid-area: 1 / 2;
+        text-align: right;
+      }
+
+      ul {
+        float: right;
+      }
+
+      ul li {
+        @include verticalalign;
+
+        margin-right: 15px;
+        list-style-type: none;
+        cursor: pointer;
+        // width: 30;
+        // height: 30;
+        text-align: center;
+        vertical-align: middle;
+        float: left;
+
+        &:hover {
+          border-radius: 2px;
+          background-color: white;
+        }
+
+        // button for både settings-add & settings-darkmode.
+        button {
+          @include transparent-button();
+          color: black;
+          cursor: pointer;
+          display: flex;
+          padding-right: 10px;
+        }
+      }
+    }
+  }
+}

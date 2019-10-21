@@ -1,0 +1,9 @@
+@import "../Styles/mixins.scss";
+
+.sidebar__star {
+  padding-right: 10px;
+
+  svg {
+    @include svgStyle();
+  }
+}

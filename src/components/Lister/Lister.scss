@@ -1,0 +1,35 @@
+@import "../Styles/mixins.scss";
+
+.sidebar__liste {
+  @include verticalalign("left");
+
+  cursor: pointer;
+  padding: 8px 0;
+  padding-left: 10px;
+  padding-right: 1px;
+  font-size: 12px;
+
+  width: 100%;
+
+  &:hover {
+    font-weight: bold;
+    background-color: $bgc-generic;
+    color: white;
+    svg {
+      color: white;
+    }
+  }
+
+  @include no-select;
+
+  width: auto;
+  overflow-x: hidden;
+  overflow-y: hidden;
+  background-color: #fafafa;
+
+  &.aktivListe {
+    font-weight: bolder;
+    background-color: $bgc-generic;
+    color: white;
+  }
+}
