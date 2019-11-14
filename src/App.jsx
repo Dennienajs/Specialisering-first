@@ -16,3 +16,13 @@ export const App = () => {
     </ValgtListeProvider>
   );
 };
+
+/*
+
+Online at:
+https://specialisering-1st.dennienajs.now.sh/
+
+to update:
+now --prod
+
+*/

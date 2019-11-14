@@ -35,7 +35,7 @@ const Punkter = () => {
             <span className="punkt-punkt">{punkt.punkt} </span>
             <span className="punkt-dato">
               ~ {moment([punkt.dato], "YYYY/MM/DD HH:mm").fromNow()}
-              {listeNavn === "ALLE" ? " @ " + punkt.listeId : ""}
+              {listeNavn === "ALLE" ? " @" + punkt.listeId : ""}
             </span>
           </li>
         ))}
