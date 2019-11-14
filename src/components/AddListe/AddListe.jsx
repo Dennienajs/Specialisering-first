@@ -39,7 +39,7 @@ const AddListe = ({ defaultVis = false }) => {
             onChange={e => setListeNavn(e.target.value)}
             type="text"
             className="add-liste__navn"
-            placeholder="Navn på listen"
+            placeholder="Liste Navn"
             onKeyPress={keyPressed}
           />
           <button
