@@ -163,7 +163,7 @@ const Sidebar = () => {
         <span>
           <FaLongArrowAltDown className={!visLister ? "skjult" : undefined} />
         </span>
-        <h2>{!visLister ? "Vis Egne Lister" : "Dine Lister"}</h2>
+        <h2>{!visLister ? "Egne Lister" : "Dine Lister"}</h2>
       </div>
 
       <ul className="sidebar__lister">{visLister && <Lister />}</ul>

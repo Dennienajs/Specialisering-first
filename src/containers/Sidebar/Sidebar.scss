@@ -3,9 +3,9 @@
 .sidebar {
   @include no-select;
 
-  width: 166px;
+  width: 136px;
   height: calc(100vh);
-  padding-top: 74px;
+  padding-top: 64px;
   position: fixed;
   // overflow-x: hidden;
   // overflow-y: hidden;
@@ -75,10 +75,10 @@
     h2 {
       margin: 1;
       color: #333;
-      font-size: 14px;
+      font-size: 13px;
       font-weight: bold;
-      padding-top: 5px;
-      padding-bottom: 5px;
+      padding-top: 3px;
+      padding-bottom: 3px;
     }
 
     margin-bottom: 13px;
