@@ -4,11 +4,15 @@
   @include no-select;
 
   width: 136px;
-  height: calc(100vh);
+  // height: calc(100vh);
+  height: 100%;
   padding-top: 64px;
   position: fixed;
-  // overflow-x: hidden;
-  // overflow-y: hidden;
+
+  // Making sidebar scrollable + little space at the but
+  max-height: calc(100vh - 3rem);
+  overflow-y: auto;
+
   border-right: 1px solid #f1f1f1;
   background-color: #fafafa;
 
