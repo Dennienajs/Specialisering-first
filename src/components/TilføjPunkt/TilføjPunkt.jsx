@@ -29,27 +29,26 @@ const TilføjPunkt = () => {
     );
   };
 
-  //Tilføj via enter
-  const keyPressed = event => {
-    if (event.key === "Enter" && punkt.length > 0) {
-      tilføjPunkt();
-    }
-  };
-
   return (
-    <div className="tilføj-punkt">
+    <div className="tilføj-punkt" data-testid="tilføj-punkt">
       <input
         type="text"
         className="tilføj-punkt__input"
         value={punkt}
         onChange={e => setPunkt(e.target.value)}
         placeholder={`tilføj til ${valgtListe.toLowerCase()}`}
-        onKeyPress={keyPressed}
+        onKeyPress={event => {
+          if (event.key === "Enter" && punkt.length > 0) {
+            tilføjPunkt();
+          }
+        }}
+        data-testid="tilføj-punkt-input"
       />
       <button
         type="button"
         className="tilføj-punkt__submit"
         onClick={() => tilføjPunkt()}
+        data-testid="tilføj-punkt-button"
       >
         Tilføj
       </button>
