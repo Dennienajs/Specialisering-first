@@ -26,6 +26,7 @@ const Sidebar = () => {
           className={aktivListe === "alle" ? "aktivListe" : undefined}
         >
           <div
+            data-testid="alle-action"
             role="button"
             onClick={() => {
               setAktivListe("alle"); //Den som skal "markeres"
@@ -48,6 +49,7 @@ const Sidebar = () => {
           className={aktivListe === "idag" ? "aktivListe" : undefined}
         >
           <div
+            data-testid="idag-action"
             role="button"
             onClick={() => {
               setAktivListe("idag");
@@ -70,6 +72,7 @@ const Sidebar = () => {
           className={aktivListe === "denneUge" ? "aktivListe" : undefined}
         >
           <div
+            data-testid="denneUge-action"
             role="button"
             onClick={() => {
               setAktivListe("denneUge");
@@ -92,6 +95,7 @@ const Sidebar = () => {
           className={aktivListe === "todo" ? "aktivListe" : undefined}
         >
           <div
+            data-testid="todo-action"
             role="button"
             onClick={() => {
               setAktivListe("todo");
@@ -114,6 +118,7 @@ const Sidebar = () => {
           className={aktivListe === "bugs" ? "aktivListe" : undefined}
         >
           <div
+            data-testid="bugs-action"
             role="button"
             onClick={() => {
               setAktivListe("bugs");
@@ -136,6 +141,7 @@ const Sidebar = () => {
           className={aktivListe === "indkøb" ? "aktivListe" : undefined}
         >
           <div
+            data-testid="indkøb-action"
             role="button"
             onClick={() => {
               setAktivListe("indkøb");
@@ -154,6 +160,7 @@ const Sidebar = () => {
         </li>
       </ul>
       <div
+        data-testid="sidebar-egne-lister"
         className="sidebar__liste-vis"
         role="button"
         tabIndex={0}
@@ -163,7 +170,7 @@ const Sidebar = () => {
         <span>
           <FaLongArrowAltDown className={!visLister ? "skjult" : undefined} />
         </span>
-        <h2>{!visLister ? "Egne Lister" : "Dine Lister"}</h2>
+        <h2>Lister</h2>
       </div>
 
       <ul className="sidebar__lister">{visLister && <Lister />}</ul>
