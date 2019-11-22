@@ -8,10 +8,10 @@ export const App = () => {
   return (
     <ValgtListeProvider>
       <ListerProvider>
-        <div className="App">
+        <main className="App" data-testid="application">
           <Header />
           <Content />
-        </div>
+        </main>
       </ListerProvider>
     </ValgtListeProvider>
   );
