@@ -30,7 +30,7 @@ const Punkter = () => {
       <ul className="punkter__liste">
         {punkter.map(punkt => (
           // mapper i gennem punkterne - identifier for hver enkelt punkt.
-          <li key={`${punkt.id}`}>
+          <li key={punkt.id}>
             <Checkbox id={punkt.id} indhold={punkt.punkt} />
             <span className="punkt-punkt">{punkt.punkt} </span>
             <span className="punkt-dato">
