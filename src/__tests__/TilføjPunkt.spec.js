@@ -7,7 +7,7 @@ import TilføjPunkt from "../components/TilføjPunkt";
 
 beforeEach(cleanup); // Cleans the DOM
 
-// Content Mock
+// Context Mock
 jest.mock("../context", () => ({
   useValgtListeValue: jest.fn(() => ({ valgtListe: "1" })) // Vigtigt at valgtListe: = "string" - number giver fejl.
 }));
@@ -58,14 +58,19 @@ describe("<TilføjPunkt />", () => {
       // HVORDAN EXPECTER JEG HER ???
       // expect input = "" (fordi den resettes ved submit) ELLER expect toHaveBeenClicked-something
 
-      // simulerer "Enter"-press submit i input feltet (virker)
+      // Enter keyPress submit
       fireEvent.keyPress(queryByTestId("tilføj-punkt-input"), {
         key: "Enter",
         code: 13,
         charCode: 13
       });
-      // HVORDAN EXPECTER JEG HER ???
-      // expect input = "" (fordi den resettes ved submit)
+
+      // else path på keyDown (!Enter)
+      fireEvent.keyPress(queryByTestId("tilføj-punkt-input"), {
+        key: "0",
+        code: 48, // 48 = "0"
+        charCode: 48 // 48 = "0"
+      });
     });
   });
 });
