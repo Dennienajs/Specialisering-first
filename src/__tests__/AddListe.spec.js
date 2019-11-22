@@ -1,11 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  queryHelpers
-} from "@testing-library/react";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 import AddListe from "../components/AddListe";
 import { useValgtListeValue, useListerValue } from "../context";
 
@@ -18,27 +13,27 @@ jest.mock("../context", () => ({
       {
         navn: "001",
         listeId: "1",
-        brugerId: "jlIFXIwyAL3tzHMtzRbw"
+        brugerId: "1234567890"
       },
       {
         navn: "002",
         listeId: "2",
-        brugerId: "jlIFXIwyAL3tzHMtzRbw"
+        brugerId: "1234567890"
       },
       {
         navn: "003",
         listeId: "3",
-        brugerId: "jlIFXIwyAL3tzHMtzRbw"
+        brugerId: "1234567890"
       },
       {
         navn: "004",
         listeId: "4",
-        brugerId: "jlIFXIwyAL3tzHMtzRbw"
+        brugerId: "1234567890"
       },
       {
         navn: "005",
         listeId: "5",
-        brugerId: "jlIFXIwyAL3tzHMtzRbw"
+        brugerId: "1234567890"
       }
     ],
     setLister: jest.fn()
@@ -81,7 +76,7 @@ describe("<AddListe />", () => {
     });
     // Præcis samme som ovenstående, bare med click i stedet for keyDown.
     it("renders <AddListe /> og tilføjer en ny liste via onClick", () => {
-      const { queryByTestId, debug } = render(<AddListe defaultVis />);
+      const { queryByTestId } = render(<AddListe defaultVis />);
       expect(queryByTestId("add-liste")).toBeTruthy();
 
       fireEvent.change(queryByTestId("add-liste-navn"), {
@@ -92,7 +87,6 @@ describe("<AddListe />", () => {
       expect(queryByTestId("add-liste-navn").value).toBe(
         "React is fun, sometimes."
       );
-      debug();
       fireEvent.click(queryByTestId("add-liste-submit"));
     });
 
