@@ -1,8 +1,8 @@
+/* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 
 import { useValgtListeValue } from "../context";
-import { firebase } from "../firebase";
 import TilføjPunkt from "../components/TilføjPunkt";
 
 beforeEach(cleanup); // Cleans the DOM
