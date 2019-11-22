@@ -26,3 +26,5 @@ to update:
 now --prod
 
 */
+
+// npm run test -- --coverage
