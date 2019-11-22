@@ -7,45 +7,50 @@ const Lister = ({ aktivValue = null }) => {
   const { setValgtListe } = useValgtListeValue();
   const { lister } = useListerValue(aktivValue);
 
-  return lister.map(liste => (
-    <div
-      className="lister"
-      role="button"
-      tabIndex={0}
-      onClick={() => {
-        setAktivListe(liste.listeId);
-        setValgtListe(liste.navn);
-      }}
-      onKeyDown={() => {
-        setAktivListe(liste.navn);
-        setValgtListe(liste.listeId);
-      }}
-    >
-      <li
-        key={liste.listeId}
-        className={
-          aktivListe === liste.listeId
-            ? "aktivListe sidebar__liste"
-            : "sidebar__liste"
-        }
+  return (
+    lister &&
+    lister.map(liste => (
+      <div
+        className="lister"
+        role="button"
+        tabIndex={0}
+        onClick={() => {
+          setAktivListe(liste.listeId);
+          setValgtListe(liste.navn);
+        }}
+        onKeyDown={() => {
+          setAktivListe(liste.navn);
+          setValgtListe(liste.listeId);
+        }}
       >
-        <div
-          role="button"
-          tabIndex={0}
-          onClick={() => {
-            setAktivListe(liste.listeId);
-            setValgtListe(liste.navn);
-          }}
-          onKeyDown={() => {
-            setAktivListe(liste.navn);
-            setValgtListe(liste.listeId);
-          }}
+        <li
+          key={liste.listeId}
+          data-testid="lister-action-parent"
+          className={
+            aktivListe === liste.listeId
+              ? "aktivListe sidebar__liste"
+              : "sidebar__liste"
+          }
         >
-          <IndividuelListe liste={liste} />
-        </div>
-      </li>
-    </div>
-  ));
+          <div
+            role="button"
+            data-testid="lister-action"
+            tabIndex={0}
+            onClick={() => {
+              setAktivListe(liste.listeId);
+              setValgtListe(liste.navn);
+            }}
+            onKeyDown={() => {
+              setAktivListe(liste.navn);
+              setValgtListe(liste.listeId);
+            }}
+          >
+            <IndividuelListe liste={liste} />
+          </div>
+        </li>
+      </div>
+    ))
+  );
 };
 
 export default Lister;

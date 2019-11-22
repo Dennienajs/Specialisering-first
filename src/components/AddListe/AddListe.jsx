@@ -31,19 +31,21 @@ const AddListe = ({ defaultVis = false }) => {
   };
 
   return (
-    <div className="add-liste">
+    <div className="add-liste" data-testid="add-liste">
       {vis && (
-        <div className="add-liste__input">
+        <div className="add-liste__input" data-testid="add-liste-input">
           <input
             value={listeNavn}
             onChange={e => setListeNavn(e.target.value)}
             type="text"
             className="add-liste__navn"
+            data-testid="add-liste-navn"
             placeholder="Liste Navn"
             onKeyPress={keyPressed}
           />
           <button
             className="add-liste__submit"
+            data-testid="add-liste-submit"
             type="button"
             onClick={() => addListe()}
           >
@@ -51,6 +53,7 @@ const AddListe = ({ defaultVis = false }) => {
           </button>
           <span
             className="add-liste__fortryd"
+            data-testid="add-liste-fortryd"
             onClick={() => setVis(false)}
             onKeyDown={() => setVis(false)}
             role="button"
@@ -69,7 +72,9 @@ const AddListe = ({ defaultVis = false }) => {
         <span className="add-liste__plus">
           {vis ? <FaMinus /> : <FaPlus />}
         </span>
-        <span className="add-liste__setVis">Tilføj</span>
+        <span className="add-liste__setVis" data-testid="add-liste-action">
+          Tilføj
+        </span>
       </div>
     </div>
   );
