@@ -11,6 +11,7 @@ const Lister = ({ aktivValue = null }) => {
     lister &&
     lister.map(liste => (
       <div
+        key={liste.listeId}
         className="lister"
         role="button"
         tabIndex={0}
@@ -24,7 +25,6 @@ const Lister = ({ aktivValue = null }) => {
         }}
       >
         <li
-          key={liste.listeId}
           data-testid="lister-action-parent"
           className={
             aktivListe === liste.listeId
