@@ -6,7 +6,10 @@
 .pnp.js
 
 # firebase config
+/src/firebase.js
 firebase.js
+src/firebase.js
+
 
 .env
 
