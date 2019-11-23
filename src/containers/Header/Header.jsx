@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
 import { FaRegMoon, FaPlus, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
-import { AuthContext } from "../../context";
 import { firebase } from "../../firebase";
 import { Link } from "react-router-dom";
+import { AuthContext } from "../../context";
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext);
@@ -18,6 +18,9 @@ const Header = () => {
         </div>
         <div className="settings">
           <ul>
+            <li className="settings-add">
+              <button>{currentUser ? currentUser.email : null}</button>
+            </li>
             <li className="settings-add">
               <button>
                 <FaPlus />
