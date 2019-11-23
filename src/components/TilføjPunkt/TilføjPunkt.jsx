@@ -1,12 +1,14 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import moment from "moment";
 import { firebase } from "../../firebase";
-import { useValgtListeValue } from "../../context";
+import { useValgtListeValue, AuthContext } from "../../context";
 
 const TilføjPunkt = () => {
   const [punkt, setPunkt] = useState("");
 
   const { valgtListe } = useValgtListeValue();
+
+  const { currentUser } = useContext(AuthContext);
 
   const tilføjPunkt = () => {
     let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
@@ -18,7 +20,7 @@ const TilføjPunkt = () => {
         .collection("punkter")
         .add({
           arkiveret: false,
-          brugerId: "1234567890", // eneste bruger.
+          brugerId: currentUser.uid,
           dato, //dato:dato
           listeId: valgtListe,
           punkt // punkt:punkt

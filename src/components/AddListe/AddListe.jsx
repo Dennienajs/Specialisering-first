@@ -1,7 +1,7 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import uuid from "uuid";
 import { firebase } from "../../firebase";
-import { useListerValue } from "../../context";
+import { useListerValue, AuthContext } from "../../context";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
 const AddListe = ({ defaultVis = false }) => {
@@ -11,12 +11,18 @@ const AddListe = ({ defaultVis = false }) => {
   const { lister, setLister } = useListerValue();
   const listeId = uuid();
 
+  const { currentUser } = useContext(AuthContext);
+
   const addListe = () =>
     listeNavn &&
     firebase
       .firestore()
       .collection("lister")
-      .add({ listeId, navn: listeNavn, brugerId: "1234567890" })
+      .add({
+        listeId,
+        navn: listeNavn,
+        brugerId: currentUser.uid
+      })
       .then(() => {
         setLister([...lister]);
         setListeNavn("");
