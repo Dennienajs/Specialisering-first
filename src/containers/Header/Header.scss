@@ -74,6 +74,11 @@ header {
           display: flex;
           padding-right: 10px;
           text-decoration: none;
+          & a {
+            color: black;
+            text-decoration: none;
+            decoration: none;
+          }
 
           & a:visited {
             text-decoration: none;
