@@ -75,6 +75,14 @@ header {
           padding-right: 10px;
           text-decoration: none;
 
+          & a:visited {
+            text-decoration: none;
+            decoration: none;
+            color: black;
+          }
+
+          border: 1px solid $bgc-generic; // Usynlig så de ikke flytter sig ved hover senere
+
           &:hover {
             color: white;
             background-color: $bgc-generic;
