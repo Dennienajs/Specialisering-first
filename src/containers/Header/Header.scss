@@ -1,4 +1,4 @@
-@import "../../components/Styles/mixins.scss";
+@import "../../Styles/mixins.scss";
 
 header {
   border-bottom: solid 1px $bgc-generic;
@@ -31,6 +31,11 @@ header {
 
         img {
           width: 50px;
+          color: white;
+
+          &:hover {
+            color: black;
+          }
         }
       }
 
@@ -45,6 +50,7 @@ header {
 
       ul li {
         @include verticalalign;
+        text-decoration: none;
 
         margin-right: 15px;
         list-style-type: none;
@@ -56,8 +62,8 @@ header {
         float: left;
 
         &:hover {
-          border-radius: 2px;
-          background-color: white;
+          border-radius: 20px;
+          color: white;
         }
 
         // button for både settings-add & settings-darkmode.
@@ -67,6 +73,14 @@ header {
           cursor: pointer;
           display: flex;
           padding-right: 10px;
+          text-decoration: none;
+
+          &:hover {
+            color: white;
+            background-color: $bgc-generic;
+            border: 1px solid white;
+            border-radius: 10px;
+          }
         }
       }
     }

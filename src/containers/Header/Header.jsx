@@ -1,12 +1,20 @@
-import React from "react";
-import { FaRegMoon, FaPlus } from "react-icons/fa";
+import React, { useContext } from "react";
+import { FaRegMoon, FaPlus, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import { AuthContext } from "../../context";
+import { firebase } from "../../firebase";
+import { Link } from "react-router-dom";
 
 const Header = () => {
+  const { currentUser } = useContext(AuthContext);
+  console.log(currentUser ? "true" : "no user");
   return (
     <header className="header" data-testid="header">
       <nav>
         <div className="logo">
-          <img src="/images/Logo.png" alt="flueben" />
+          <Link to="/">
+            {" "}
+            <img src="/images/Logo.png" alt="flueben" />
+          </Link>
         </div>
         <div className="settings">
           <ul>
@@ -19,6 +27,24 @@ const Header = () => {
               <button>
                 <FaRegMoon />
               </button>
+            </li>
+            <li className="auth">
+              {!currentUser ? (
+                <button>
+                  <Link to="/login">
+                    <FaSignInAlt />
+                  </Link>
+                </button>
+              ) : (
+                <button
+                  onClick={() => {
+                    firebase.auth().signOut();
+                    console.log("Sign out");
+                  }}
+                >
+                  <FaSignOutAlt />
+                </button>
+              )}
             </li>
           </ul>
         </div>
