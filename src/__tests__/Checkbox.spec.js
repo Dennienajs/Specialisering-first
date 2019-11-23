@@ -12,17 +12,18 @@ beforeEach(cleanup); // Cleans the DOM
 
 // Mocks firebase med fake functions og alle functionerne som bruges i firebase.js filen.
 // Vi skal bruge firebase i testen, men vil ikke at den kalder til den rigtige db.
-jest.mock("../firebase", () => ({
-  firebase: {
-    firestore: jest.fn(() => ({
-      collection: jest.fn(() => ({
-        doc: jest.fn(() => ({
-          update: jest.fn()
-        }))
-      }))
-    }))
-  }
-}));
+
+// jest.mock("../firebase", () => ({
+//   firebase: {
+//     firestore: jest.fn(() => ({
+//       collection: jest.fn(() => ({
+//         doc: jest.fn(() => ({
+//           update: jest.fn()
+//         }))
+//       }))
+//     }))
+//   }
+// }));
 
 describe("<Checkbox />", () => {
   describe("Success", () => {
