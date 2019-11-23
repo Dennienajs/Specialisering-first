@@ -1,20 +1,22 @@
 import { useState, useEffect } from "react";
 import { firebase } from "../firebase";
 
+const brugerId = "1234567890";
+const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2";
+
 //passing valgtListe in like a regular function.
 // usePunkter giver adgang til alle puntker.
 // const { punkter } = usePunkter(valgtListe); (valgtListe = listeId)
 export const usePunkter = valgtListe => {
   const [punkter, setPunkter] = useState([]);
   const [arkiveretPunkter, setArkiveretPunkter] = useState([]);
-
   // Firebase henter indhold: punkter ud fra brugerId
   // - Real-time database, med brug af subscribe/unsubscribe
   useEffect(() => {
     let unsubscribe = firebase
       .firestore()
       .collection("punkter")
-      .where("brugerId", "==", "1234567890"); // orderBy("dato") virker ikke
+      .where("brugerId", "in", [brugerId, uid]); // orderBy("dato") virker ikke
     //Ikke så smart at sætte brugerId direkte i koden, men "jeg" er alligevel den eneste bruger.
 
     // Er der valgt en liste, henter den punkter ud fra den liste.
@@ -54,7 +56,7 @@ export const useLister = () => {
     firebase
       .firestore()
       .collection("lister")
-      .where("brugerId", "==", "1234567890")
+      .where("brugerId", "in", [brugerId, uid]) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
       .orderBy("listeId")
       .get()
       .then(snapshot => {
