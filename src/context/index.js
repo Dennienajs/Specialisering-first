@@ -13,13 +13,17 @@ import {
   useValgtListeValue
 } from "./valgt-liste-context";
 
+import { AuthProvider, AuthContext } from "./auth-context";
+
 export {
   ListerContext,
   ListerProvider,
   useListerValue,
   ValgtListeContext,
   ValgtListeProvider,
-  useValgtListeValue
+  useValgtListeValue,
+  AuthProvider,
+  AuthContext
 };
 
 /*
