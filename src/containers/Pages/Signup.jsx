@@ -26,8 +26,12 @@ const Signup = ({ history }) => {
   );
 
   return (
-    <div className="wrap">
-      <form onSubmit={handleSignup} className="form">
+    <div className="wrap" data-testid="signup">
+      <form
+        onSubmit={handleSignup}
+        className="form"
+        data-testid="form-input-submit"
+      >
         <h3 className="form-header">SIGNUP PAGE</h3>
 
         <div className="form-group">
@@ -38,6 +42,7 @@ const Signup = ({ history }) => {
             id="email"
             placeholder="Email"
             required
+            data-testid="form-input-email"
           />
         </div>
         <div className="form-group">
@@ -48,6 +53,7 @@ const Signup = ({ history }) => {
             id="password"
             placeholder="Password"
             required
+            data-testid="form-input-password"
           />
         </div>
         <div className="form-group">

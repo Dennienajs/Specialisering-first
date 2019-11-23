@@ -33,8 +33,12 @@ const Login = ({ history }) => {
   }
 
   return (
-    <div className="wrap">
-      <form onSubmit={handleLogin} className="form">
+    <div className="wrap" data-testid="login">
+      <form
+        onSubmit={handleLogin}
+        className="form"
+        data-testid="form-input-submit"
+      >
         <h3 className="form-header">LOGIN PAGE</h3>
 
         <div className="form-group">
@@ -45,6 +49,7 @@ const Login = ({ history }) => {
             id="email"
             placeholder="Email"
             required
+            data-testid="form-input-email"
           />
         </div>
         <div className="form-group">
@@ -55,6 +60,7 @@ const Login = ({ history }) => {
             id="password"
             placeholder="Password"
             required
+            data-testid="form-input-password"
           />
         </div>
         <div className="form-group">

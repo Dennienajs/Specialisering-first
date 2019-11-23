@@ -30,13 +30,14 @@ const Header = () => {
             </li>
             <li className="auth">
               {!currentUser ? (
-                <button>
+                <button data-testid="header-button-login">
                   <Link to="/login">
                     <FaSignInAlt />
                   </Link>
                 </button>
               ) : (
                 <button
+                  data-testid="header-button-signout"
                   onClick={() => {
                     firebase.auth().signOut();
                     console.log("Sign out");
