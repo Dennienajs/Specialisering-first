@@ -6,7 +6,7 @@ import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
 import { useValgtListeValue } from "../../context";
 
-const Punkter = () => {
+const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
 
   // const { lister } = useListerValue();
@@ -22,11 +22,22 @@ const Punkter = () => {
   useEffect(() => {
     document.title = `${listeNavn}`;
   });
+
   return (
-    <div className="punkter" data-testid="punkter">
-      <h2 data-testid="liste-navn">
-        {listeNavn === "" ? (listeNavn = "ALLE") : listeNavn}
-      </h2>
+    <div
+      className="punkter"
+      data-testid="punkter"
+      style={
+        visSidebar
+          ? { marginLeft: "139px" }
+          : { marginLeft: "20px", marginRight: "20px" }
+      }
+    >
+      <div className="punkter-overskrift">
+        <h2 data-testid="liste-navn">
+          {listeNavn === "" ? (listeNavn = "ALLE") : listeNavn}
+        </h2>
+      </div>
       <ul className="punkter__liste">
         {punkter.map(punkt => (
           // mapper i gennem punkterne - identifier for hver enkelt punkt.
