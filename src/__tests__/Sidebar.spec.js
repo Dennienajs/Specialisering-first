@@ -9,6 +9,8 @@ import {
 } from "@testing-library/react";
 import Sidebar from "../containers/Sidebar";
 import { useValgtListeValue, useListerValue } from "../context";
+import { AuthProvider } from "../context";
+import { BrowserRouter as Router } from "react-router-dom";
 
 // Context mock - useValgtListeValue, useListerValue
 // Samme mock fra Punkter.spec.js
@@ -34,9 +36,18 @@ beforeEach(cleanup);
 // De er basically bare copy-pasted og ændret ~7 fields
 
 describe("<Sidebar />", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+  // VIRKER IKKE EFTER DIVERSE KODE-IMPROVEMENTS  .. FIX LATER
   describe("Success", () => {
     it("renders the <Sidebar />", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const currentUser = false;
+      const { queryByTestId } = render(
+        <AuthProvider value={currentUser}>
+          <Sidebar />
+        </AuthProvider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
     });
 
