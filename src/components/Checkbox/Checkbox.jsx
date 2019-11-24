@@ -7,7 +7,18 @@ const Checkbox = ({ id, indhold }) => {
       .firestore()
       .collection("punkter")
       .doc(id)
-      .update({ arkiveret: true });
+      // Herfra og ned til .update comment kan byttes.
+      .delete()
+      .then(() => {
+        window.alert("Task completed!");
+      })
+      .catch(err => {
+        console.error("Error completing task: ", err);
+        window.alert("Ooops, something went wrong. Please try again.");
+      });
+
+    // .update({ arkiveret: true }); // Førhen opdateres denne felt bare til true.
+    // Føler det er bedre at jeg sletter dem, for de ikke fylder i db.
   };
 
   return (
