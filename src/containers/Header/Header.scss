@@ -27,7 +27,7 @@ header {
     div {
       &.logo {
         padding-left: 1px;
-        grid-area: 1 / 1;
+        grid-area: 1/1;
 
         img {
           width: 50px;
@@ -46,13 +46,15 @@ header {
 
       ul {
         float: right;
+        display: flex;
       }
 
       ul li {
         @include verticalalign;
         text-decoration: none;
+        text-align: right;
 
-        margin-right: 15px;
+        margin-right: 8px;
         list-style-type: none;
         cursor: pointer;
         // width: 30;
