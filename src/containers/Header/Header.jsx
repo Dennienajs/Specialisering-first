@@ -19,7 +19,9 @@ const Header = () => {
         <div className="settings">
           <ul>
             <li className="settings-add">
-              <button>{currentUser ? currentUser.email : null}</button>
+              <button>
+                {currentUser ? currentUser.email : "Not signed in"}
+              </button>
             </li>
             <li className="settings-add">
               <button>
