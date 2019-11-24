@@ -9,6 +9,8 @@ import {
   FaLongArrowAltDown
 } from "react-icons/fa";
 
+import "./Sidebar.scss";
+
 import { useValgtListeValue } from "../../context";
 import Lister from "../../components/Lister";
 import AddListe from "../../components/AddListe";
@@ -16,7 +18,7 @@ import AddListe from "../../components/AddListe";
 const Sidebar = () => {
   const { setValgtListe } = useValgtListeValue(); //
   const [aktivListe, setAktivListe] = useState("alle"); // Markerer ..
-  const [visLister, setVisLister] = useState(false);
+  const [visLister, setVisLister] = useState(true);
 
   return (
     <div className="sidebar" data-testid="sidebar">
