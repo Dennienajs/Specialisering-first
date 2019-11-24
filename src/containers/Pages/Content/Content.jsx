@@ -6,7 +6,7 @@ const Content = () => {
   const [visSidebar, setVisSidebar] = useState(true);
 
   return (
-    <section className="content">
+    <section className="content" data-testid="content">
       <div className="content__toggle-sidebar">
         <label className="switch">
           <input
