@@ -3,14 +3,12 @@
 .punkter {
   width: 350px;
   background-color: white;
-  // margin-left: 139px;
-  border-right: 1px solid #f1f1f1;
-  // min-height: calc(100vh);
+  // margin-left: 139px; // moved to inline
+
   min-height: 80%;
   vertical-align: top;
   padding-left: 10px;
   padding-right: 7px;
-  // padding-top: 64px;
   padding-bottom: 60px;
 
   max-width: $maxWidth;
