@@ -1,23 +1,72 @@
-// import { samletPunkter } from "../constants"; // Lister (Alle, I dag, 7, Arkiveret)
+import { firebase } from "../firebase";
+import uuid from "uuid";
+import moment from "moment";
 
-// Liste-navn er h2'en (overskriften) over punkterne. fx Alle, i dag, osv...
-// helpers som giver en true/false værdi tilbage, som kan bruges.
-// export const getListeNavn = (lister, listeId) => {
-//   lister.find(liste => liste.listeId === listeId);
-// };
+// Overvej hvis der kommer mange functioner at smide
+// dem ud i hver sin fil og importere til index filen.
+// ***************************************************
+// ***************************************************
+// *********** IKKE TESTET ENDNU.*********************
+// ***************************************************
+// ***************************************************
 
-// export const getSamletListeNavn = (lister, key) => {
-//   lister.find(liste => liste.key === key);
-// };
+// SLETPUNKT (Checkbox component)
+export const sletPunkt = id => {
+  firebase
+    .firestore()
+    .collection("punkter")
+    .doc(id)
+    // Herfra og ned til .update comment kan byttes.
+    .delete()
+    .then(() => {
+      window.alert("Task completed!");
+    })
+    .catch(err => {
+      console.error("Error completing task: ", err);
+      window.alert("Ooops, something went wrong. Please try again.");
+    });
+};
 
-// bruger bare constanterne
+// ADDLISTE (AddListe)
+export const addListe = ({ listeNavn, currentUser }) => {
+  const listeId = uuid();
+  firebase
+    .firestore()
+    .collection("lister")
+    .add({
+      listeId,
+      navn: listeNavn,
+      brugerId: currentUser.uid
+    });
+  /* Skal blive i addListe filen.
+    .then(() => {
+      setLister([...lister]);
+      setListeNavn("");
+      setVis(false);
+    });
+    */
+};
 
-// export const samletPunkterFundet = valgtListe => {
-//   samletPunkter.find(punkt => punkt.key === valgtListe);
-// };
+// TILFØJ PUNKT (TilføjPunkt)
+export const tilføjPunkt = ({ punkt, currentUser, valgtListe }) => {
+  let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
 
-/* *******************************************************
-   BLIVER IKKE BRUGT MERE ...
-   BØR FJERNES SENERE
-   LADER STÅ INDTIL VIDERE OG HÅBER PÅ DEN KAN TAGES I BRUG.
- ******************************************************* */
+  return (
+    punkt &&
+    firebase
+      .firestore()
+      .collection("punkter")
+      .add({
+        arkiveret: false,
+        brugerId: currentUser.uid,
+        dato, //dato:dato
+        listeId: valgtListe,
+        punkt // punkt:punkt
+      })
+    /* skal blive i filen.
+            .then(() => {
+                setPunkt("");
+            })
+            */
+  );
+};
