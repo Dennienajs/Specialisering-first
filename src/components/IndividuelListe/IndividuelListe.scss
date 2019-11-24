@@ -1,9 +1,21 @@
 @import "../../Styles/mixins.scss";
 
-.sidebar__star {
+.individuel-liste-sidebar__star {
   padding-right: 10px;
 
   svg {
     @include svgStyle();
   }
 }
+
+.individuel-liste-sidebar {
+  // align-self: center;
+  display: flex;
+  flex-direction: row;
+
+  &__liste-navn {
+    align-self: center;
+  }
+}
+
+// individuel-liste-sidebar__liste-navn

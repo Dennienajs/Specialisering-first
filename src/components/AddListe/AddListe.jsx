@@ -70,15 +70,16 @@ const AddListe = ({ defaultVis = false }) => {
         </div>
       )}
       <div
+        className="add-liste__vis"
         onClick={() => setVis(!vis)}
         onKeyDown={() => setVis(!vis)}
         role="button"
         tabIndex={0}
       >
-        <span className="add-liste__plus">
+        <span className="add-liste__vis-plus">
           {vis ? <FaMinus /> : <FaPlus />}
         </span>
-        <span className="add-liste__setVis" data-testid="add-liste-action">
+        <span className="add-liste__vis-setVis" data-testid="add-liste-action">
           Tilføj
         </span>
       </div>

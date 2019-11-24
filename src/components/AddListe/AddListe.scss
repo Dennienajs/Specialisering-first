@@ -3,6 +3,11 @@
 .add-liste {
   @include no-select;
 
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  justify-items: center;
+
   border-top: 1px solid #f1f1f1;
   padding-top: 13px;
 
@@ -16,9 +21,9 @@
 
   &__navn {
     width: 100%;
-    border: 2px solid #8092e2;
+    border: 2px solid $bgc-generic;
     background-color: white !important;
-    border-radius: 3.5px;
+    border-radius: 5px;
     height: 30px;
     padding-right: 15px;
     padding-left: 15px;
@@ -31,18 +36,39 @@
 
   &__submit {
     @include btnStyle();
+    width: 100%;
+  }
+
+  &__vis {
+    display: flex;
+    justify-content: center;
+    border-radius: 5px;
+    border: 2px solid transparent;
+    &:hover {
+      border: 2px solid $bgc-generic;
+      color: black;
+    }
+
+    &-setVis {
+      align-self: center;
+      padding-left: 10px;
+      font-size: 14px;
+      color: grey;
+      cursor: pointer;
+      font-weight: lighter;
+      &hover {
+        color: black;
+      }
+    }
   }
 
   &__fortryd {
-    color: #555;
+    color: rgb(114, 113, 113);
     cursor: pointer;
     font-size: 14px;
-    margin: 2px 5px;
-  }
-
-  &__setVis {
-    padding-left: 10px;
-    font-size: 14px;
-    color: grey;
+    font-weight: lighter;
+    &:hover {
+      color: black;
+    }
   }
 }

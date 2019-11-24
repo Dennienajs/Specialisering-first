@@ -7,12 +7,12 @@ const IndividuelListe = ({ liste }) => {
   // const { setValgtListe } = useValgtListeValue();
 
   return (
-    <>
-      <span className="sidebar__star">
+    <div className="individuel-liste-sidebar">
+      <span className="individuel-liste-sidebar__star">
         <FaStar />
       </span>
-      <span className="sidebar__liste-navn">{liste.navn}</span>
-    </>
+      <span className="individuel-liste-sidebar__liste-navn">{liste.navn}</span>
+    </div>
   );
 };
 
