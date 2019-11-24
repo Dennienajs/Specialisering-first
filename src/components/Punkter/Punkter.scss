@@ -1,31 +1,23 @@
 @import "../../Styles/mixins.scss";
 
 .punkter {
-  width: 344px;
+  width: 350px;
   background-color: white;
-  margin-left: 139px;
+  // margin-left: 139px;
   border-right: 1px solid #f1f1f1;
-  min-height: calc(100vh);
+  // min-height: calc(100vh);
+  min-height: 80%;
   vertical-align: top;
   padding-left: 10px;
   padding-right: 7px;
-  padding-top: 71px;
+  // padding-top: 64px;
   padding-bottom: 60px;
 
-  max-width: 600px;
+  max-width: $maxWidth;
   width: auto;
 
-  h2 {
-    font-size: 26px;
-    font-weight: 600;
-    margin: 0 30px 20px 0;
-    display: block;
-    text-transform: lowercase;
-    &:first-letter {
-      // Virkede ikke uden denne af en eller anden grund...
-      text-transform: capitalize; // overskriften var all caps før.
-    }
-  }
+  display: flex;
+  flex-direction: column;
 
   //Styling af punkter ->
   &__liste li {
@@ -45,6 +37,7 @@
       &.punkt-punkt {
         position: relative;
         width: 70%;
+        align-self: center;
       }
 
       &.punkt-dato {
@@ -56,6 +49,51 @@
         font-size: 9px;
         width: 29%;
         text-transform: lowercase;
+      }
+    }
+  }
+
+  &-overskrift {
+    height: 42px;
+    display: flex;
+    flex-direction: row;
+    // placement (hver sin side)
+    justify-content: space-between;
+
+    padding-left: 20px;
+    margin-left: 0px;
+    padding-left: 0px;
+
+    & label {
+      align-self: flex-start !important;
+      justify-items: flex-start !important;
+      align-items: flex-start !important;
+      justify-content: left !important;
+      justify-content: flex-start !important;
+    }
+
+    // Overskrift teksten
+    h2 {
+      font-family: "Lato", sans-serif;
+      align-self: flex-end;
+      padding-left: 10px;
+      margin-top: 10px;
+      margin-bottom: 10px;
+      text-transform: lowercase;
+
+      // TEST
+
+      color: white;
+      font-family: "Rouge Script", cursive;
+      font-size: 35px;
+      font-weight: lighter;
+      text-shadow: -2px 1px 10px rgb(42, 42, 42);
+
+      // TEST SLUT
+
+      &:first-letter {
+        // Virkede ikke uden denne af en eller anden grund...
+        text-transform: capitalize; // overskriften var all caps før.
       }
     }
   }
