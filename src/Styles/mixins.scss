@@ -6,6 +6,9 @@
 // Samme blå "tema farve" (header, markering af liste, liste pil, checkbox border)
 $bgc-generic: #8092e2;
 
+// bruges flere steder, så siden ikke bliver for stor.
+$maxWidth: 700px;
+
 // Tilføj knap - punkter + lister
 @mixin btnStyle() {
   cursor: pointer;
@@ -72,6 +75,3 @@ $bgc-generic: #8092e2;
     color: white;
   }
 }
-
-// bruges flere steder, så siden ikke bliver for stor.
-$maxWidth: 700px;
