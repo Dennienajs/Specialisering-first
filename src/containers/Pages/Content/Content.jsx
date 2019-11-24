@@ -19,7 +19,7 @@ const Content = () => {
         </label>
       </div>
       {visSidebar ? <Sidebar /> : null}
-      <Punkter visSidebar={visSidebar} setVisSidebar={setVisSidebar} />
+      <Punkter visSidebar={visSidebar} />
     </section>
   );
 };
