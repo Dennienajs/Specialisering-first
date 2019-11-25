@@ -38,12 +38,13 @@ export const usePunkter = valgtListe => {
       }));
 
       // henter punkter som ikke er arkiveret.
-      setPunkter(nyePunkter.filter(punkt => punkt.arkiveret !== true));
+      // setPunkter(nyePunkter.filter(punkt => punkt.arkiveret !== true));
+      setPunkter(nyePunkter);
 
       // henter punkter som er arkiveret.
-      setArkiveretPunkter(
-        nyePunkter.filter(punkt => punkt.arkiveret !== false)
-      );
+      // setArkiveretPunkter(
+      //   nyePunkter.filter(punkt => punkt.arkiveret !== false)
+      // );
     });
 
     // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" rammes.
