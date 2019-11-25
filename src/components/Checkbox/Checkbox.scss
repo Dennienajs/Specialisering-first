@@ -9,13 +9,10 @@
 
   .checkbox {
     cursor: pointer;
-
     height: 15px;
     width: 15px;
     display: block;
-    border: 1px solid $bgc-generic();
+    border: 1px solid $blue-generic();
     border-radius: 100px; // alt over 20 giver det samme.
-
-    // color: $bgc-generic(); // reminder: farve virker ikke på checkbox,,
   }
 }
