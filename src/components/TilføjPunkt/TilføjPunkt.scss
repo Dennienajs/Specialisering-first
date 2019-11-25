@@ -1,16 +1,27 @@
 @import "../../Styles/mixins.scss";
 
 .tilføj-punkt {
-  //@include theme-colors($darkmode-off);
-  //styling af "input"-felt
+  padding-top: 10px;
+
   &__input {
     width: 100%;
     border: 1px solid #ddd;
-    // background-//color: white;
-    border-radius: 3px;
+    border-radius: 5px;
     height: 30px;
-    padding-left: 20px;
-    padding-right: 20px;
+
+    // SHADOW UNDER INPUT FELTET
+    // HUGGET FRA https://css-tricks.com/snippets/
+    background: #fff;
+    box-shadow:
+    /* The top layer shadow */ 0 1px 1px rgba(0, 0, 0, 0.15),
+      /* The second layer */ 0 8px 0 -5px rgba(238, 238, 238, 0.342),
+      /* The second layer shadow */ 0 8px 1px -4px rgba(0, 0, 0, 0.15),
+      /* The third layer */ 0 16px 0 -10px rgba(238, 238, 238, 0.171),
+      /* The third layer shadow */ 0 16px 1px -8px rgba(0, 0, 0, 0.15);
+    /* Padding for demo purposes */
+
+    padding: 17px;
+    padding-left: 37px;
   }
 
   //styling af "Tilføj"-knap
