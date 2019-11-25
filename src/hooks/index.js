@@ -1,8 +1,8 @@
 import { useState, useEffect } from "react";
 import { firebase } from "../firebase";
 
-const brugerId = "1234567890";
-const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2";
+const brugerId = "1234567890"; // ALLE MINE PUNKTER.
+const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2"; // DENNIE UID
 
 //passing valgtListe in like a regular function.
 // usePunkter giver adgang til alle puntker.
