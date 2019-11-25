@@ -7,6 +7,7 @@ const PrivateRoute = ({ component: RouteComponent, ...rest }) => {
   const currentUser = useContext(AuthContext);
   return (
     <Route
+      data-testid="private-route"
       {...rest}
       render={routeProps =>
         currentUser ? (
