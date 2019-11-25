@@ -71,6 +71,15 @@ export const tilføjPunkt = ({ punkt, currentUser, valgtListe }) => {
   );
 };
 
+// ***************************************************
+// **Nedenstående er testet og i brug i Punkter.jsx **
+// ***************************************************
+// ***************************************************
+// *********** TESTET OG I BRUG **********************
+// ***************************************************
+// ***************************************************
+
+// Bruges til "line-through" ved click på punkt.
 export const arkiverPunktTrue = id => {
   id &&
     firebase
@@ -86,6 +95,7 @@ export const arkiverPunktTrue = id => {
       });
 };
 
+// Bruges til !"line-through" ved click på punkt.
 export const arkiverPunktFalse = id => {
   id &&
     firebase
