@@ -1,4 +1,4 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../../Sidebar";
 import Punkter from "../../../components/Punkter";
 import ButtonToggleSidebar from "./ButtonToggleSidebar";
@@ -9,6 +9,14 @@ const Content = () => {
   const { currentUser } = useContext(AuthContext);
   const [visSidebar, setVisSidebar] = useState(true);
   const { theme } = React.useContext(ThemeContext);
+
+  // Sjkuler sidebaren ved første render, hvis man ikke er logget ind.
+  useEffect(() => {
+    if (!currentUser) {
+      setVisSidebar(!visSidebar);
+    }
+  }, []);
+
   return (
     <section
       data-testid="content"
@@ -21,9 +29,11 @@ const Content = () => {
       <ButtonToggleSidebar
         visSidebar={visSidebar}
         setVisSidebar={setVisSidebar}
+        currentUser={currentUser}
       />
 
       {visSidebar ? <Sidebar /> : null}
+
       {currentUser ? (
         <Punkter visSidebar={visSidebar} />
       ) : (
