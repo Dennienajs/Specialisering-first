@@ -1,7 +1,6 @@
 @import "../../../Styles/mixins.scss";
 
 .content {
-  // display: grid;
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
@@ -10,17 +9,23 @@
   margin: auto;
 
   // BOX SHADOW - OM HELE SIDEN
-  border: 1px solid rgb(218, 218, 218);
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(0, 0, 0, 0.15);
-  min-height: calc(98vh);
+  // border: 1px solid rgb(218, 218, 218);
+  // *********** SIDEBAR TOGGLE BUTTON ***************
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3),
+    0 6px 20px 0 rgba(36, 35, 35, 0.15);
+  min-height: calc(100vh);
+  // *********** ----------------------***************
 
+  // *********** SIDEBAR TOGGLE BUTTON *************** (det meste hugget fra w3schools)
   &__toggle-sidebar {
-    padding: 10px;
-    padding-top: 50px;
+    // top, right, bottom, left
+    padding: 50px 5px 10px 0px;
+    display: flex;
+    justify-content: flex-end;
 
     .switch {
-      position: relative;
-      display: inline-block;
+      cursor: pointer;
+      position: fixed;
       width: 48px;
       height: 28px;
     }
@@ -40,9 +45,9 @@
       left: 0;
       right: 0;
       bottom: 0;
-      background-color: #ccc;
-      -webkit-transition: 0.4s;
-      transition: 0.4s;
+      background-color: $blue-generic;
+      -webkit-transition: 1s;
+      transition: 1s;
       border: 1px solid transparent;
       border-radius: 5px;
     }
@@ -53,7 +58,7 @@
       width: 20px;
       left: 3px;
       bottom: 3px;
-      background-color: rgb(255, 114, 114);
+      background-color: rgb(255, 255, 255);
       -webkit-transition: 0.4s;
       transition: 0.4s;
       border: 1px solid transparent;
@@ -61,18 +66,18 @@
     }
 
     input:checked + .slider {
-      background-color: $bgc-generic;
+      background-color: $blue-generic;
     }
 
     input:focus + .slider {
-      box-shadow: 0 0 1px $bgc-generic;
+      box-shadow: 0 0 1px $blue-generic;
     }
 
     input:checked + .slider:before {
       -webkit-transform: translateX(20px);
       -ms-transform: translateX(20px);
       transform: translateX(20px);
-      background-color: white;
+      // background-//color: white;
     }
 
     /* Rounded sliders */

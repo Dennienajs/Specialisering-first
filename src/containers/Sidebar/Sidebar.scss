@@ -1,22 +1,26 @@
 @import "../../Styles/mixins.scss";
 
+// GØR SCROLLBAREN USYNLIG.
+::-webkit-scrollbar {
+  display: none;
+}
+
 .sidebar {
   @include no-select;
-
   width: 136px;
-  // height: 98%;
-  // padding-top: 10px;
   position: fixed;
+  margin-top: 0px;
 
   // Making sidebar scrollable + little space at the but
-  max-height: calc(100vh - 3rem);
+  max-height: calc(100vh - 5rem);
   overflow-y: auto;
 
-  border-right: 1px solid #f1f1f1;
+  border-right: 1px solid transparent;
   background-color: #fafafa;
 
   &_liste {
     li {
+      outline: none !important;
       list-style-type: none;
       display: -webkit-box;
       display: -ms-flexbox;
@@ -29,15 +33,17 @@
       font-size: 12px;
 
       //styling af sidebar iconer + text - placering
-      div:nth-child(1) {
+      div {
+        outline: none;
         width: 100%;
         display: flex;
         display: -webkit-box;
         display: -ms-flexbox;
-        padding: 10px 0 10px 15px;
+        padding: 8px 0 10px 7px;
 
         // Mellemrum mellem icon og text.
-        span:first-of-type {
+        span {
+          // :first-of-type
           margin-right: 10px;
           display: -webkit-box;
           display: -ms-flexbox;
@@ -49,22 +55,29 @@
           // Iconer - størrelse + farve (matcher header color)
           svg {
             @include svgStyle();
+
+            &.skjult {
+              -webkit-transform: rotate(-180deg);
+              transform: rotate(-180deg);
+
+              // color: $blue-generic;
+              color: white;
+            }
           }
         }
+      }
+      &.aktivListe {
+        outline: none;
       }
       // markerer valgte liste (blue)
       &.aktivListe,
       &:hover {
-        font-weight: bolder;
-        background-color: $bgc-generic;
-        color: white;
+        font-weight: bolder !important;
+        background-color: $blue-generic !important;
+        color: white !important;
+        //color: white;
         svg {
-          color: white;
-        }
-      }
-      &:hover {
-        svg:hover {
-          // color: white !important;
+          color: white !important;
         }
       }
     }

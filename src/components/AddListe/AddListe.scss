@@ -1,6 +1,7 @@
 @import "../../Styles/mixins.scss";
 
 .add-liste {
+  //@include theme-colors($darkmode-off);
   @include no-select;
 
   display: flex;
@@ -8,12 +9,12 @@
   width: 100%;
   justify-items: center;
 
-  border-top: 1px solid #f1f1f1;
+  border-top: $border-generic;
   padding-top: 13px;
 
   padding-left: 12px;
   padding-right: 20px;
-  margin-top: 20px;
+  padding-bottom: 40px;
 
   &__input {
     margin-bottom: 19px;
@@ -21,12 +22,10 @@
 
   &__navn {
     width: 100%;
-    border: 2px solid $bgc-generic;
-    background-color: white !important;
+    border: 2px solid $blue-generic;
     border-radius: 5px;
     height: 30px;
-    padding-right: 15px;
-    padding-left: 15px;
+    text-align: center;
   }
 
   &__fortryd,
@@ -39,13 +38,15 @@
     width: 100%;
   }
 
+  // "- Tilføj" knap i AddListe
   &__vis {
+    @include no-select;
     display: flex;
     justify-content: center;
     border-radius: 5px;
     border: 2px solid transparent;
     &:hover {
-      border: 2px solid $bgc-generic;
+      border: 2px solid $blue-generic;
       color: black;
     }
 
@@ -53,7 +54,7 @@
       align-self: center;
       padding-left: 10px;
       font-size: 14px;
-      color: grey;
+      color: rgb(190, 189, 189);
       cursor: pointer;
       font-weight: lighter;
       &hover {
@@ -63,7 +64,8 @@
   }
 
   &__fortryd {
-    color: rgb(114, 113, 113);
+    padding: 5px;
+    color: rgb(190, 189, 189);
     cursor: pointer;
     font-size: 14px;
     font-weight: lighter;

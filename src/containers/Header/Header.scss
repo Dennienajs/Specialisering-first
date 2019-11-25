@@ -1,8 +1,10 @@
 @import "../../Styles/mixins.scss";
 
 header {
-  border-bottom: solid 1px $bgc-generic;
-  background-color: $bgc-generic;
+  // //@include theme-colors($darkmode-off);
+
+  border-bottom: solid 1px $blue-generic;
+  background-color: $blue-generic;
   -webkit-transition: height 200ms ease-in;
   transition: height 200ms ease-in;
   height: 45px;
@@ -32,7 +34,7 @@ header {
 
         img {
           width: 50px;
-          color: white;
+          //color: white;
 
           &:hover {
             color: black;
@@ -66,7 +68,7 @@ header {
 
         &:hover {
           border-radius: 20px;
-          color: white;
+          //color: white;
         }
 
         // button for både settings-add & settings-darkmode.
@@ -77,23 +79,22 @@ header {
           display: flex;
           padding-right: 10px;
           text-decoration: none;
+          outline: none;
           & a {
             color: black;
             text-decoration: none;
-            decoration: none;
           }
 
           & a:visited {
             text-decoration: none;
-            decoration: none;
             color: black;
           }
 
-          border: 1px solid $bgc-generic; // Usynlig så de ikke flytter sig ved hover senere
+          border: 1px solid transparent; // Usynlig så de ikke flytter sig ved hover senere
 
           &:hover {
-            color: white;
-            background-color: $bgc-generic;
+            //color: white;
+            background-color: transparent;
             border: 1px solid white;
             border-radius: 10px;
           }
