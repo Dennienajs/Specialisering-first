@@ -15,6 +15,8 @@ import {
 
 import { AuthProvider, AuthContext } from "./auth-context";
 
+import { ThemeProvider, ThemeContext } from "./darkmode-theme-context";
+
 export {
   ListerContext,
   ListerProvider,
@@ -23,25 +25,10 @@ export {
   ValgtListeProvider,
   useValgtListeValue,
   AuthProvider,
-  AuthContext
+  AuthContext,
+  ThemeProvider,
+  ThemeContext
 };
 
-/*
-    For man kan bruge dette, skal man HUSKE AT WRAPPE APPLIKATIONEN med provideren!
-        - se app.jsx
-
-        export const App = () => {
-            return (
-                <ValgtListeProvider>           <-- provider
-                    <ListerProvider>           <-- provider
-                        <div className="App">
-                            <Header />
-                            <Content />
-                        </div>
-                    </ListerProvider>           <-- provider
-                </ValgtListeProvider>           <-- provider
-            );
-        };
-
-
-*/
+// NOTE: husk at wrappe application med Provideren.
+// Se Index.jsx / App.jsx.

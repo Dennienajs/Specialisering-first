@@ -1,20 +1,32 @@
 import React from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import { ListerProvider, ValgtListeProvider } from "./context";
 import Header from "./containers/Header/index";
 import Login from "./containers/Pages/Login";
 import Signup from "./containers/Pages/Signup";
-import { AuthProvider } from "./context";
 import PrivateRoute from "./PrivateRoute";
 import Content from "./containers/Pages/Content";
+import {
+  ListerProvider,
+  ValgtListeProvider,
+  AuthProvider,
+  ThemeContext
+} from "./context";
 
 export const App = () => {
+  const { theme } = React.useContext(ThemeContext);
   return (
     <ValgtListeProvider>
       <ListerProvider>
         <AuthProvider>
-          <main className="App" data-testid="application">
+          <main
+            data-testid="application"
+            className="App"
+            style={{
+              backgroundColor: theme.backgroundColor,
+              color: theme.color
+            }}
+          >
             <Router>
               <Header />
               <PrivateRoute exact path="/" component={Content} />

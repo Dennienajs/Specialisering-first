@@ -5,10 +5,11 @@ import moment from "moment";
 import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
 import { useValgtListeValue } from "../../context";
+import { ThemeContext } from "../../context/";
 
 const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
-
+  const { theme } = React.useContext(ThemeContext);
   // i usePunkter("SØGE-ID") - kan man insætte fx 1 for at vise alle puntker med listeId = 1.
   // tomme ("") - vil vise punkter ligegyldigt id. (stadig kun !arkiveret)
   const { punkter } = usePunkter(valgtListe); // viser alle punkter med "listeId = "1"...
@@ -26,8 +27,17 @@ const Punkter = ({ visSidebar }) => {
       data-testid="punkter"
       style={
         visSidebar
-          ? { marginLeft: "139px" }
-          : { marginLeft: "20px", marginRight: "20px" }
+          ? {
+              marginLeft: "139px",
+              backgroundColor: theme.backgroundColor,
+              color: theme.color
+            }
+          : {
+              marginLeft: "20px",
+              marginRight: "20px",
+              backgroundColor: theme.backgroundColor,
+              color: theme.color
+            }
       }
     >
       <div className="punkter-overskrift">
@@ -38,7 +48,13 @@ const Punkter = ({ visSidebar }) => {
       <ul className="punkter__liste">
         {punkter.map(punkt => (
           // mapper i gennem punkterne - identifier for hver enkelt punkt.
-          <li key={punkt.id}>
+          <li
+            key={punkt.id}
+            style={{
+              backgroundColor: theme.backgroundColor,
+              color: theme.color
+            }}
+          >
             <Checkbox id={punkt.id} indhold={punkt.punkt} />
             <span className="punkt-punkt">{punkt.punkt} </span>
             <span className="punkt-dato">

@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useState, useContext } from "react";
 import {
   FaRegListAlt,
   FaCalendarDay,
@@ -8,20 +8,30 @@ import {
   FaShoppingBasket,
   FaLongArrowAltDown
 } from "react-icons/fa";
-
-import "./Sidebar.scss";
-
-import { useValgtListeValue } from "../../context";
-import Lister from "../../components/Lister";
+import IndividuelListe from "../../components/IndividuelListe";
 import AddListe from "../../components/AddListe";
+import {
+  useValgtListeValue,
+  useListerValue,
+  ThemeContext
+} from "../../context";
 
 const Sidebar = () => {
-  const { setValgtListe } = useValgtListeValue(); //
-  const [aktivListe, setAktivListe] = useState("alle"); // Markerer ..
-  const [visLister, setVisLister] = useState(true);
+  const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
+  const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
+  const [visLister, setVisLister] = useState(true); // Toggle egne lister
+  const { theme } = useContext(ThemeContext); // darkmode
+  const { lister } = useListerValue(); // brugerens lister
 
   return (
-    <div className="sidebar" data-testid="sidebar">
+    <div
+      className="sidebar"
+      data-testid="sidebar"
+      style={{
+        backgroundColor: theme.backgroundColor,
+        color: theme.color
+      }}
+    >
       <ul className="sidebar_liste">
         <li
           data-testid="alle"
@@ -160,24 +170,61 @@ const Sidebar = () => {
             <span>Indkøb</span>
           </div>
         </li>
+
+        {/**** TOGGLE EGNE LISTER KNAP ****/}
+        <li>
+          <div
+            data-testid="sidebar-egne-lister"
+            className="sidebar__liste-vis"
+            role="button"
+            tabIndex={0}
+            onClick={() => setVisLister(!visLister)}
+            onKeyDown={() => setVisLister(!visLister)}
+          >
+            <span>
+              <FaLongArrowAltDown
+                className={!visLister ? "skjult" : undefined}
+              />
+            </span>
+            <h2>Lister</h2>
+          </div>
+        </li>
       </ul>
-      <div
-        data-testid="sidebar-egne-lister"
-        className="sidebar__liste-vis"
-        role="button"
-        tabIndex={0}
-        onClick={() => setVisLister(!visLister)}
-        onKeyDown={() => setVisLister(!visLister)}
-      >
-        <span>
-          <FaLongArrowAltDown className={!visLister ? "skjult" : undefined} />
-        </span>
-        <h2>Lister</h2>
-      </div>
 
-      <ul className="sidebar__lister">{visLister && <Lister />}</ul>
+      {/** RENDER EGNE LISTER I SIDEBAREN **/}
+      <ul className="sidebar_liste">
+        {visLister &&
+          lister &&
+          lister.map(liste => (
+            <li
+              key={liste.listeId}
+              style={{
+                backgroundColor: theme.backgroundColor,
+                color: theme.color
+              }}
+              className={
+                aktivListe === liste.listeId ? "aktivListe" : undefined
+              }
+            >
+              <div
+                role="button"
+                onClick={() => {
+                  setAktivListe(liste.listeId);
+                  setValgtListe(liste.navn);
+                }}
+                onKeyDown={() => {
+                  setAktivListe(liste.navn);
+                  setValgtListe(liste.listeId);
+                }}
+              >
+                <IndividuelListe liste={liste} />
+              </div>
+            </li>
+          ))}
+      </ul>
 
-      {visLister && <AddListe />}
+      {/** RENDER ADDLISTE I SIDEBAREN**/}
+      <AddListe />
     </div>
   );
 };

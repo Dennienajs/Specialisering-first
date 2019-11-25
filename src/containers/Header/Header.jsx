@@ -1,8 +1,14 @@
 import React, { useContext, useEffect } from "react";
-import { FaRegMoon, FaPlus, FaSignInAlt, FaSignOutAlt } from "react-icons/fa";
+import {
+  FaMoon as Moon,
+  FaPlus as Plus,
+  FaSignInAlt as SignIn,
+  FaSignOutAlt as SignOut,
+  FaSun as Sun
+} from "react-icons/fa";
 import { firebase } from "../../firebase";
 import { Link } from "react-router-dom";
-import { AuthContext } from "../../context";
+import { AuthContext, ThemeContext } from "../../context";
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext);
@@ -40,17 +46,15 @@ const Header = () => {
 
   // Hvis brugeren intet displayName har, får man et ud fra ens email.
   useEffect(() => {
-    const getProfileData = () => {
-      if (currentUser && !currentUser.displayName) {
-        let emailDisplay = currentUser.email.split("@", 1);
-        currentUser
-          .updateProfile({
-            displayName: emailDisplay.toString()
-          })
-          .catch(err => console.error(err));
-        console.log(currentUser.displayName);
-      }
-    };
+    if (currentUser && !currentUser.displayName) {
+      let emailDisplay = currentUser.email.split("@", 1);
+      currentUser
+        .updateProfile({
+          displayName: emailDisplay.toString()
+        })
+        .catch(err => console.error(err));
+      console.log(currentUser.displayName);
+    }
   }, [currentUser]);
 
   // Til debug og test. Tjekker om email er verified.
@@ -61,8 +65,10 @@ const Header = () => {
     if (currentUser && currentUser.emailVerified) {
       console.log("email is verified");
     }
+    console.log(currentUser);
   };
 
+  const { toggle, dark } = useContext(ThemeContext);
   return (
     <header className="header" data-testid="header">
       <nav>
@@ -85,19 +91,17 @@ const Header = () => {
             </li>
             <li className="settings-add">
               <button onClick={() => console.log("TODO: something..")}>
-                <FaPlus />
+                <Plus />
               </button>
             </li>
             <li className="settings-darkmode">
-              <button onClick={() => console.log("TODO: darkmode")}>
-                <FaRegMoon />
-              </button>
+              <button onClick={toggle}>{dark ? <Sun /> : <Moon />}</button>
             </li>
             <li className="auth">
               {!currentUser ? (
                 <button data-testid="header-button-login">
                   <Link to="/login">
-                    <FaSignInAlt />
+                    <SignIn />
                   </Link>
                 </button>
               ) : (
@@ -110,7 +114,7 @@ const Header = () => {
                     console.log("FBIdToken removed");
                   }}
                 >
-                  <FaSignOutAlt />
+                  <SignOut />
                 </button>
               )}
             </li>
