@@ -1,8 +1,9 @@
 @import "../../Styles/mixins.scss";
 
 // GØR SCROLLBAREN USYNLIG.
+// Virker pludseligt ikke mere ???
 ::-webkit-scrollbar {
-  display: none;
+  display: none !important;
 }
 
 .sidebar {
