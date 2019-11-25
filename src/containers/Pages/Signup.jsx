@@ -3,8 +3,10 @@ import { withRouter } from "react-router";
 import { firebase } from "../../firebase";
 import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
+import { ThemeContext } from "../../context";
 
 const Signup = ({ history }) => {
+  const { theme } = React.useContext(ThemeContext);
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
   const handleSignup = useCallback(
@@ -28,6 +30,10 @@ const Signup = ({ history }) => {
   return (
     <div className="wrap" data-testid="signup">
       <form
+        style={{
+          backgroundColor: theme.backgroundColor,
+          color: theme.color
+        }}
         onSubmit={handleSignup}
         className="form"
         data-testid="form-input-submit"
@@ -63,7 +69,14 @@ const Signup = ({ history }) => {
         </div>
         <div className="form-footer">
           Allerede bruger?
-          <Link to="/login">{` Log in`}</Link>
+          <Link
+            style={{
+              color: theme.color
+            }}
+            to="/login"
+          >
+            {` Log in`}{" "}
+          </Link>
         </div>
       </form>
     </div>
