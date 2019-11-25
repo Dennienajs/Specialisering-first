@@ -15,7 +15,10 @@ const Content = () => {
     if (!currentUser) {
       setVisSidebar(!visSidebar);
     }
-  }, []);
+    if (currentUser) {
+      setVisSidebar(true);
+    }
+  }, [currentUser]);
 
   return (
     <section
