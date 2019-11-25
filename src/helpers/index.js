@@ -70,3 +70,33 @@ export const tilføjPunkt = ({ punkt, currentUser, valgtListe }) => {
             */
   );
 };
+
+export const arkiverPunktTrue = id => {
+  id &&
+    firebase
+      .firestore()
+      .collection("punkter")
+      .doc(id)
+      .update({
+        arkiveret: true
+      })
+      .catch(err => {
+        console.error("Error: ", err);
+        window.alert("Ooops, something went wrong. Please try again.");
+      });
+};
+
+export const arkiverPunktFalse = id => {
+  id &&
+    firebase
+      .firestore()
+      .collection("punkter")
+      .doc(id)
+      .update({
+        arkiveret: false
+      })
+      .catch(err => {
+        console.error("Error: ", err);
+        window.alert("Ooops, something went wrong. Please try again.");
+      });
+};
