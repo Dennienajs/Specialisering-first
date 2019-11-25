@@ -8,7 +8,7 @@ const ButtonToggleSidebar = ({ visSidebar, setVisSidebar }) => {
           type="checkbox"
           value={visSidebar}
           onClick={() => setVisSidebar(!visSidebar)}
-          checked={visSidebar}
+          defaultChecked={visSidebar}
         />
         <span className="slider"></span>
       </label>
