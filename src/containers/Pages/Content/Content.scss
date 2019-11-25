@@ -16,6 +16,26 @@
   min-height: calc(100vh);
   // *********** ----------------------***************
 
+  // NOT SIGNED IN - MIDDLE TEXT AND BUTTONS.
+  &__not-signed-in {
+    padding-top: 60px;
+    p {
+      text-align: center;
+      a:visited,
+      a:link,
+      a:active {
+        text-decoration: none;
+      }
+      a {
+        margin: 10px;
+        padding: 5px;
+        background-color: $blue-generic;
+        color: white;
+        border-radius: 10px;
+      }
+    }
+  }
+
   // *********** SIDEBAR TOGGLE BUTTON *************** (det meste hugget fra w3schools)
   &__toggle-sidebar {
     // top, right, bottom, left
