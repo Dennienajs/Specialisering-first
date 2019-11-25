@@ -15,8 +15,20 @@
   display: flex;
   flex-direction: column;
 
+  // HVIS JEG VIL "LINETHROUGH" VED HOVER
+  // &__liste-li {
+  //   &:hover {
+  //     text-decoration: line-through;
+  //   }
+  // }
+
+  &__liste-container {
+    display: flex;
+    flex-direction: row !important;
+  }
+
   //Styling af punkter ->
-  &__liste li {
+  &__liste-container li {
     // color: $blue-generic();
     color: rgb(66, 66, 66);
 
@@ -24,9 +36,10 @@
     line-height: 13px;
     padding-top: 6px;
     padding-bottom: 6px;
-    font-size: 11px;
+    font-size: 12px;
     list-style-type: none;
     border-top: $border-generic;
+    width: 100%;
 
     span {
       // punkt texten

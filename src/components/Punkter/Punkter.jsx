@@ -6,6 +6,7 @@ import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
 import { useValgtListeValue } from "../../context";
 import { ThemeContext } from "../../context/";
+import { arkiverPunktFalse, arkiverPunktTrue } from "../../helpers";
 
 const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
@@ -20,6 +21,10 @@ const Punkter = ({ visSidebar }) => {
   useEffect(() => {
     document.title = `${listeNavn}`;
   });
+
+  const checkPunkt = punkt => {
+    !punkt.arkiveret ? arkiverPunktTrue(punkt.id) : arkiverPunktFalse(punkt.id);
+  };
 
   return (
     <div
@@ -48,20 +53,32 @@ const Punkter = ({ visSidebar }) => {
       <ul className="punkter__liste">
         {punkter.map(punkt => (
           // mapper i gennem punkterne - identifier for hver enkelt punkt.
-          <li
-            key={punkt.id}
-            style={{
-              backgroundColor: theme.backgroundColor,
-              color: theme.color
-            }}
-          >
+          <div className="punkter__liste-container">
             <Checkbox id={punkt.id} indhold={punkt.punkt} />
-            <span className="punkt-punkt">{punkt.punkt} </span>
-            <span className="punkt-dato">
-              ~ {moment([punkt.dato], "YYYY/MM/DD HH:mm").fromNow()}
-              {listeNavn === "ALLE" ? " @" + punkt.listeId : ""}
-            </span>
-          </li>
+            <li
+              onClick={() => checkPunkt(punkt)}
+              className="punkter__liste-container-li"
+              style={
+                punkt.arkiveret
+                  ? {
+                      textDecoration: "line-through",
+                      backgroundColor: theme.backgroundColor,
+                      color: theme.color
+                    }
+                  : {
+                      backgroundColor: theme.backgroundColor,
+                      color: theme.color
+                    }
+              }
+              key={punkt.id}
+            >
+              <span className="punkt-punkt">{punkt.punkt}</span>
+              <span className="punkt-dato">
+                ~ {moment([punkt.dato], "YYYY/MM/DD HH:mm").fromNow()}
+                {listeNavn === "ALLE" ? " @" + punkt.listeId : ""}
+              </span>
+            </li>
+          </div>
         ))}
       </ul>
       <TilføjPunkt />
