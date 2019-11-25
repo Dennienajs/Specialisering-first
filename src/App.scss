@@ -1,10 +1,11 @@
 // Henter font fra google
 @import url("https://fonts.googleapis.com/css?family=Roboto:400,700,900");
-
+// @import "./Styles/mixins.scss";
 // ********** General Settings **********
 html {
   -webkit-box-sizing: border-box;
   box-sizing: border-box;
+  height: 100%;
 }
 *,
 *:before,
@@ -18,7 +19,7 @@ body {
   padding: 0;
   line-height: 1;
   font-family: "Roboto", sans-serif;
-  color: #202020;
+  min-height: 100%;
 }
 
 ul {
