@@ -13,28 +13,37 @@ const TilføjPunkt = () => {
   const tilføjPunkt = () => {
     let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
 
-    return (
-      punkt &&
-      firebase
-        .firestore()
-        .collection("punkter")
-        .add({
-          arkiveret: false,
-          brugerId: currentUser.uid,
-          dato, //dato:dato
-          listeId: valgtListe,
-          punkt // punkt:punkt
-        })
-        .then(() => {
-          setPunkt("");
-        })
-    );
+    if (!punkt) return;
+    if (currentUser) {
+      return (
+        punkt &&
+        firebase
+          .firestore()
+          .collection("punkter")
+          .add({
+            arkiveret: false,
+            brugerId: currentUser.uid,
+            dato, //dato:dato
+            listeId: valgtListe,
+            punkt // punkt:punkt
+          })
+          .then(() => {
+            setPunkt("");
+          })
+      );
+    }
+    if (!currentUser && punkt) {
+      return window.alert("Please login.");
+    } else {
+      window.alert("Something went wrong.");
+    }
   };
 
   return (
     <div className="tilføj-punkt" data-testid="tilføj-punkt">
       <input
         type="text"
+        required
         className="tilføj-punkt__input"
         value={punkt}
         onChange={e => setPunkt(e.target.value)}

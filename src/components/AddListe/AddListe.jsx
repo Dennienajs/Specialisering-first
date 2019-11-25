@@ -13,21 +13,24 @@ const AddListe = ({ defaultVis = false }) => {
 
   const { currentUser } = useContext(AuthContext);
 
-  const addListe = () =>
-    listeNavn &&
-    firebase
-      .firestore()
-      .collection("lister")
-      .add({
-        listeId,
-        navn: listeNavn,
-        brugerId: currentUser.uid
-      })
-      .then(() => {
-        setLister([...lister]);
-        setListeNavn("");
-        setVis(false);
-      });
+  const addListe = () => {
+    currentUser
+      ? listeNavn &&
+        firebase
+          .firestore()
+          .collection("lister")
+          .add({
+            listeId,
+            navn: listeNavn,
+            brugerId: currentUser.uid
+          })
+          .then(() => {
+            setLister([...lister]);
+            setListeNavn("");
+            setVis(false);
+          })
+      : window.alert("Please login.");
+  };
 
   //Tilføj via enter
   const keyPressed = event => {
