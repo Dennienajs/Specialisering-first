@@ -1,18 +1,24 @@
-import { useState, useEffect } from "react";
+import { useState, useEffect, useContext } from "react";
 import { firebase } from "../firebase";
-
-const brugerId = "1234567890"; // ALLE MINE PUNKTER.
-const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2"; // DENNIE UID
+import { AuthContext } from "../context";
+const brugerId = "1234567890"; // ALLE MINE PUNKTER. KAN SES AF ALLE BRUGERE.
+// const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2"; // DENNIE UID
+let uid = "";
 
 //passing valgtListe in like a regular function.
 // usePunkter giver adgang til alle puntker.
 // const { punkter } = usePunkter(valgtListe); (valgtListe = listeId)
+
 export const usePunkter = valgtListe => {
+  const { currentUser } = useContext(AuthContext);
   const [punkter, setPunkter] = useState([]);
   const [arkiveretPunkter, setArkiveretPunkter] = useState([]);
   // Firebase henter indhold: punkter ud fra brugerId
   // - Real-time database, med brug af subscribe/unsubscribe
   useEffect(() => {
+    if (currentUser) {
+      uid = currentUser.uid;
+    }
     let unsubscribe = firebase
       .firestore()
       .collection("punkter")
@@ -42,7 +48,7 @@ export const usePunkter = valgtListe => {
 
     // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" rammes.
     return () => unsubscribe();
-  }, [valgtListe]); //empty array = kør én gang. - [valgtListe] = kør når den ændres.
+  }, [valgtListe, currentUser]); //empty array = kør én gang. - [valgtListe] = kør når den ændres.
 
   // retunerer "ikke-arkiveret" punkter + ArkiveretPunkter.
   return { punkter, arkiveretPunkter };
