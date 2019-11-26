@@ -27,7 +27,8 @@ const Punkter = ({ visSidebar }) => {
           : currentUser
         : null
     }: ${capitalizeString(listeNavn.toLowerCase())}`;
-  });
+    console.log("title");
+  }, [listeNavn, currentUser]);
 
   return (
     <div
