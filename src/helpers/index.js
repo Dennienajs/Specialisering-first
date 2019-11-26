@@ -10,28 +10,9 @@ import moment from "moment";
 // ***************************************************
 // ***************************************************
 
-// SLETPUNKT (Checkbox component)
-export const sletPunkt = id => {
-  let confirmation = window.confirm(
-    "Er du sikker på du vil fjerne dette punkt?"
-  );
-  confirmation &&
-    firebase
-      .firestore()
-      .collection("punkter")
-      .doc(id)
-      // Herfra og ned til .update comment kan byttes.
-      .delete()
-      // .then(() => {
-      //   window.alert("Task completed and deleted!");
-      // })
-      .catch(err => {
-        console.error("Error deleting task: ", err);
-        window.alert("Ooops, something went wrong. Please try again.");
-      });
-};
-
-// ADDLISTE (AddListe)
+// ADDLISTE (AddListe) - IKKE I BRUG -
+// VED IKKE LIGE HVORFOR MAN IKKE KAN BRUGE CURRENTUSER.
+// MÅSKE JEG SKULLE PRØVE AT HENTE CURRENTUSER DIREKTE HERINDE.
 export const addListe = ({ listeNavn, currentUser }) => {
   const listeId = uuid();
   firebase
@@ -51,7 +32,9 @@ export const addListe = ({ listeNavn, currentUser }) => {
     */
 };
 
-// TILFØJ PUNKT (TilføjPunkt)
+// TILFØJ PUNKT (TilføjPunkt) - IKKE I BRUG -
+// VED IKKE LIGE HVORFOR MAN IKKE KAN BRUGE CURRENTUSER.
+// MÅSKE JEG SKULLE PRØVE AT HENTE CURRENTUSER DIREKTE HERINDE.
 export const tilføjPunkt = ({ punkt, currentUser, valgtListe }) => {
   let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
 
@@ -82,6 +65,27 @@ export const tilføjPunkt = ({ punkt, currentUser, valgtListe }) => {
 // *********** TESTET OG I BRUG **********************
 // ***************************************************
 // ***************************************************
+
+// SLETPUNKT (Checkbox component)
+export const sletPunkt = id => {
+  let confirmation = window.confirm(
+    "Er du sikker på du vil fjerne dette punkt?"
+  );
+  confirmation &&
+    firebase
+      .firestore()
+      .collection("punkter")
+      .doc(id)
+      // Herfra og ned til .update comment kan byttes.
+      .delete()
+      // .then(() => {
+      //   window.alert("Task completed and deleted!");
+      // })
+      .catch(err => {
+        console.error("Error deleting task: ", err);
+        window.alert("Ooops, something went wrong. Please try again.");
+      });
+};
 
 // Bruges i Checkbox.
 export const checkPunktDone = (arkiveret, id) => {
