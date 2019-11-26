@@ -2,7 +2,12 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import Punkter from "../components/Punkter";
-import { useValgtListeValue, useListerValue } from "../context";
+import {
+  useValgtListeValue,
+  useListerValue,
+  AuthContext,
+  AuthProvider
+} from "../context";
 
 // Context mock - useValgtListeValue, useListerValue
 jest.mock("../context", () => ({
@@ -77,7 +82,11 @@ it("render ALLE punkter", () => {
     valgtListe: "ALLE" // "" = "ALLE"
   }));
 
-  const { queryByTestId } = render(<Punkter />);
+  const { queryByTestId } = render(
+    <AuthContext.Provider value={{ true }}>
+      <Punkter />
+    </AuthContext.Provider>
+  );
   expect(queryByTestId("punkter")).toBeTruthy();
   expect(queryByTestId("liste-navn").textContent).toBe("ALLE");
 });

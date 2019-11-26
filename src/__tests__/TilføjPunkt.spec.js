@@ -1,9 +1,9 @@
 /* eslint-disable react/jsx-pascal-case */
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
-import { useValgtListeValue } from "../context";
 import TilføjPunkt from "../components/TilføjPunkt";
+
+import { AuthContext, AuthProvider, useValgtListeValue } from "../context";
 
 beforeEach(cleanup); // Cleans the DOM
 
@@ -33,7 +33,12 @@ describe("<TilføjPunkt />", () => {
   describe("Success", () => {
     // Render Component
     it("renders the <TilføjPunkt />", () => {
-      const { queryByTestId } = render(<TilføjPunkt />);
+      const { currentUser } = {};
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <TilføjPunkt />;
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("tilføj-punkt")).toBeTruthy(); // data-testid="tilføj-punkt"
     });
 
@@ -43,7 +48,11 @@ describe("<TilføjPunkt />", () => {
       useValgtListeValue.mockImplementation(() => ({
         valgtListe: "Todo"
       }));
-      const { queryByTestId } = render(<TilføjPunkt />);
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={true}>
+          <TilføjPunkt />;
+        </AuthContext.Provider>
+      );
 
       // Ændrer staten i input feltet (skriver noget...)
       fireEvent.change(queryByTestId("tilføj-punkt-input"), {
