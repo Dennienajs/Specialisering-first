@@ -2,7 +2,7 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Header from "../containers/Header";
-import { AuthContext } from "../context";
+import { AuthContext, AuthProvider } from "../context";
 
 beforeEach(cleanup);
 
@@ -11,10 +11,9 @@ beforeEach(cleanup);
 describe("<Header />", () => {
   describe("Success", () => {
     it("render header MED en currentUser", () => {
-      const currentUser = { name: "123" };
       const { queryByTestId } = render(
         <Router>
-          <AuthContext.Provider value={{ currentUser }}>
+          <AuthContext.Provider value="true">
             <Header />
           </AuthContext.Provider>
         </Router>
@@ -29,12 +28,12 @@ describe("<Header />", () => {
 
     describe("Success", () => {
       it("render header UDEN en currentUser", () => {
-        const currentUser = null;
+        const currentUser = false;
         const { queryByTestId } = render(
           <Router>
-            <AuthContext.Provider value={{ currentUser }}>
+            <AuthProvider value={true}>
               <Header />
-            </AuthContext.Provider>
+            </AuthProvider>
           </Router>
         );
         expect(queryByTestId("header")).toBeTruthy();

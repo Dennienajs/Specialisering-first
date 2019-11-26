@@ -29,11 +29,21 @@ describe("<Content />", () => {
   });
 
   describe("Success", () => {
-    it("renders the Content page", () => {
-      const currentUser = true;
+    it("renders the Content page with user", () => {
       const { queryByTestId } = render(
         <Router>
-          <AuthProvider value={currentUser}>
+          <AuthProvider value="true">
+            <Content />
+          </AuthProvider>
+        </Router>
+      );
+      expect(queryByTestId("content")).toBeTruthy();
+    });
+
+    it("renders the Content page without user", () => {
+      const { queryByTestId } = render(
+        <Router>
+          <AuthProvider value="false">
             <Content />
           </AuthProvider>
         </Router>
@@ -41,25 +51,4 @@ describe("<Content />", () => {
       expect(queryByTestId("content")).toBeTruthy();
     });
   });
-
-  // Kan ikke få den til at ramme history.push("/");
-  //   describe("Success", () => {
-  //     it("renders the Content page", () => {
-  //       const currentUser = true;
-  //       const setValgtListe = "";
-  //       const { queryByTestId } = render(
-  //         <ValgtListeContext.Provider value={{"123"}}>
-  //           <ListerProvider value="1">
-  //             <AuthContext.Provider value={currentUser}>
-  //               <Router>
-  //                 <Content />
-  //               </Router>
-  //             </AuthContext.Provider>
-  //           </ListerProvider>
-  //         </ValgtListeContext.Provider>
-  //       );
-
-  //       expect(queryByTestId("content")).toBeTruthy();
-  //     });
-  //   });
 });
