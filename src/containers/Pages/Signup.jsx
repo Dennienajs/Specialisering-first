@@ -21,6 +21,8 @@ const Signup = ({ history }) => {
           .createUserWithEmailAndPassword(email.value, password.value);
         history.push("/");
       } catch (err) {
+        // Hvis man prøvet at oprette en bruger med email, hvor emailen allerede er i brug,
+        // får man "Error: The email address is already in use by another account."
         alert(err);
       }
     },
