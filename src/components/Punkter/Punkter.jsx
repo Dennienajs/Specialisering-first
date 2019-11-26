@@ -1,11 +1,10 @@
+/* eslint-disable react/jsx-pascal-case */
 import React, { useEffect, useContext } from "react";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
 import { ThemeContext, AuthContext, useValgtListeValue } from "../../context/";
 import { capitalizeString } from "../../helpers";
-// eslint-disable-next-line no-unused-vars
 import TilføjPunkt from "../TilføjPunkt";
-// eslint-disable-next-line no-unused-vars
 import Checkbox from "../Checkbox";
 
 const Punkter = ({ visSidebar }) => {
