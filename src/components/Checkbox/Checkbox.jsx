@@ -1,11 +1,5 @@
-import { firebase } from "../../firebase";
 import React from "react";
-import {
-  arkiverPunktFalse,
-  arkiverPunktTrue,
-  checkPunktDone,
-  sletPunkt
-} from "../../helpers";
+import { checkPunktDone, sletPunkt } from "../../helpers";
 import { TiTickOutline as Tick, TiDelete as Delete } from "react-icons/ti";
 
 const Checkbox = ({ id, indhold, type, arkiveret }) => {
