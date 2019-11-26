@@ -59,7 +59,6 @@ export const useLister = () => {
       .firestore()
       .collection("lister")
       .where("brugerId", "in", [brugerId, uid]) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
-      .orderBy("dato")
       .get()
       .then(snapshot => {
         const alleLister = snapshot.docs.map(liste => ({
