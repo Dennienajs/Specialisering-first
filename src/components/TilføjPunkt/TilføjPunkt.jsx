@@ -27,6 +27,7 @@ const TilføjPunkt = () => {
     if (currentUser) {
       return (
         punkt &&
+        punkt.length > 0 &&
         firebase
           .firestore()
           .collection("punkter")
@@ -41,6 +42,7 @@ const TilføjPunkt = () => {
             toast.success();
             setPunkt("");
           })
+          .catch(err => console.error("ERROR: " + err))
       );
     }
     if (!currentUser && punkt) {
