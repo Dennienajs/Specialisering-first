@@ -22,7 +22,7 @@ const Punkter = ({ visSidebar }) => {
     document.title = `${listeNavn}`;
   });
 
-  const checkPunkt = punkt => {
+  const checkPunktDone = punkt => {
     !punkt.arkiveret ? arkiverPunktTrue(punkt.id) : arkiverPunktFalse(punkt.id);
   };
 
@@ -53,10 +53,15 @@ const Punkter = ({ visSidebar }) => {
       <ul className="punkter__liste">
         {punkter.map(punkt => (
           // mapper i gennem punkterne - identifier for hver enkelt punkt.
-          <div className="punkter__liste-container">
-            <Checkbox id={punkt.id} indhold={punkt.punkt} />
+          <div className="punkter__liste-container" key={punkt.id}>
+            <Checkbox id={punkt.id} indhold={punkt.punkt} type={"delete"} />
+            <Checkbox
+              id={punkt.id}
+              indhold={punkt.punkt}
+              type={"done"}
+              arkiveret={punkt.arkiveret}
+            />
             <li
-              onClick={() => checkPunkt(punkt)}
               className="punkter__liste-container-li"
               style={
                 punkt.arkiveret
@@ -70,7 +75,6 @@ const Punkter = ({ visSidebar }) => {
                       color: theme.color
                     }
               }
-              key={punkt.id}
             >
               <span className="punkt-punkt">{punkt.punkt}</span>
               <span className="punkt-dato">

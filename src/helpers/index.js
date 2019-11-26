@@ -12,19 +12,23 @@ import moment from "moment";
 
 // SLETPUNKT (Checkbox component)
 export const sletPunkt = id => {
-  firebase
-    .firestore()
-    .collection("punkter")
-    .doc(id)
-    // Herfra og ned til .update comment kan byttes.
-    .delete()
-    .then(() => {
-      window.alert("Task completed!");
-    })
-    .catch(err => {
-      console.error("Error completing task: ", err);
-      window.alert("Ooops, something went wrong. Please try again.");
-    });
+  let confirmation = window.confirm(
+    "Er du sikker på du vil fjerne dette punkt?"
+  );
+  confirmation &&
+    firebase
+      .firestore()
+      .collection("punkter")
+      .doc(id)
+      // Herfra og ned til .update comment kan byttes.
+      .delete()
+      // .then(() => {
+      //   window.alert("Task completed and deleted!");
+      // })
+      .catch(err => {
+        console.error("Error deleting task: ", err);
+        window.alert("Ooops, something went wrong. Please try again.");
+      });
 };
 
 // ADDLISTE (AddListe)
@@ -78,6 +82,11 @@ export const tilføjPunkt = ({ punkt, currentUser, valgtListe }) => {
 // *********** TESTET OG I BRUG **********************
 // ***************************************************
 // ***************************************************
+
+// Bruges i Checkbox.
+export const checkPunktDone = (arkiveret, id) => {
+  !arkiveret ? arkiverPunktTrue(id) : arkiverPunktFalse(id);
+};
 
 // Bruges til "line-through" ved click på punkt.
 export const arkiverPunktTrue = id => {
