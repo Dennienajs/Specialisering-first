@@ -3,34 +3,12 @@
 
 // Disse mixins kan bruges af andre scss filer via @import './mixins.scss
 
-// Samme blå "tema farve" (header, markering af liste, liste pil, checkbox border)
-// $blue-generic: #8092e2;
-
-// @import "../App.scss";
-
 $maxWidth: 700px !important; // Punkter, header, content.
 
 // Dejlige blå til Header, knapper, aktivListe
 $blue-generic: #8092e2;
 // punkter, sidebar, addListe
 $border-generic: 1px solid #a8a6a62f;
-
-// Prøvede at lave noget smart med mixins og darkmode, men endte med context api løstninen.
-// TOGGLE DARKMODE - true/false
-// $darkmode-toggle: true;
-// $darkmode-off: $darkmode-toggle;
-
-// // DARKMODE mixin
-// @mixin theme-colors($darkmode: $darkmode-off) {
-//   border-color: transparent !important;
-//   @if $darkmode {
-//     background-color: $dark-background !important;
-//     color: $dark-text !important;
-//   } @else {
-//     color: $light-text !important;
-//     background-color: $light-background !important;
-//   }
-// }
 
 // Tilføj knap - punkter + lister
 @mixin btnStyle() {
