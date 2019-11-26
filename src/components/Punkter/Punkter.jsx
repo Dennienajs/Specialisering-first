@@ -6,7 +6,6 @@ import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
 import { useValgtListeValue } from "../../context";
 import { ThemeContext } from "../../context/";
-import { arkiverPunktFalse, arkiverPunktTrue } from "../../helpers";
 
 const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
