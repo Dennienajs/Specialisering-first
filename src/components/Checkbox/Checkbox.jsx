@@ -29,9 +29,9 @@ const Checkbox = ({ id, indhold, type, arkiveret }) => {
       role="button"
     >
       {type === "done" ? (
-        <Tick className={`checkbox ${type}`} />
+        <Tick className={`checkbox ${type}`} data-testid="checkbox-tick" />
       ) : type === "delete" ? (
-        <Delete className={`checkbox ${type}`} />
+        <Delete className={`checkbox ${type}`} data-testid="checkbox-delete" />
       ) : null}
     </div>
   );
