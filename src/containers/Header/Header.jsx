@@ -9,6 +9,7 @@ import {
 import { firebase } from "../../firebase";
 import { Link } from "react-router-dom";
 import { AuthContext, ThemeContext } from "../../context";
+import { capitalizeString } from "../../helpers";
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext);
@@ -50,7 +51,7 @@ const Header = () => {
       let emailDisplay = currentUser.email.split("@", 1);
       currentUser
         .updateProfile({
-          displayName: emailDisplay.toString()
+          displayName: capitalizeString(emailDisplay.toString())
         })
         .catch(err => console.error(err));
       console.log(currentUser.displayName);

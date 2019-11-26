@@ -119,3 +119,7 @@ export const arkiverPunktFalse = id => {
         window.alert("Ooops, something went wrong. Please try again.");
       });
 };
+
+export const capitalizeString = capString => {
+  return capString.charAt(0).toUpperCase() + capString.slice(1);
+};
