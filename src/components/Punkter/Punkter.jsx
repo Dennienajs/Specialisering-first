@@ -1,12 +1,12 @@
-/* eslint-disable react/jsx-pascal-case */ //Pascal case ved TilføjPunkt ???
 import React, { useEffect, useContext } from "react";
-import Checkbox from "../Checkbox/index";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
-import TilføjPunkt from "../TilføjPunkt";
-import { useValgtListeValue } from "../../context";
-import { ThemeContext, AuthContext } from "../../context/";
+import { ThemeContext, AuthContext, useValgtListeValue } from "../../context/";
 import { capitalizeString } from "../../helpers";
+// eslint-disable-next-line no-unused-vars
+import TilføjPunkt from "../TilføjPunkt";
+// eslint-disable-next-line no-unused-vars
+import Checkbox from "../Checkbox";
 
 const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
@@ -27,7 +27,6 @@ const Punkter = ({ visSidebar }) => {
           : currentUser
         : null
     }: ${capitalizeString(listeNavn.toLowerCase())}`;
-    console.log("title");
   }, [listeNavn, currentUser]);
 
   return (
