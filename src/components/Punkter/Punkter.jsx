@@ -1,15 +1,17 @@
 /* eslint-disable react/jsx-pascal-case */ //Pascal case ved TilføjPunkt ???
-import React, { useEffect } from "react";
+import React, { useEffect, useContext } from "react";
 import Checkbox from "../Checkbox/index";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
 import TilføjPunkt from "../TilføjPunkt";
 import { useValgtListeValue } from "../../context";
-import { ThemeContext } from "../../context/";
+import { ThemeContext, AuthContext } from "../../context/";
+import { capitalizeString } from "../../helpers";
 
 const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
   const { theme } = React.useContext(ThemeContext);
+  const { currentUser } = useContext(AuthContext);
   // i usePunkter("SØGE-ID") - kan man insætte fx 1 for at vise alle puntker med listeId = 1.
   // tomme ("") - vil vise punkter ligegyldigt id. (stadig kun !arkiveret)
   const { punkter } = usePunkter(valgtListe); // viser alle punkter med "listeId = "1"...
@@ -18,7 +20,13 @@ const Punkter = ({ visSidebar }) => {
 
   // Sætter document title = ud fra markeret liste.
   useEffect(() => {
-    document.title = `${listeNavn.toLowerCase()}`;
+    document.title = `${
+      currentUser
+        ? currentUser.displayName
+          ? currentUser.displayName
+          : currentUser
+        : null
+    }: ${capitalizeString(listeNavn.toLowerCase())}`;
   });
 
   return (
