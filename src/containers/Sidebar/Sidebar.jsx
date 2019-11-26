@@ -224,7 +224,7 @@ const Sidebar = () => {
       </ul>
 
       {/** RENDER ADDLISTE I SIDEBAREN**/}
-      <AddListe />
+      {visLister && <AddListe />}
     </div>
   );
 };
