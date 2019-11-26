@@ -22,8 +22,9 @@ export const usePunkter = valgtListe => {
     let unsubscribe = firebase
       .firestore()
       .collection("punkter")
-      .where("brugerId", "in", [brugerId, uid]); // orderBy("dato") virker ikke
-    //Ikke så smart at sætte brugerId direkte i koden, men "jeg" er alligevel den eneste bruger.
+      .orderBy("dato", "desc")
+      .where("brugerId", "in", [brugerId, uid]);
+    // orderBy("dato") virker ikke (FIXED: manglede "firebase index")
 
     // Er der valgt en liste, henter den punkter ud fra den liste.
     unsubscribe = valgtListe
@@ -37,19 +38,13 @@ export const usePunkter = valgtListe => {
         ...punkt.data()
       }));
 
-      // henter punkter som ikke er arkiveret.
-      // setPunkter(nyePunkter.filter(punkt => punkt.arkiveret !== true));
+      // Sætter alle de nye punkter og returner dem i bunden.
       setPunkter(nyePunkter);
-
-      // henter punkter som er arkiveret.
-      // setArkiveretPunkter(
-      //   nyePunkter.filter(punkt => punkt.arkiveret !== false)
-      // );
     });
 
     // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" rammes.
     return () => unsubscribe();
-  }, [valgtListe, currentUser]); //empty array = kør én gang. - [valgtListe] = kør når den ændres.
+  }, [valgtListe, currentUser]); // ListeSkift + user login/signout
 
   // retunerer "ikke-arkiveret" punkter + ArkiveretPunkter.
   return { punkter, arkiveretPunkter };
@@ -64,7 +59,7 @@ export const useLister = () => {
       .firestore()
       .collection("lister")
       .where("brugerId", "in", [brugerId, uid]) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
-      .orderBy("listeId")
+      .orderBy("dato")
       .get()
       .then(snapshot => {
         const alleLister = snapshot.docs.map(liste => ({
