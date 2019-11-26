@@ -6,7 +6,7 @@ import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
 
 const Login = ({ history }) => {
-  const { theme } = React.useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
   const handleLogin = useCallback(
