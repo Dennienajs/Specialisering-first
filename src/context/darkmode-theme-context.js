@@ -12,14 +12,14 @@ const themes = {
 };
 
 const initialState = {
-  dark: false,
-  theme: themes.light,
+  dark: true,
+  theme: themes.dark,
   toggle: () => {}
 };
 const ThemeContext = React.createContext(initialState);
 
 function ThemeProvider({ children }) {
-  const [dark, setDark] = React.useState(false); // Default theme is light
+  const [dark, setDark] = React.useState(true); // Default theme is dark
 
   // On mount, read the preferred theme from the persistence
   React.useEffect(() => {

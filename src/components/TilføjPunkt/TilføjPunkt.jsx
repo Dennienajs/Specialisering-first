@@ -2,8 +2,8 @@ import React, { useState, useContext } from "react";
 import moment from "moment";
 import { firebase } from "../../firebase";
 import { useValgtListeValue, AuthContext } from "../../context";
-import { ToastContainer, toast } from "react-toastify";
 
+import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
 const TilføjPunkt = () => {
@@ -57,7 +57,7 @@ const TilføjPunkt = () => {
         required
         className="tilføj-punkt__input"
         value={punkt}
-        onChange={e => setPunkt(e.target.value)}
+        onChange={event => setPunkt(event.target.value)}
         placeholder={`tilføj til ${valgtListe.toLowerCase()}`}
         onKeyPress={event => {
           if (event.key === "Enter" && punkt.length > 0) {
@@ -70,6 +70,7 @@ const TilføjPunkt = () => {
         type="button"
         className="tilføj-punkt__submit"
         onClick={() => tilføjPunkt()}
+        onKeyDown={() => tilføjPunkt()}
         data-testid="tilføj-punkt-button"
       >
         Tilføj

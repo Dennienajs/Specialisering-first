@@ -1,7 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { firebase } from "../firebase";
-// Import auth() function ** Skal laves først **
-// https://www.youtube.com/watch?v=unr4s3jd9qA
+
 export const AuthContext = React.createContext();
 
 export const AuthProvider = ({ children }) => {

@@ -6,7 +6,7 @@ const Checkbox = ({ id, indhold, type, arkiveret }) => {
   // Type = done -> line-through + update arkiveret felt i firebase = true/false.
   // Type = delete -> slet punkt fra firebase.
 
-  //Kunne også laves i en switch for readability, men jeg elsker ternary operators.
+  // Kunne også laves i en switch for readability, men jeg elsker ternary operators.
   return (
     <div
       className="checkbox-holder"

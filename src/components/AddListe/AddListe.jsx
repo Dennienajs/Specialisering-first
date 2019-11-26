@@ -7,10 +7,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 const AddListe = ({ defaultVis = false }) => {
   const [vis, setVis] = useState(defaultVis);
   const [listeNavn, setListeNavn] = useState("");
-
   const { lister, setLister } = useListerValue();
-  const listeId = uuid();
-
   const { currentUser } = useContext(AuthContext);
 
   const addListe = () => {
@@ -20,7 +17,7 @@ const AddListe = ({ defaultVis = false }) => {
           .firestore()
           .collection("lister")
           .add({
-            listeId,
+            listeId: uuid(),
             navn: listeNavn,
             brugerId: currentUser.uid
           })

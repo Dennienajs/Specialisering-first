@@ -9,10 +9,10 @@ import Checkbox from "../Checkbox";
 
 const Punkter = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
-  const { theme } = React.useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   const { currentUser } = useContext(AuthContext);
   // i usePunkter("SØGE-ID") - kan man insætte fx 1 for at vise alle puntker med listeId = 1.
-  // tomme ("") - vil vise punkter ligegyldigt id. (stadig kun !arkiveret)
+  // tomme ("") - vil vise punkter ligegyldigt id.
   const { punkter } = usePunkter(valgtListe); // viser alle punkter med "listeId = "1"...
 
   let listeNavn = valgtListe;
