@@ -1,7 +1,7 @@
 @import "../../Styles/mixins.scss";
 
 .checkbox-holder {
-  margin-right: 23px;
+  margin-right: 7px;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -12,7 +12,17 @@
     height: 15px;
     width: 15px;
     display: block;
-    border: 1px solid $blue-generic();
+    // // border: 1px solid;
     border-radius: 100px; // alt over 20 giver det samme.
+  }
+
+  .done {
+    background-color: rgba(0, 255, 0, 0.575);
+    border-color: rgba(0, 255, 0, 0.3);
+    margin-right: 8px;
+  }
+  .delete {
+    background-color: red;
+    border-color: rgba(251, 51, 51, 0.3);
   }
 }

@@ -1,36 +1,44 @@
 import { firebase } from "../../firebase";
 import React from "react";
+import {
+  arkiverPunktFalse,
+  arkiverPunktTrue,
+  checkPunktDone,
+  sletPunkt
+} from "../../helpers";
+import { TiTickOutline as Tick, TiDelete as Delete } from "react-icons/ti";
 
-const Checkbox = ({ id, indhold }) => {
-  const arkiverPunkt = () => {
-    firebase
-      .firestore()
-      .collection("punkter")
-      .doc(id)
-      // Herfra og ned til .update comment kan byttes.
-      .delete()
-      .then(() => {
-        window.alert("Task completed!");
-      })
-      .catch(err => {
-        console.error("Error completing task: ", err);
-        window.alert("Ooops, something went wrong. Please try again.");
-      });
+const Checkbox = ({ id, indhold, type, arkiveret }) => {
+  // Type = done -> line-through + update arkiveret felt i firebase = true/false.
+  // Type = delete -> slet punkt fra firebase.
 
-    // .update({ arkiveret: true }); // Førhen opdateres denne felt bare til true.
-    // Føler det er bedre at jeg sletter dem, for de ikke fylder i db.
-  };
-
+  //Kunne også laves i en switch for readability, men jeg elsker ternary operators.
   return (
     <div
       className="checkbox-holder"
       data-testid="checkbox-action"
-      onClick={() => arkiverPunkt()}
-      onKeyDown={() => arkiverPunkt()}
+      onClick={() =>
+        type === "done"
+          ? checkPunktDone(arkiveret, id)
+          : type === "delete"
+          ? sletPunkt(id)
+          : console.log("fejl")
+      }
+      onKeyDown={() =>
+        type === "done"
+          ? checkPunktDone(arkiveret, id)
+          : type === "delete"
+          ? sletPunkt(id)
+          : console.log("fejl")
+      }
       aria-label={`Mark ${indhold} as done?`}
       role="button"
     >
-      <span className="checkbox" />
+      {type === "done" ? (
+        <Tick className={`checkbox ${type}`} />
+      ) : type === "delete" ? (
+        <Delete className={`checkbox ${type}`} />
+      ) : null}
     </div>
   );
 };
