@@ -2,16 +2,26 @@ import React, { useState, useContext } from "react";
 import moment from "moment";
 import { firebase } from "../../firebase";
 import { useValgtListeValue, AuthContext } from "../../context";
+import { ToastContainer, toast } from "react-toastify";
+
+import "react-toastify/dist/ReactToastify.css";
 
 const TilføjPunkt = () => {
   const [punkt, setPunkt] = useState("");
-
   const { valgtListe } = useValgtListeValue();
-
   const { currentUser } = useContext(AuthContext);
 
   const tilføjPunkt = () => {
     let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
+
+    toast.info(`☑ Tilføjet til ${valgtListe.toLowerCase()} ☑`, {
+      position: "top-center",
+      autoClose: 1700,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false
+    });
 
     if (!punkt) return;
     if (currentUser) {
@@ -28,6 +38,7 @@ const TilføjPunkt = () => {
             punkt // punkt:punkt
           })
           .then(() => {
+            toast.success();
             setPunkt("");
           })
       );
@@ -63,6 +74,7 @@ const TilføjPunkt = () => {
       >
         Tilføj
       </button>
+      <ToastContainer style={{ textAlign: "center" }} />
     </div>
   );
 };

@@ -19,12 +19,8 @@ const Punkter = ({ visSidebar }) => {
 
   // Sætter document title = ud fra markeret liste.
   useEffect(() => {
-    document.title = `${listeNavn}`;
+    document.title = `${listeNavn.toLowerCase()}`;
   });
-
-  const checkPunktDone = punkt => {
-    !punkt.arkiveret ? arkiverPunktTrue(punkt.id) : arkiverPunktFalse(punkt.id);
-  };
 
   return (
     <div
