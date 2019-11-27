@@ -72,8 +72,8 @@ $border-generic: 1px solid #a8a6a62f;
 
 // react-fa-icons i sidebar + header.
 @mixin svgStyle {
-  width: 20px;
-  height: 20px;
+  width: 17px !important;
+  height: 17px !important;
   color: black;
   &:hover {
     color: white;
