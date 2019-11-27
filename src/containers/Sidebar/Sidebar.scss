@@ -45,8 +45,8 @@
 
         // Mellemrum mellem icon og text.
         span {
-          // :first-of-type
-          margin-right: 10px;
+          //
+          margin-right: 5px;
           display: -webkit-box;
           display: -ms-flexbox;
           display: flex;
@@ -66,20 +66,34 @@
               color: white;
             }
           }
+          &:nth-of-type(3n) {
+            //3n = 3 span i sidebar = delete.
+            display: flex;
+            justify-content: right;
+            justify-self: right;
+            justify-items: right;
+            // color: red;
+
+            margin-left: auto;
+            svg {
+              color: rgb(243, 122, 122);
+            }
+          }
         }
       }
       &.aktivListe {
         outline: none;
+        display: flex;
       }
       // markerer valgte liste (blue)
       &.aktivListe,
       &:hover {
-        font-weight: bolder !important;
+        // font-weight: bolder !important;
         background-color: $blue-generic !important;
-        color: white !important;
+        color: white;
         //color: white;
         svg {
-          color: white !important;
+          color: white;
         }
       }
     }

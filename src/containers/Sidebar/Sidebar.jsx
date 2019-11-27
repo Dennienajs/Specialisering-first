@@ -5,9 +5,10 @@ import {
   FaCalendarAlt,
   FaTasks,
   FaBug,
-  FaShoppingBasket,
-  FaLongArrowAltDown
+  FaShoppingBasket
 } from "react-icons/fa";
+
+import { FiChevronsDown } from "react-icons/fi";
 import IndividuelListe from "../../components/IndividuelListe";
 import AddListe from "../../components/AddListe";
 import {
@@ -184,9 +185,7 @@ const Sidebar = () => {
             onKeyDown={() => setVisLister(!visLister)}
           >
             <span>
-              <FaLongArrowAltDown
-                className={!visLister ? "skjult" : undefined}
-              />
+              <FiChevronsDown className={!visLister ? "skjult" : undefined} />
             </span>
             <h2>Lister</h2>
           </div>
@@ -210,6 +209,7 @@ const Sidebar = () => {
               }
             >
               <div
+                className="sidebar_liste__individuel-liste"
                 role="button"
                 onClick={() => {
                   setAktivListe(liste.listeId);
@@ -220,7 +220,7 @@ const Sidebar = () => {
                   setValgtListe(liste.listeId);
                 }}
               >
-                <IndividuelListe liste={liste} />
+                <IndividuelListe liste={liste} aktivListe={aktivListe} />
               </div>
             </li>
           ))}
