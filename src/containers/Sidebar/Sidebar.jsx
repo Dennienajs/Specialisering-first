@@ -13,7 +13,8 @@ import AddListe from "../../components/AddListe";
 import {
   useValgtListeValue,
   useListerValue,
-  ThemeContext
+  ThemeContext,
+  AuthContext
 } from "../../context";
 
 const Sidebar = () => {
@@ -22,6 +23,7 @@ const Sidebar = () => {
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
   const { lister } = useListerValue(); // brugerens lister
+  const { currentUser } = useContext(AuthContext);
 
   return (
     <div
@@ -193,7 +195,8 @@ const Sidebar = () => {
 
       {/** RENDER EGNE LISTER I SIDEBAREN **/}
       <ul className="sidebar_liste">
-        {visLister &&
+        {currentUser &&
+          visLister &&
           lister &&
           lister.map(liste => (
             <li
@@ -224,7 +227,7 @@ const Sidebar = () => {
       </ul>
 
       {/** RENDER ADDLISTE I SIDEBAREN**/}
-      {visLister && <AddListe />}
+      {currentUser && visLister && <AddListe />}
     </div>
   );
 };
