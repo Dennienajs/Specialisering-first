@@ -12,18 +12,20 @@ let uid = "";
 export const usePunkter = valgtListe => {
   const { currentUser } = useContext(AuthContext);
   const [punkter, setPunkter] = useState([]);
+  const [loadingPunkter, setLoadingPunkter] = useState(true);
   const [arkiveretPunkter, setArkiveretPunkter] = useState([]);
   // Firebase henter indhold: punkter ud fra brugerId
   // - Real-time database, med brug af subscribe/unsubscribe
   useEffect(() => {
+    setLoadingPunkter(true);
     if (currentUser) {
       uid = currentUser.uid;
     }
     let unsubscribe = firebase
       .firestore()
       .collection("punkter")
-      .orderBy("dato", "desc")
-      .where("brugerId", "in", [brugerId, uid]);
+      .orderBy("dato", "desc") // sorteret efter nyeste øverst.
+      .where("brugerId", "in", [brugerId, uid]); // brugerId = mit id inden authentication, vil gerne beholde indtil videre.
     // orderBy("dato") virker ikke (FIXED: manglede "firebase index")
 
     // Er der valgt en liste, henter den punkter ud fra den liste.
@@ -31,15 +33,18 @@ export const usePunkter = valgtListe => {
       ? unsubscribe.where("listeId", "==", valgtListe)
       : unsubscribe;
 
-    //mapper gennem punkterne/data
-    unsubscribe = unsubscribe.onSnapshot(ss => {
-      const nyePunkter = ss.docs.map(punkt => ({
+    // Mapper gennem punkterne
+    // Snapshot fordi det er den data "at that point in time"
+    unsubscribe = unsubscribe.onSnapshot(snapshot => {
+      const nyePunkter = snapshot.docs.map(punkt => ({
         id: punkt.id,
         ...punkt.data()
       }));
 
       // Sætter alle de nye punkter og returner dem i bunden.
+
       setPunkter(nyePunkter);
+      setLoadingPunkter(false);
     });
 
     // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" rammes.
@@ -47,7 +52,7 @@ export const usePunkter = valgtListe => {
   }, [valgtListe, currentUser]); // ListeSkift + user login/signout
 
   // retunerer "ikke-arkiveret" punkter + ArkiveretPunkter.
-  return { punkter, arkiveretPunkter };
+  return { punkter, arkiveretPunkter, loadingPunkter };
 };
 
 export const useLister = () => {
