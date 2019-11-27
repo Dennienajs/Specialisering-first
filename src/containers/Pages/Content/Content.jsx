@@ -8,7 +8,7 @@ import { Link } from "react-router-dom";
 const Content = () => {
   const { currentUser } = useContext(AuthContext);
   const [visSidebar, setVisSidebar] = useState(true);
-  const { theme } = React.useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
 
   // Sjkuler sidebaren ved første render, hvis man ikke er logget ind.
   useEffect(() => {
