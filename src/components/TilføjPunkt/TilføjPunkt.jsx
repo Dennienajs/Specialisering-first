@@ -12,18 +12,24 @@ const TilføjPunkt = () => {
   const { currentUser } = useContext(AuthContext);
 
   const tilføjPunkt = () => {
-    let dato = moment().format("YYYY/MM/DD HH:mm"); // Sætter dato til dagens dato.
+    // Sætter dato til dagens dato.
+    let dato = moment().format("YYYY/MM/DD HH:mm");
 
-    toast.info(`☑ Tilføjet til ${valgtListe.toLowerCase()} ☑`, {
-      position: "top-center",
-      autoClose: 1700,
-      hideProgressBar: false,
-      closeOnClick: true,
-      pauseOnHover: false,
-      draggable: false
-    });
+    // Popop when punkt added successfully.
+    const toastSuccess = () => {
+      toast.success(`☑ Tilføjet til ${valgtListe.toLowerCase()} ☑`, {
+        position: "top-center",
+        autoClose: 1700,
+        hideProgressBar: false,
+        closeOnClick: true,
+        pauseOnHover: false,
+        draggable: false
+      });
+    };
 
+    // Empty Punkt input = return.
     if (!punkt) return;
+
     if (currentUser) {
       return (
         punkt &&
@@ -39,7 +45,7 @@ const TilføjPunkt = () => {
             punkt // punkt:punkt
           })
           .then(() => {
-            toast.success();
+            toastSuccess();
             setPunkt("");
           })
           .catch(err => console.error("ERROR: " + err))
