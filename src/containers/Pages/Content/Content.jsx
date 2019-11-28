@@ -18,7 +18,8 @@ const Content = () => {
     if (currentUser) {
       setVisSidebar(true);
     }
-  }, [currentUser]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [currentUser]); // Den vil have "visSidebar" i denpendency arrayet, men det vil give et infinite loop. Logikken virker som den skal nu.
 
   return (
     <section

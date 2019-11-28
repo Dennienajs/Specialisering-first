@@ -13,7 +13,7 @@ export const usePunkter = valgtListe => {
   const { currentUser } = useContext(AuthContext);
   const [punkter, setPunkter] = useState([]);
   const [loadingPunkter, setLoadingPunkter] = useState(true);
-  const [arkiveretPunkter, setArkiveretPunkter] = useState([]);
+  const [arkiveretPunkter] = useState([]); // setArkiveretPunkter fjernet - unused.
   // Firebase henter indhold: punkter ud fra brugerId
   // - Real-time database, med brug af subscribe/unsubscribe
   useEffect(() => {

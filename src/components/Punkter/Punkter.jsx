@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
-import React, { useState, useEffect, useContext } from "react";
+import React, { useEffect, useContext } from "react";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
 import { ThemeContext, AuthContext, useValgtListeValue } from "../../context/";
