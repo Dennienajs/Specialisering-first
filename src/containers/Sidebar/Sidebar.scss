@@ -66,6 +66,7 @@
               color: white;
             }
           }
+          // TRASH - DELETE LISTE KNAP
           &:nth-of-type(3n) {
             //3n = 3 span i sidebar = delete.
             display: flex;
@@ -90,7 +91,8 @@
       &:hover {
         // font-weight: bolder !important;
         background-color: $blue-generic !important;
-        color: white;
+
+        color: white !important; // Bliver overriddet til sort i light-mode uden important.
         //color: white;
         svg {
           color: white;
