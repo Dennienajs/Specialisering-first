@@ -16,9 +16,9 @@ import {
 export const App = () => {
   const { theme } = React.useContext(ThemeContext);
   return (
-    <ValgtListeProvider>
+    <AuthProvider>
       <ListerProvider>
-        <AuthProvider>
+        <ValgtListeProvider>
           <main
             data-testid="application"
             className="App"
@@ -34,9 +34,9 @@ export const App = () => {
               <Route exact path="/signup" component={Signup} />
             </Router>
           </main>
-        </AuthProvider>
+        </ValgtListeProvider>
       </ListerProvider>
-    </ValgtListeProvider>
+    </AuthProvider>
   );
 };
 

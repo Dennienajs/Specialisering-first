@@ -11,21 +11,17 @@ import {
 import { FiChevronsDown } from "react-icons/fi";
 import IndividuelListe from "../../components/IndividuelListe";
 import AddListe from "../../components/AddListe";
-import {
-  useValgtListeValue,
-  useListerValue,
-  ThemeContext,
-  AuthContext
-} from "../../context";
+import { useValgtListeValue, ThemeContext, AuthContext } from "../../context";
 import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
+import { useLister } from "../../hooks";
 
 const Sidebar = () => {
   const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
   const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
-  const { lister, loadingLister } = useListerValue(); // brugerens lister
   const { currentUser } = useContext(AuthContext);
+  const { lister, loadingLister } = useLister(currentUser); // brugerens lister
 
   return (
     <div
