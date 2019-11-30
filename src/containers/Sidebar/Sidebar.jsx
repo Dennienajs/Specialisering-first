@@ -17,13 +17,14 @@ import {
   ThemeContext,
   AuthContext
 } from "../../context";
+import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 
 const Sidebar = () => {
   const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
   const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
-  const { lister } = useListerValue(); // brugerens lister
+  const { lister, loadingLister } = useListerValue(); // brugerens lister
   const { currentUser } = useContext(AuthContext);
 
   return (
@@ -194,36 +195,39 @@ const Sidebar = () => {
 
       {/** RENDER EGNE LISTER I SIDEBAREN **/}
       <ul className="sidebar_liste">
-        {currentUser &&
-          visLister &&
-          lister &&
-          lister.map(liste => (
-            <li
-              key={liste.listeId}
-              style={{
-                backgroundColor: theme.backgroundColor,
-                color: theme.color
-              }}
-              className={
-                aktivListe === liste.listeId ? "aktivListe" : undefined
-              }
-            >
-              <div
-                className="sidebar_liste__individuel-liste"
-                role="button"
-                onClick={() => {
-                  setAktivListe(liste.listeId);
-                  setValgtListe(liste.navn);
+        {visLister ? (
+          loadingLister ? (
+            <LinearProgress />
+          ) : (
+            lister.map(liste => (
+              <li
+                key={liste.listeId}
+                style={{
+                  backgroundColor: theme.backgroundColor,
+                  color: theme.color
                 }}
-                onKeyDown={() => {
-                  setAktivListe(liste.navn);
-                  setValgtListe(liste.listeId);
-                }}
+                className={
+                  aktivListe === liste.listeId ? "aktivListe" : undefined
+                }
               >
-                <IndividuelListe liste={liste} aktivListe={aktivListe} />
-              </div>
-            </li>
-          ))}
+                <div
+                  className="sidebar_liste__individuel-liste"
+                  role="button"
+                  onClick={() => {
+                    setAktivListe(liste.listeId);
+                    setValgtListe(liste.navn);
+                  }}
+                  onKeyDown={() => {
+                    setAktivListe(liste.navn);
+                    setValgtListe(liste.listeId);
+                  }}
+                >
+                  <IndividuelListe liste={liste} aktivListe={aktivListe} />
+                </div>
+              </li>
+            ))
+          )
+        ) : null}
       </ul>
 
       {/** RENDER ADDLISTE I SIDEBAREN**/}

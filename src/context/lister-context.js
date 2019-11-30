@@ -4,10 +4,12 @@ import { useLister } from "../hooks";
 export const ListerContext = createContext();
 export const ListerProvider = ({ children }) => {
   //får dataen fra useLister hook (firebase query)
-  const { lister, setLister } = useLister();
+  const { lister, setLister, loadingLister, setLoadingLister } = useLister();
 
   return (
-    <ListerContext.Provider value={{ lister, setLister }}>
+    <ListerContext.Provider
+      value={{ lister, setLister, loadingLister, setLoadingLister }}
+    >
       {children}
     </ListerContext.Provider>
   );

@@ -57,9 +57,11 @@ export const usePunkter = valgtListe => {
 
 export const useLister = () => {
   const [lister, setLister] = useState([]);
+  const [loadingLister, setLoadingLister] = useState(true);
 
   // Fetcher fra databasen og giver et "fresh snapshot".
   useEffect(() => {
+    setLoadingLister(true);
     firebase
       .firestore()
       .collection("lister")
@@ -77,9 +79,10 @@ export const useLister = () => {
           setLister(alleLister);
         }
       });
+    setLoadingLister(false);
   }, [lister]);
 
-  return { lister, setLister };
+  return { lister, setLister, loadingLister, setLoadingLister };
 };
 
 /* 
