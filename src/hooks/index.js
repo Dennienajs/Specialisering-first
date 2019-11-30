@@ -1,9 +1,10 @@
 import { useState, useEffect, useContext } from "react";
 import { firebase } from "../firebase";
 import { AuthContext } from "../context";
-const brugerId = "1234567890"; // ALLE MINE PUNKTER. KAN SES AF ALLE BRUGERE.
+// const brugerId = "1234567890"; // ALLE MINE PUNKTER. KAN SES AF ALLE BRUGERE.
 // const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2"; // DENNIE UID
-let uid = "";
+
+let uid = ""; // brugerens unikke id
 
 //passing valgtListe in like a regular function.
 // usePunkter giver adgang til alle puntker.
@@ -25,13 +26,13 @@ export const usePunkter = valgtListe => {
       .firestore()
       .collection("punkter")
       .orderBy("dato", "desc") // sorteret efter nyeste øverst.
-      .where("brugerId", "in", [brugerId, uid]); // brugerId = mit id inden authentication, vil gerne beholde indtil videre.
+      .where("brugerId", "in", [uid]); // brugerId = mit id inden authentication, vil gerne beholde indtil videre.
     // orderBy("dato") virker ikke (FIXED: manglede "firebase index")
 
     // Er der valgt en liste, henter den punkter ud fra den liste.
-    unsubscribe = valgtListe
-      ? unsubscribe.where("listeId", "==", valgtListe)
-      : unsubscribe;
+    unsubscribe = valgtListe // liste valgt i sidebaren (som ikke er "alle")
+      ? unsubscribe.where("listeId", "==", valgtListe) // Viser kun fra den valgte liste
+      : unsubscribe; // Ellers bare alle.
 
     // Mapper gennem punkterne
     // Snapshot fordi det er den data "at that point in time"
@@ -41,8 +42,7 @@ export const usePunkter = valgtListe => {
         ...punkt.data()
       }));
 
-      // Sætter alle de nye punkter og returner dem i bunden.
-
+      // Sætter punkter og loading done.
       setPunkter(nyePunkter);
       setLoadingPunkter(false);
     });
@@ -65,7 +65,7 @@ export const useLister = () => {
     firebase
       .firestore()
       .collection("lister")
-      .where("brugerId", "in", [brugerId, uid]) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
+      .where("brugerId", "in", [uid]) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
       .get()
       .then(snapshot => {
         const alleLister = snapshot.docs.map(liste => ({
@@ -80,7 +80,10 @@ export const useLister = () => {
         }
       });
     setLoadingLister(false);
-  }, [lister]);
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [lister, uid]); // jeg sætter uid her for at rerender brugerens "egne lister" ved login.
+  // Det er det nemmere sted at fixe det. Listerne bliver kun renderet ud fra uid og uid bliver ændret når brugeren logger ind.
+  // Hvis uid ikke er her, skal man F5 siden for at få listerne frem. Dette fixes med denne ene dependency added.
 
   return { lister, setLister, loadingLister, setLoadingLister };
 };
