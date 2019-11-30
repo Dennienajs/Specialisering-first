@@ -13,6 +13,8 @@ import { capitalizeString } from "../../helpers";
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext);
+  const { toggle, dark } = useContext(ThemeContext);
+
   console.log(
     currentUser
       ? currentUser.displayName
@@ -69,7 +71,6 @@ const Header = () => {
     console.log(currentUser);
   };
 
-  const { toggle, dark } = useContext(ThemeContext);
   return (
     <header className="header" data-testid="header">
       <nav>
