@@ -21,7 +21,7 @@ const Sidebar = () => {
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
   const { currentUser } = useContext(AuthContext);
-  const { lister, loadingLister } = useLister(currentUser); // brugerens lister
+  const { lister, setLister, loadingLister } = useLister(); // brugerens lister
 
   return (
     <div
@@ -223,7 +223,9 @@ const Sidebar = () => {
               </li>
             ))
           )
-        ) : null}
+        ) : (
+          "null/lukket"
+        )}
       </ul>
 
       {/** RENDER ADDLISTE I SIDEBAREN**/}
