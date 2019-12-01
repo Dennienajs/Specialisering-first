@@ -8,12 +8,13 @@ import {
 } from "react-icons/fa";
 import { firebase } from "../../firebase";
 import { Link } from "react-router-dom";
-import { AuthContext, ThemeContext } from "../../context";
+import { AuthContext, ThemeContext, useValgtListeValue } from "../../context";
 import { capitalizeString } from "../../helpers";
 
 const Header = () => {
   const { currentUser } = useContext(AuthContext);
   const { toggle, dark } = useContext(ThemeContext);
+  const { setValgtListe } = useValgtListeValue(); // Ændre valgtListe til "" ved signout.
 
   console.log(
     currentUser
@@ -112,6 +113,7 @@ const Header = () => {
                   onClick={() => {
                     firebase.auth().signOut();
                     localStorage.removeItem("FBIdToken");
+                    setValgtListe("");
                     console.log("Signed out");
                     console.log("FBIdToken removed");
                   }}
