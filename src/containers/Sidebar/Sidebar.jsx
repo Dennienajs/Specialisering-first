@@ -11,7 +11,12 @@ import {
 import { FiChevronsDown } from "react-icons/fi";
 import IndividuelListe from "../../components/IndividuelListe";
 import AddListe from "../../components/AddListe";
-import { useValgtListeValue, ThemeContext, AuthContext } from "../../context";
+import {
+  useValgtListeValue,
+  ThemeContext,
+  AuthContext,
+  useListerValue
+} from "../../context";
 import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 import { useLister } from "../../hooks";
 
@@ -21,7 +26,8 @@ const Sidebar = () => {
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
   const { currentUser } = useContext(AuthContext);
-  const { lister, setLister, loadingLister } = useLister(); // brugerens lister
+  const { lister, setLister, loadingLister } = useLister(); // brugerens lister - VIRKER HER.
+  // const { lister, setLister, loadingLister } = useListerValue(); // VIRKER SLET IKKE HER.
 
   return (
     <div
