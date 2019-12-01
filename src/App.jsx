@@ -1,7 +1,7 @@
-import React from "react";
+import React, { useContext } from "react";
 import "./App.scss";
 import { BrowserRouter as Router, Route } from "react-router-dom";
-import Header from "./containers/Header/index";
+import Header from "./containers/Header";
 import Login from "./containers/Pages/Login";
 import Signup from "./containers/Pages/Signup";
 import PrivateRoute from "./PrivateRoute";
@@ -14,7 +14,7 @@ import {
 } from "./context";
 
 export const App = () => {
-  const { theme } = React.useContext(ThemeContext);
+  const { theme } = useContext(ThemeContext);
   return (
     <AuthProvider>
       <ListerProvider>
@@ -43,7 +43,7 @@ export const App = () => {
 // ************
 /*
 AuthProvider giver access til "currentUser" gennem Context API
- - 
+ - bliver ændret ved login/signout.
 
 now --prod  // updates: https://specialisering-1st.dennienajs.now.sh/
 npm run test -- --coverage  // Tests
