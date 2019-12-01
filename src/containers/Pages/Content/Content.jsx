@@ -12,6 +12,7 @@ const Content = () => {
 
   // Sjkuler sidebaren ved første render, hvis man ikke er logget ind.
   useEffect(() => {
+    // evt ændre til ternary.
     if (!currentUser) {
       setVisSidebar(!visSidebar);
     }
