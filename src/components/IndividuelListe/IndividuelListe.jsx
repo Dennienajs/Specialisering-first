@@ -5,7 +5,7 @@ import { useListerValue, useValgtListeValue } from "../../context";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const IndividuelListe = ({ liste, aktivListe }) => {
+const IndividuelListe = ({ liste, aktivListe, setAktivListe }) => {
   const { lister, setLister } = useListerValue(); // brugerens lister
   const { setValgtListe } = useValgtListeValue(); // hvilke punkter som vises.
 
@@ -38,6 +38,7 @@ const IndividuelListe = ({ liste, aktivListe }) => {
       .then(() => {
         setLister([...lister]);
         setValgtListe("");
+        setAktivListe("alle");
         toastSletSuccess();
       })
       .catch(err => {

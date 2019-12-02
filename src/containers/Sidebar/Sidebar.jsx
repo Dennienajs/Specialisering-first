@@ -218,11 +218,15 @@ const Sidebar = () => {
                     setValgtListe(liste.navn);
                   }}
                   onKeyDown={() => {
-                    setAktivListe(liste.navn);
-                    setValgtListe(liste.listeId);
+                    setAktivListe(liste.listeId);
+                    setValgtListe(liste.navn);
                   }}
                 >
-                  <IndividuelListe liste={liste} aktivListe={aktivListe} />
+                  <IndividuelListe
+                    liste={liste}
+                    aktivListe={aktivListe}
+                    setAktivListe={setAktivListe}
+                  />
                 </div>
               </li>
             ))
