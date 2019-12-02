@@ -18,16 +18,14 @@ import {
   useListerValue
 } from "../../context";
 import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
-import { useLister } from "../../hooks";
 
 const Sidebar = () => {
   const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
   const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
-  const { currentUser } = useContext(AuthContext);
-  const { lister, setLister, loadingLister } = useLister(); // brugerens lister - VIRKER HER.
-  // const { lister, setLister, loadingLister } = useListerValue(); // VIRKER SLET IKKE HER.
+  const { currentUser } = useContext(AuthContext); // authentication/user info
+  const { lister, loadingLister } = useListerValue(); // brugerens egne lister
 
   return (
     <div
@@ -229,9 +227,7 @@ const Sidebar = () => {
               </li>
             ))
           )
-        ) : (
-          "null/lukket"
-        )}
+        ) : null}
       </ul>
 
       {/** RENDER ADDLISTE I SIDEBAREN**/}
