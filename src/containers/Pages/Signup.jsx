@@ -66,7 +66,7 @@ const Signup = ({ history }) => {
         </div>
         <div className="form-group">
           <button className="form-button" type="submit">
-            OPRET
+            OPRET BRUGER
           </button>
         </div>
         <div className="form-footer">

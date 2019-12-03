@@ -12,10 +12,12 @@
   background: #fafafa;
 }
 .form {
-  width: 350px;
+  display: flex;
+  flex-direction: column;
+  width: 375px;
   margin: 0 auto;
   border: 1px solid #ddd;
-  padding: 2rem;
+  padding: 1.5rem;
   background: #ffffff;
   border-radius: 20px;
   height: 100%;
@@ -28,16 +30,19 @@
   &-input {
     background: #fafafa;
     border: 1px solid #eeeeee;
-    padding: 15px;
+    // padding: 15px;
     width: 100%;
     border-radius: 20px;
     text-align: center;
+    height: 50px;
     &:hover {
       border-color: black;
     }
   }
 
   &-group {
+    display: flex;
+    justify-content: center;
     margin-bottom: 1rem;
   }
 
@@ -45,14 +50,37 @@
     background: $blue-generic;
     border: 1px solid #ddd;
     color: #ffffff;
-    padding: 10px;
+    // padding: 10px;
     width: 100%;
     text-transform: uppercase;
     border-radius: 20px;
+    height: 50px;
+    display: flex;
+    text-align: center;
+    justify-content: center;
+    justify-self: center;
+    justify-items: center;
+    align-items: center;
+
+    margin: 0px;
 
     &:hover {
       //   font-weight: bolder;
       border-color: black;
+    }
+
+    // Icons: google, email.
+    img,
+    svg {
+      height: 37px;
+      width: 37px;
+      align-items: center;
+    }
+    //text i button
+    p {
+      padding-left: 10px;
+      display: flex;
+      align-items: center;
     }
   }
 
