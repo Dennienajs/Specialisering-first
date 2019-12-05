@@ -66,22 +66,17 @@ describe("<TilføjPunkt />", () => {
       const valgtListeMock = "";
 
       const { queryByTestId } = render(
-        const { queryByTestId } = render(
-          <ValgtListeContext.Provider value="">
-            <ListerContext.Provider value={[]}>
-              <AuthContext.Provider value={{ currentUserMock }}>
-                <ThemeContext.Provider
-                  value={{ theme: "", dark: "", toggle: "" }}
-                >
-                  <TilføjPunkt/>
-                </ThemeContext.Provider>
-              </AuthContext.Provider>
-            </ListerContext.Provider>
-          </ValgtListeContext.Provider>
-
-
-
-        
+        <ValgtListeContext.Provider value="">
+          <ListerContext.Provider value={[]}>
+            <AuthContext.Provider value={{ currentUserMock }}>
+              <ThemeContext.Provider
+                value={{ theme: "", dark: "", toggle: "" }}
+              >
+                <TilføjPunkt />
+              </ThemeContext.Provider>
+            </AuthContext.Provider>
+          </ListerContext.Provider>
+        </ValgtListeContext.Provider>
       );
       expect(queryByTestId("tilføj-punkt")).toBeTruthy(); // data-testid="tilføj-punkt"
     });
@@ -90,7 +85,7 @@ describe("<TilføjPunkt />", () => {
     //
     //
     //
-    it.skip("renders <TilføjPunkt /> og tilføjer et punkt til 'Todo'.", () => {
+    it("renders <TilføjPunkt /> og tilføjer et punkt til 'Todo'.", () => {
       // Mocks valgtListe (listen i sidebaren, fx Todo)
       // useValgtListeValue.mockImplementation(() => ({
       //   valgtListe: "Todo"
