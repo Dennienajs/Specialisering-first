@@ -73,7 +73,7 @@ describe("<Content />", () => {
       expect(queryByTestId("content")).toBeTruthy();
     });
 
-    it.skip("renders the Content page without user", () => {
+    it("renders the Content page without user", () => {
       const { queryByTestId } = render(
         <Router>
           <AuthProvider value="false">

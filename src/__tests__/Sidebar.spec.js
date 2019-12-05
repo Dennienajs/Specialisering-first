@@ -65,7 +65,7 @@ describe("<Sidebar />", () => {
     // ***** COPY-PASTE START *****
 
     // ALLE
-    it.skip("skifter den aktive liste til ALLE ('alle')", () => {
+    it("skifter den aktive liste til ALLE ('alle')", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("alle-action"));
@@ -92,7 +92,7 @@ describe("<Sidebar />", () => {
     });
 
     // I DAG
-    it.skip("skifter den aktive liste til IDAG ('idag')", () => {
+    it("skifter den aktive liste til IDAG ('idag')", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("idag-action"));
@@ -119,7 +119,7 @@ describe("<Sidebar />", () => {
     });
 
     // DENNEUGE
-    it.skip("skifter den aktive liste til DENNEUGE ('denneUge')", () => {
+    it("skifter den aktive liste til DENNEUGE ('denneUge')", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("denneUge-action"));
@@ -146,7 +146,7 @@ describe("<Sidebar />", () => {
     });
 
     // TODO
-    it.skip("skifter den aktive liste til TODO ('todo')", () => {
+    it("skifter den aktive liste til TODO ('todo')", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("todo-action"));
@@ -173,7 +173,7 @@ describe("<Sidebar />", () => {
     });
 
     // BUGS
-    it.skip("skifter den aktive liste til BUGS ('bugs')", () => {
+    it("skifter den aktive liste til BUGS ('bugs')", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("bugs-action"));
@@ -200,7 +200,7 @@ describe("<Sidebar />", () => {
     });
 
     // BUGS
-    it.skip("skifter den aktive liste til INDKØB ('indkøb')", () => {
+    it("skifter den aktive liste til INDKØB ('indkøb')", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("indkøb-action"));
@@ -228,7 +228,7 @@ describe("<Sidebar />", () => {
 
     // ***** COPY-PASTE END *****
 
-    it.skip("Open and close sidebar 'egne lister' with onClick", () => {
+    it("Open and close sidebar 'egne lister' with onClick", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
 
@@ -241,7 +241,7 @@ describe("<Sidebar />", () => {
       expect(queryByTestId("add-liste")).toBeFalsy();
     });
 
-    it.skip("Open and close sidebar 'egne lister' with onKeyPress", () => {
+    it("Open and close sidebar 'egne lister' with onKeyPress", () => {
       const { queryByTestId } = render(<Sidebar />);
       expect(queryByTestId("sidebar")).toBeTruthy();
 
