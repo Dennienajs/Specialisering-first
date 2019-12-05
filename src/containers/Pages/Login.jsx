@@ -10,7 +10,7 @@ const Login = ({ history }) => {
   const { theme } = useContext(ThemeContext);
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
-  const handleLogin = useCallback(async event => {
+  const handleLoginWithEmailAndPassword = useCallback(async event => {
     event.preventDefault();
     const { email, password } = event.target.elements; // deconstructs from the event (form below)
 
@@ -45,7 +45,7 @@ const Login = ({ history }) => {
           backgroundColor: theme.backgroundColor,
           color: theme.color
         }}
-        onSubmit={handleLogin}
+        onSubmit={handleLoginWithEmailAndPassword}
         className="form"
         data-testid="form-input-submit"
       >
