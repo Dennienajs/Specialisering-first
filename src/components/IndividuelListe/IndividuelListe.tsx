@@ -5,7 +5,17 @@ import { useListerValue, useValgtListeValue } from "../../context";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-export const IndividuelListe = ({ liste, aktivListe, setAktivListe }) => {
+interface IndividuelListeProps {
+  liste: { navn: string; docId: string; listeId: string };
+  aktivListe: string;
+  setAktivListe: React.Dispatch<React.SetStateAction<string>>;
+}
+
+export const IndividuelListe: React.FC<IndividuelListeProps> = ({
+  liste,
+  aktivListe,
+  setAktivListe
+}) => {
   const { lister, setLister } = useListerValue(); // brugerens lister
   const { setValgtListe } = useValgtListeValue(); // hvilke punkter som vises.
 
