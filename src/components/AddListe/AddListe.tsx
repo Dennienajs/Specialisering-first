@@ -1,10 +1,10 @@
-import React, { useState, useContext } from "react";
+import React, { useState, useContext, KeyboardEvent } from "react";
 import uuid from "uuid";
 import { firebase } from "../../firebase";
 import { useListerValue, AuthContext } from "../../context";
 import { FaPlus, FaMinus } from "react-icons/fa";
 
-const AddListe = ({ defaultVis = false }) => {
+export const AddListe = ({ defaultVis = false }) => {
   const [vis, setVis] = useState(defaultVis);
   const [listeNavn, setListeNavn] = useState("");
   const { lister, setLister } = useListerValue();
@@ -12,8 +12,7 @@ const AddListe = ({ defaultVis = false }) => {
 
   const addListe = () => {
     currentUser
-      ? listeNavn &&
-        firebase
+      ? firebase
           .firestore()
           .collection("lister")
           .add({
@@ -29,8 +28,8 @@ const AddListe = ({ defaultVis = false }) => {
       : window.alert("Please login.");
   };
 
-  //Tilføj via enter
-  const keyPressed = event => {
+  // Tilføj via enter
+  const keyPressed = (event: KeyboardEvent) => {
     if (event.key === "Enter" && listeNavn.length > 0) {
       addListe();
     }
@@ -86,5 +85,3 @@ const AddListe = ({ defaultVis = false }) => {
     </div>
   );
 };
-
-export default AddListe;
