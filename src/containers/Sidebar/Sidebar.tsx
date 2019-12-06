@@ -30,6 +30,7 @@ export const Sidebar = () => {
   interface ListeProps {
     navn: string;
     listeId: string;
+    docId: string;
   }
 
   return (
@@ -199,11 +200,9 @@ export const Sidebar = () => {
       </ul>
 
       <ul className="sidebar_liste">
-        {visLister ? (
-          loadingLister ? (
-            <LinearProgress />
-          ) : (
-            lister.map((liste: ListeProps) => (
+        {!loadingLister ? null : <LinearProgress />}
+        {visLister
+          ? lister.map((liste: ListeProps) => (
               <li
                 key={liste.listeId}
                 style={{
@@ -234,11 +233,9 @@ export const Sidebar = () => {
                 </div>
               </li>
             ))
-          )
-        ) : null}
+          : null}
+        {currentUser && visLister && <AddListe />}
       </ul>
-
-      {currentUser && visLister && <AddListe />}
     </div>
   );
 };
