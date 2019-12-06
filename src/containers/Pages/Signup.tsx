@@ -5,7 +5,8 @@ import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
 import { ThemeContext } from "../../context";
 
-const Signup = ({ history }) => {
+// removed {history}
+const Signup = () => {
   const { theme } = React.useContext(ThemeContext);
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
@@ -19,14 +20,14 @@ const Signup = ({ history }) => {
         await firebase
           .auth()
           .createUserWithEmailAndPassword(email.value, password.value);
-        history.push("/");
+        // history.push("/");
       } catch (err) {
         // Hvis man prøvet at oprette en bruger med email, hvor emailen allerede er i brug,
         // får man "Error: The email address is already in use by another account."
         alert(err);
       }
     },
-    [history]
+    [] // removed history
   );
 
   return (
@@ -49,7 +50,7 @@ const Signup = ({ history }) => {
             name="email"
             id="email"
             placeholder="Email"
-            required
+            required={true}
             data-testid="form-input-email"
           />
         </div>
@@ -60,7 +61,7 @@ const Signup = ({ history }) => {
             name="password"
             id="password"
             placeholder="Password"
-            required
+            required={true}
             data-testid="form-input-password"
           />
         </div>

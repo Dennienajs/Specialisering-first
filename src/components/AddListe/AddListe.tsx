@@ -7,7 +7,7 @@ import { FaPlus, FaMinus } from "react-icons/fa";
 export const AddListe = ({ defaultVis = false }) => {
   const [vis, setVis] = useState(defaultVis);
   const [listeNavn, setListeNavn] = useState("");
-  const { lister, setLister } = useListerValue();
+  const { lister, setLister }: any = useListerValue();
   const { currentUser } = useContext(AuthContext);
 
   const addListe = () => {

@@ -1,4 +1,4 @@
-import IndividuelListe from "./IndividuelListe.jsx";
+import { IndividuelListe } from "./IndividuelListe";
 import "./IndividuelListe.scss";
 
 export default IndividuelListe;

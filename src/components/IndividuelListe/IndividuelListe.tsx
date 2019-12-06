@@ -5,9 +5,9 @@ import { useListerValue, useValgtListeValue } from "../../context";
 import { toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const IndividuelListe = ({ liste, aktivListe, setAktivListe }) => {
-  const { lister, setLister } = useListerValue(); // brugerens lister
-  const { setValgtListe } = useValgtListeValue(); // hvilke punkter som vises.
+export const IndividuelListe = ({ liste, aktivListe, setAktivListe }: any) => {
+  const { lister, setLister }: any = useListerValue(); // brugerens lister
+  const { setValgtListe }: any = useValgtListeValue(); // hvilke punkter som vises.
 
   const toastSletSuccess = () => {
     toast.success(`${liste.navn} blev slettet. ❌`, {
@@ -21,7 +21,7 @@ const IndividuelListe = ({ liste, aktivListe, setAktivListe }) => {
   };
 
   const confirmSletListe = () => {
-    let confirmation = window.confirm(
+    const confirmation = window.confirm(
       `Er du sikker på du vil slette: '${liste.navn}'?`
     );
     if (confirmation) {
@@ -61,5 +61,3 @@ const IndividuelListe = ({ liste, aktivListe, setAktivListe }) => {
     </>
   );
 };
-
-export default IndividuelListe;

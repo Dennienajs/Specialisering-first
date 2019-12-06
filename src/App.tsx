@@ -4,7 +4,7 @@ import { BrowserRouter as Router, Route } from "react-router-dom";
 import Header from "./containers/Header";
 import Login from "./containers/Pages/Login";
 import Signup from "./containers/Pages/Signup";
-import PrivateRoute from "./PrivateRoute";
+import { PrivateRoute } from "./PrivateRoute";
 import Content from "./containers/Pages/Content";
 import {
   ListerProvider,
@@ -13,7 +13,7 @@ import {
   ThemeContext
 } from "./context";
 
-export const App = () => {
+export const App: React.FC = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <AuthProvider>
@@ -29,9 +29,9 @@ export const App = () => {
           >
             <Router>
               <Header />
-              <PrivateRoute exact path="/" component={Content} />
-              <Route exact path="/login" component={Login} />
-              <Route exact path="/signup" component={Signup} />
+              <PrivateRoute exact={true} path="/" component={Content} />
+              <Route exact={true} path="/login" component={Login} />
+              <Route exact={true} path="/signup" component={Signup} />
             </Router>
           </main>
         </ValgtListeProvider>

@@ -2,10 +2,10 @@ import React, { useState, useContext, useEffect } from "react";
 import Sidebar from "../../Sidebar";
 import Punkter from "../../../components/Punkter";
 import ButtonToggleSidebar from "./ButtonToggleSidebar";
-import { ThemeContext, AuthContext } from "../../../context/";
+import { ThemeContext, AuthContext } from "../../../context";
 import { Link } from "react-router-dom";
 
-const Content = () => {
+export const Content = () => {
   const { currentUser } = useContext(AuthContext);
   const [visSidebar, setVisSidebar] = useState(true);
   const { theme } = useContext(ThemeContext);
@@ -34,7 +34,6 @@ const Content = () => {
       <ButtonToggleSidebar
         visSidebar={visSidebar}
         setVisSidebar={setVisSidebar}
-        currentUser={currentUser}
       />
 
       {visSidebar ? <Sidebar /> : null}
@@ -59,5 +58,3 @@ const Content = () => {
     </section>
   );
 };
-
-export default Content;

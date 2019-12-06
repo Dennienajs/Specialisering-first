@@ -1,4 +1,4 @@
-import React from "react";
+import * as React from "react";
 
 const themes = {
   dark: {
@@ -14,11 +14,17 @@ const themes = {
 const initialState = {
   dark: true,
   theme: themes.dark,
+  /* tslint:disable:no-empty */
   toggle: () => {}
 };
 const ThemeContext = React.createContext(initialState);
 
-function ThemeProvider({ children }) {
+interface ChildProps {
+  children: React.ReactNode;
+  // any other props that come into the component
+}
+
+function ThemeProvider({ children }: ChildProps) {
   const [dark, setDark] = React.useState(true); // Default theme is dark
 
   // On mount, read the preferred theme from the persistence

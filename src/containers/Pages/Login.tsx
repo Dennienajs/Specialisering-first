@@ -6,7 +6,8 @@ import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
 import { MdEmail as EmailIcon } from "react-icons/md";
 
-const Login = ({ history }) => {
+// Removed {history}
+const Login = () => {
   const { theme } = useContext(ThemeContext);
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
@@ -58,7 +59,7 @@ const Login = ({ history }) => {
             name="email"
             id="email"
             placeholder="Email"
-            required
+            required={true}
             data-testid="form-input-email"
           />
         </div>
@@ -69,7 +70,7 @@ const Login = ({ history }) => {
             name="password"
             id="password"
             placeholder="Password"
-            required
+            required={true}
             data-testid="form-input-password"
           />
         </div>

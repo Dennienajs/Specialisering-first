@@ -11,10 +11,10 @@ import { Link } from "react-router-dom";
 import { AuthContext, ThemeContext, useValgtListeValue } from "../../context";
 import { capitalizeString } from "../../helpers";
 
-const Header = () => {
+export const Header = () => {
   const { currentUser } = useContext(AuthContext);
   const { toggle, dark } = useContext(ThemeContext);
-  const { setValgtListe } = useValgtListeValue(); // Ændre valgtListe til "" ved signout.
+  const { setValgtListe }: any = useValgtListeValue(); // Ændre valgtListe til "" ved signout.
 
   console.log(
     currentUser
@@ -28,7 +28,7 @@ const Header = () => {
   useEffect(() => {
     if (currentUser && !currentUser.emailVerified) {
       // Alert popop confirmation.
-      let confirmation = window.confirm(
+      const confirmation = window.confirm(
         "You email is not verified. Send verification email to " +
           currentUser.email
       );
@@ -40,7 +40,7 @@ const Header = () => {
               alert("Verification email sent to: " + currentUser.email);
               console.log("Verification email sent to: " + currentUser.email);
             })
-            .catch(err => {
+            .catch((err: Error) => {
               console.error(err);
               console.log("Error sending verification email");
             })
@@ -51,12 +51,12 @@ const Header = () => {
   // Hvis brugeren intet displayName har, får man et ud fra ens email.
   useEffect(() => {
     if (currentUser && !currentUser.displayName) {
-      let emailDisplay = currentUser.email.split("@", 1);
+      const emailDisplay = currentUser.email.split("@", 1);
       currentUser
         .updateProfile({
           displayName: capitalizeString(emailDisplay.toString())
         })
-        .catch(err => console.error(err));
+        .catch((err: Error) => console.error(err));
       console.log(currentUser.displayName);
     }
   }, [currentUser]);
@@ -128,5 +128,3 @@ const Header = () => {
     </header>
   );
 };
-
-export default Header;

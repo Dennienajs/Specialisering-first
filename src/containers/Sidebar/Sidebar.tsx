@@ -19,13 +19,18 @@ import {
 } from "../../context";
 import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 
-const Sidebar = () => {
-  const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
+export const Sidebar = () => {
+  const { setValgtListe }: any = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
   const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
   const { currentUser } = useContext(AuthContext); // authentication/user info
-  const { lister, loadingLister } = useListerValue(); // brugerens egne lister
+  const { lister, loadingLister }: any = useListerValue(); // brugerens egne lister
+
+  interface ListeProps {
+    navn: string;
+    listeId: string;
+  }
 
   return (
     <div
@@ -45,8 +50,8 @@ const Sidebar = () => {
             data-testid="alle-action"
             role="button"
             onClick={() => {
-              setAktivListe("alle"); //Den som skal "markeres"
-              setValgtListe(""); //punkterne med dette "id" skal vises. 1=id 1, ""=alle
+              setAktivListe("alle"); // Den som skal "markeres"
+              setValgtListe(""); // punkterne med dette "id" skal vises. 1=id 1, ""=alle
             }}
             onKeyDown={() => {
               setAktivListe("alle");
@@ -193,13 +198,12 @@ const Sidebar = () => {
         </li>
       </ul>
 
-      {/** RENDER EGNE LISTER I SIDEBAREN **/}
       <ul className="sidebar_liste">
         {visLister ? (
           loadingLister ? (
             <LinearProgress />
           ) : (
-            lister.map(liste => (
+            lister.map((liste: ListeProps) => (
               <li
                 key={liste.listeId}
                 style={{
@@ -234,9 +238,7 @@ const Sidebar = () => {
         ) : null}
       </ul>
 
-      {/** RENDER ADDLISTE I SIDEBAREN**/}
       {currentUser && visLister && <AddListe />}
     </div>
   );
 };
-export default Sidebar;
