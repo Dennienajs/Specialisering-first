@@ -15,8 +15,7 @@ const ButtonToggleSidebar: React.FC<ButtonToggleSidebarProps> = ({
         <input
           type="checkbox"
           checked={visSidebar}
-          onClick={() => setVisSidebar(!visSidebar)}
-          defaultChecked={visSidebar}
+          onChange={() => setVisSidebar(!visSidebar)}
         />
         <span className="slider" />
       </label>
