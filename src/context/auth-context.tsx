@@ -1,9 +1,7 @@
 import React, { useEffect, useState, createContext } from "react";
 import { firebase } from "../firebase";
 
-const initialState = {};
-
-export const AuthContext = createContext(initialState);
+export const AuthContext = createContext({});
 
 interface ChildProps {
   children: React.ReactNode;
@@ -11,7 +9,7 @@ interface ChildProps {
 }
 
 export const AuthProvider = ({ children }: ChildProps) => {
-  const [currentUser, setCurrentUser] = useState(null);
+  const [currentUser, setCurrentUser] = useState(); // eller null
 
   // Sign up to currentUser updates
   // Runs once when component AuthProvider is mounted.
