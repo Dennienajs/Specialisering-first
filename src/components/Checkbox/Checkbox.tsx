@@ -2,7 +2,19 @@ import React from "react";
 import { checkPunktDone, sletPunkt } from "../../helpers";
 import { TiTickOutline as Tick, TiDelete as Delete } from "react-icons/ti";
 
-const Checkbox = ({ id, indhold, type, arkiveret }) => {
+interface CheckboxProps {
+  id: string;
+  indhold: string;
+  type: string;
+  arkiveret: boolean;
+}
+
+const Checkbox: React.FC<CheckboxProps> = ({
+  id,
+  indhold,
+  type,
+  arkiveret
+}) => {
   // Type = done -> line-through + update arkiveret felt i firebase = true/false.
   // Type = delete -> slet punkt fra firebase.
 
