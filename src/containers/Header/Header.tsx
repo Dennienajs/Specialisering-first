@@ -18,9 +18,7 @@ export const Header = () => {
 
   console.log(
     currentUser
-      ? currentUser.displayName
-        ? currentUser.displayName
-        : currentUser.email
+      ? `currentUser: ${currentUser.displayName}, email verified: ${currentUser.emailVerified}`
       : "no user"
   );
 
