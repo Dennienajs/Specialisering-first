@@ -6,11 +6,11 @@ import { AuthContext } from "../context";
 
 let uid = ""; // brugerens unikke id
 
-//passing valgtListe in like a regular function.
+// passing valgtListe in like a regular function.
 // usePunkter giver adgang til alle puntker.
 // const { punkter } = usePunkter(valgtListe); (valgtListe = listeId)
 
-export const usePunkter = valgtListe => {
+export const usePunkter = (valgtListe: string) => {
   const { currentUser } = useContext(AuthContext);
   const [punkter, setPunkter] = useState([]);
   const [loadingPunkter, setLoadingPunkter] = useState(true);
@@ -26,7 +26,7 @@ export const usePunkter = valgtListe => {
       .firestore()
       .collection("punkter")
       .orderBy("dato", "desc") // sorteret efter nyeste øverst.
-      .where("brugerId", "in", [uid]); // brugerId = mit id inden authentication, vil gerne beholde indtil videre.
+      .where("brugerId", "==", uid); // brugerId = mit id inden authentication, vil gerne beholde indtil videre.
     // orderBy("dato") virker ikke (FIXED: manglede "firebase index")
 
     // Er der valgt en liste, henter den punkter ud fra den liste.
@@ -69,7 +69,7 @@ export const useLister = () => {
     firebase
       .firestore()
       .collection("lister")
-      .where("brugerId", "in", [uid]) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
+      .where("brugerId", "==", uid) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
       .get()
       .then(snapshot => {
         const alleLister = snapshot.docs.map(liste => ({

@@ -1,9 +1,16 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useState, createContext } from "react";
 import { firebase } from "../firebase";
 
-export const AuthContext = React.createContext();
+const initialState = {};
 
-export const AuthProvider = ({ children }) => {
+export const AuthContext = createContext(initialState);
+
+interface ChildProps {
+  children: React.ReactNode;
+  // any other props that come into the component
+}
+
+export const AuthProvider = ({ children }: ChildProps) => {
   const [currentUser, setCurrentUser] = useState(null);
 
   // Sign up to currentUser updates

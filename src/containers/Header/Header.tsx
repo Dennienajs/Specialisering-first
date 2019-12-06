@@ -14,7 +14,7 @@ import { capitalizeString } from "../../helpers";
 export const Header = () => {
   const { currentUser } = useContext(AuthContext);
   const { toggle, dark } = useContext(ThemeContext);
-  const { setValgtListe }: any = useValgtListeValue(); // Ændre valgtListe til "" ved signout.
+  const { setValgtListe } = useValgtListeValue(); // Ændre valgtListe til "" ved signout.
 
   console.log(
     currentUser

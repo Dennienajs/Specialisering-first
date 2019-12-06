@@ -2,13 +2,24 @@
 import React, { useEffect, useContext } from "react";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
-import { ThemeContext, AuthContext, useValgtListeValue } from "../../context/";
+import { ThemeContext, AuthContext, useValgtListeValue } from "../../context";
 import { capitalizeString } from "../../helpers";
 import TilføjPunkt from "../TilføjPunkt";
 import Checkbox from "../Checkbox";
 import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 
-const Punkter = ({ visSidebar }) => {
+interface PunkterProps {
+  visSidebar: boolean;
+}
+interface PunktProps {
+  id: string;
+  punkt: string;
+  arkiveret: boolean;
+  dato: string;
+  listeId: string;
+}
+
+export const Punkter: React.FC<PunkterProps> = ({ visSidebar }) => {
   const { valgtListe } = useValgtListeValue();
   const { theme } = useContext(ThemeContext);
   const { currentUser } = useContext(AuthContext);
@@ -56,10 +67,15 @@ const Punkter = ({ visSidebar }) => {
         {loadingPunkter ? (
           <LinearProgress />
         ) : (
-          punkter.map(punkt => (
+          punkter.map((punkt: PunktProps) => (
             // mapper i gennem punkterne - identifier for hver enkelt punkt.
             <div className="punkter__liste-container" key={punkt.id}>
-              <Checkbox id={punkt.id} indhold={punkt.punkt} type={"delete"} />
+              <Checkbox
+                id={punkt.id}
+                indhold={punkt.punkt}
+                type={"delete"}
+                arkiveret={punkt.arkiveret}
+              />
               <Checkbox
                 id={punkt.id}
                 indhold={punkt.punkt}
@@ -95,4 +111,3 @@ const Punkter = ({ visSidebar }) => {
     </div>
   );
 };
-export default Punkter;

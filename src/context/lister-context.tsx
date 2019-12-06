@@ -1,9 +1,17 @@
-import React, { createContext, useContext } from "react";
+import React, { createContext, useContext, ReactChildren } from "react";
 import { useLister } from "../hooks";
 
-export const ListerContext = createContext();
-export const ListerProvider = ({ children }) => {
-  //får dataen fra useLister hook (firebase query)
+const initialState = {};
+
+export const ListerContext = createContext(initialState);
+
+interface ChildProps {
+  children: React.ReactNode;
+  // any other props that come into the component
+}
+
+export const ListerProvider = ({ children }: ChildProps) => {
+  // får dataen fra useLister hook (firebase query)
   const { lister, setLister, loadingLister, setLoadingLister } = useLister();
 
   return (
@@ -17,7 +25,7 @@ export const ListerProvider = ({ children }) => {
 
 export const useListerValue = () => useContext(ListerContext);
 
-/* 
+/*  
 Context giver mulighed for at pass data gennem componenttræet,
   uden at pass props hele vejen i gennem.
 

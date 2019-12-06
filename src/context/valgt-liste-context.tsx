@@ -7,8 +7,16 @@
 
 import React, { createContext, useContext, useState } from "react";
 
-export const ValgtListeContext = createContext();
-export const ValgtListeProvider = ({ children }) => {
+interface ChildProps {
+  children: React.ReactNode;
+  // any other props that come into the component
+}
+
+const initialState = {};
+
+export const ValgtListeContext = createContext(initialState);
+
+export const ValgtListeProvider = ({ children }: ChildProps) => {
   const [valgtListe, setValgtListe] = useState(""); // "" = alle...
 
   return (

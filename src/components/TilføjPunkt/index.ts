@@ -1,4 +1,4 @@
-import TilføjPunkt from "./TilføjPunkt.jsx";
+import { TilføjPunkt } from "./TilføjPunkt";
 import "./TilføjPunkt.scss";
 
 export default TilføjPunkt;

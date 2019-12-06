@@ -20,12 +20,12 @@ import {
 import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 
 export const Sidebar = () => {
-  const { setValgtListe }: any = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
+  const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
   const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
   const { currentUser } = useContext(AuthContext); // authentication/user info
-  const { lister, loadingLister }: any = useListerValue(); // brugerens egne lister
+  const { lister, loadingLister } = useListerValue(); // brugerens egne lister
 
   interface ListeProps {
     navn: string;

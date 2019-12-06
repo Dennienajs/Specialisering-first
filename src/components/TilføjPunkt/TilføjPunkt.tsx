@@ -6,14 +6,14 @@ import { useValgtListeValue, AuthContext } from "../../context";
 import { ToastContainer, toast } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-const TilføjPunkt = () => {
+export const TilføjPunkt = () => {
   const [punkt, setPunkt] = useState("");
   const { valgtListe } = useValgtListeValue();
   const { currentUser } = useContext(AuthContext);
 
   const tilføjPunkt = () => {
     // Sætter dato til dagens dato.
-    let dato = moment().format("YYYY/MM/DD HH:mm");
+    const dato = moment().format("YYYY/MM/DD HH:mm");
 
     // Popop when punkt added successfully.
     const toastSuccess = () => {
@@ -28,7 +28,9 @@ const TilføjPunkt = () => {
     };
 
     // Empty Punkt input = return.
-    if (!punkt) return;
+    if (!punkt) {
+      return;
+    }
 
     if (currentUser) {
       return (
@@ -40,7 +42,7 @@ const TilføjPunkt = () => {
           .add({
             arkiveret: false,
             brugerId: currentUser.uid,
-            dato, //dato:dato
+            dato, // dato:dato
             listeId: valgtListe,
             punkt // punkt:punkt
           })
@@ -62,7 +64,7 @@ const TilføjPunkt = () => {
     <div className="tilføj-punkt" data-testid="tilføj-punkt">
       <input
         type="text"
-        required
+        required={true}
         className="tilføj-punkt__input"
         value={punkt}
         onChange={event => setPunkt(event.target.value)}
@@ -87,5 +89,3 @@ const TilføjPunkt = () => {
     </div>
   );
 };
-
-export default TilføjPunkt;
