@@ -9,7 +9,7 @@ interface CheckboxProps {
   arkiveret: boolean;
 }
 
-const Checkbox: React.FC<CheckboxProps> = ({
+export const Checkbox: React.FC<CheckboxProps> = ({
   id,
   indhold,
   type,
@@ -48,5 +48,3 @@ const Checkbox: React.FC<CheckboxProps> = ({
     </div>
   );
 };
-
-export default Checkbox;
