@@ -184,7 +184,7 @@ export const Sidebar = () => {
         {/**** TOGGLE EGNE LISTER KNAP ****/}
         <li>
           <div
-            data-testid="sidebar-egne-lister"
+            data-testid="sidebar-toggle-egne-lister"
             className="sidebar__liste-vis"
             role="button"
             tabIndex={0}
@@ -200,7 +200,7 @@ export const Sidebar = () => {
       </ul>
 
       <ul className="sidebar_liste">
-        {!loadingLister ? null : <LinearProgress />}
+        {/* {!loadingLister ? null : <LinearProgress />} VIRKER IKKE */}
         {visLister
           ? lister.map((liste: ListeProps) => (
               <li
@@ -214,6 +214,7 @@ export const Sidebar = () => {
                 }
               >
                 <div
+                  data-testid="sidebar-egne-lister"
                   className="sidebar_liste__individuel-liste"
                   role="button"
                   onClick={() => {
@@ -234,7 +235,7 @@ export const Sidebar = () => {
               </li>
             ))
           : null}
-        {currentUser && visLister && <AddListe />}
+        {currentUser && visLister && <AddListe data-testid="add-liste" />}
       </ul>
     </div>
   );
