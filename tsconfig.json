@@ -3,7 +3,6 @@
     "target": "ES2018",
     "module": "esnext",
     "jsx": "react",
-    "strict": true,
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
     "lib": ["dom", "dom.iterable", "esnext"],
@@ -13,7 +12,9 @@
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "isolatedModules": true,
-    "noEmit": true
+    "noEmit": true,
+    "strict": true,
+    "noImplicitAny": true
   },
-  "include": ["src"]
+  "include": ["src", "App", "PrivateRoute"]
 }
