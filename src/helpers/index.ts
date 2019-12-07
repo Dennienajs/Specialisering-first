@@ -67,7 +67,7 @@ export const arkiverPunktFalse = (id: string) => {
       .update({
         arkiveret: false
       })
-      .catch(err => {
+      .catch((err: Error) => {
         console.error("Error: ", err);
         window.alert("Ooops, something went wrong. Please try again.");
       });
