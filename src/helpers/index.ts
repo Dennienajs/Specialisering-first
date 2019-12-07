@@ -12,10 +12,11 @@ import { firebase } from "../firebase";
 
 // SLETPUNKT (Checkbox component)
 export const sletPunkt = (id: string) => {
-  let confirmation = window.confirm(
+  const confirmation = window.confirm(
     "Er du sikker på du vil fjerne dette punkt?"
   );
-  confirmation &&
+  if (confirmation) {
+    // ændret fra ternary, da TSLint brokkede sig.
     firebase
       .firestore()
       .collection("punkter")
@@ -29,6 +30,7 @@ export const sletPunkt = (id: string) => {
         console.error("Error deleting task: ", err);
         window.alert("Ooops, something went wrong. Please try again.");
       });
+  }
 };
 
 // Bruges i Checkbox.
@@ -38,7 +40,8 @@ export const checkPunktDone = (arkiveret: boolean, id: string) => {
 
 // Bruges til "line-through" ved click på punkt.
 export const arkiverPunktTrue = (id: string) => {
-  id &&
+  if (id) {
+    // Ændret fra ternary da TSLint brokkede sig.
     firebase
       .firestore()
       .collection("punkter")
@@ -50,11 +53,13 @@ export const arkiverPunktTrue = (id: string) => {
         console.error("Error: ", err);
         window.alert("Ooops, something went wrong. Please try again.");
       });
+  }
 };
 
 // Bruges til !"line-through" ved click på punkt.
 export const arkiverPunktFalse = (id: string) => {
-  id &&
+  if (id) {
+    // Ændret fra ternary da ESLint brokkede sig.
     firebase
       .firestore()
       .collection("punkter")
@@ -66,6 +71,7 @@ export const arkiverPunktFalse = (id: string) => {
         console.error("Error: ", err);
         window.alert("Ooops, something went wrong. Please try again.");
       });
+  }
 };
 
 export const capitalizeString = (capString: string) => {
