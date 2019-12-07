@@ -69,6 +69,7 @@ export const AddListe = ({ defaultVis = false }) => {
         </div>
       )}
       <div
+        data-testid="add-liste--vis"
         className="add-liste__vis"
         onClick={() => setVis(!vis)}
         onKeyDown={() => setVis(!vis)}
