@@ -50,11 +50,9 @@ export const Header = () => {
   useEffect(() => {
     if (currentUser && !currentUser.displayName) {
       const emailDisplay = currentUser.email.split("@", 1);
-      currentUser
-        .updateProfile({
-          displayName: capitalizeString(emailDisplay.toString())
-        })
-        .catch((err: Error) => console.error(err));
+      currentUser.updateProfile({
+        displayName: capitalizeString(emailDisplay.toString())
+      });
       console.log(currentUser.displayName);
     }
   }, [currentUser]);
@@ -82,7 +80,10 @@ export const Header = () => {
         <div className="settings">
           <ul>
             <li className="settings-add">
-              <button onClick={() => handleOnClickDisplayName()}>
+              <button
+                data-testid="handle-click-display-name"
+                onClick={() => handleOnClickDisplayName()}
+              >
                 {currentUser
                   ? currentUser.displayName
                     ? currentUser.displayName
@@ -91,12 +92,21 @@ export const Header = () => {
               </button>
             </li>
             <li className="settings-add">
-              <button onClick={() => console.log("TODO: something..")}>
+              <button
+                data-testid="header-plus"
+                onClick={() => console.log("TODO: something..")}
+              >
                 <Plus />
               </button>
             </li>
             <li className="settings-darkmode">
-              <button onClick={toggle}>{dark ? <Sun /> : <Moon />}</button>
+              <button onClick={toggle} data-testid="header-toggle-darkmode">
+                {dark ? (
+                  <Sun data-testid="header-Sun" />
+                ) : (
+                  <Moon data-testid="header-moon" />
+                )}
+              </button>
             </li>
             <li className="auth">
               {!currentUser ? (
