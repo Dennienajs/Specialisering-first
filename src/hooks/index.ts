@@ -12,9 +12,9 @@ let uid = ""; // brugerens unikke id
 
 export const usePunkter = (valgtListe: string) => {
   const { currentUser } = useContext(AuthContext);
-  const [punkter, setPunkter] = useState([]);
+  const [punkter, setPunkter] = useState([]); //
   const [loadingPunkter, setLoadingPunkter] = useState(true);
-  const [arkiveretPunkter] = useState([]); // setArkiveretPunkter fjernet - unused.
+  const [arkiveretPunkter] = useState([]); // arkiveret = true (line through)
   // Firebase henter indhold: punkter ud fra brugerId
   // - Real-time database, med brug af subscribe/unsubscribe
   useEffect(() => {

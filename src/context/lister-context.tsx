@@ -1,14 +1,18 @@
-import React, { createContext, useContext, ReactChildren } from "react";
+import React, { createContext, useContext } from "react";
 import { useLister } from "../hooks";
-
-const initialState = {};
-
-export const ListerContext = createContext(initialState);
 
 interface ChildProps {
   children: React.ReactNode;
   // any other props that come into the component
 }
+interface ListerContextProps {
+  lister: object;
+  setLister: React.Dispatch<React.SetStateAction<object>>;
+  loadingLister: boolean;
+  setLoadingLister: React.Dispatch<React.SetStateAction<boolean>>;
+}
+
+export const ListerContext = createContext<ListerContextProps>(); // Brokker sig over ingen defaultValue
 
 export const ListerProvider = ({ children }: ChildProps) => {
   // får dataen fra useLister hook (firebase query)

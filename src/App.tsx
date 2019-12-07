@@ -13,7 +13,7 @@ import {
   ThemeContext
 } from "./context";
 
-export const App: React.FC = () => {
+export const App = () => {
   const { theme } = useContext(ThemeContext);
   return (
     <AuthProvider>

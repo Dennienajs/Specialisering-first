@@ -83,7 +83,7 @@ it("render ALLE punkter", () => {
   }));
 
   const { queryByTestId } = render(
-    <AuthContext.Provider value={{ true }}>
+    <AuthContext.Provider value={{}}>
       <Punkter />
     </AuthContext.Provider>
   );
