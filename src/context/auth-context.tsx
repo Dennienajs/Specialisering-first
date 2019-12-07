@@ -6,8 +6,7 @@ interface ChildProps {
   // any other props that come into the component
 }
 
-export const AuthContext = createContext<firebase.User | null>(null)(); // ??? Brokker sig over ingen defaultValue
-// export const AuthContext = createContext(); // Brokker sig over ingen defaultValue
+export const AuthContext = createContext(); // Brokker sig over ingen defaultValue
 
 export const AuthProvider = ({ children }: ChildProps) => {
   const [currentUser, setCurrentUser] = useState<firebase.User | null>(null); // eller null
