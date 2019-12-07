@@ -32,6 +32,11 @@ export const TilføjPunkt = () => {
       return;
     }
 
+    // No user
+    if (!currentUser) {
+      return window.alert("Please login.");
+    }
+
     if (currentUser) {
       return (
         punkt &&
@@ -52,11 +57,6 @@ export const TilføjPunkt = () => {
           })
           .catch(err => console.error("ERROR: " + err))
       );
-    }
-    if (!currentUser && punkt) {
-      return window.alert("Please login.");
-    } else {
-      window.alert("Something went wrong.");
     }
   };
 
