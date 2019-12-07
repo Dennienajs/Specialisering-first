@@ -1,44 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
-import AddListe from "../components/AddListe";
-import { useValgtListeValue, useListerValue } from "../context";
 
-// Context mock - useValgtListeValue, useListerValue
-// Samme mock fra Punkter.spec.js
-jest.mock("../context", () => ({
-  useValgtListeValue: jest.fn(),
-  useListerValue: jest.fn(() => ({
-    lister: [
-      {
-        navn: "001",
-        listeId: "1",
-        brugerId: "1234567890"
-      },
-      {
-        navn: "002",
-        listeId: "2",
-        brugerId: "1234567890"
-      },
-      {
-        navn: "003",
-        listeId: "3",
-        brugerId: "1234567890"
-      },
-      {
-        navn: "004",
-        listeId: "4",
-        brugerId: "1234567890"
-      },
-      {
-        navn: "005",
-        listeId: "5",
-        brugerId: "1234567890"
-      }
-    ],
-    setLister: jest.fn()
-  }))
-}));
+import AddListe from "../components/AddListe";
+
+import {
+  ListerContext,
+  ValgtListeContext,
+  AuthContext,
+  ThemeContext
+} from "../context";
 
 // Samme mock som fra Punkter.spec.js
 jest.mock("../firebase", () => ({
@@ -55,13 +26,88 @@ beforeEach(cleanup);
 
 describe("<AddListe />", () => {
   describe("Success", () => {
-    it("renders <AddListe />", () => {
-      const { queryByTestId } = render(<AddListe defaultVis />);
+    it("renders <AddListe /> MED currentUser ", () => {
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("add-liste")).toBeTruthy();
     });
+    // Uden currentUser = "Please login"
+    it("renders <AddListe /> UDEN currentUser og clicker addListe ", () => {
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
 
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider value={{ lister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+      expect(queryByTestId("add-liste")).toBeTruthy();
+
+      fireEvent.change(queryByTestId("add-liste-navn"), {
+        target: {
+          value: "React is fun, sometimes."
+        }
+      });
+      expect(queryByTestId("add-liste-navn").value).toBe(
+        "React is fun, sometimes."
+      );
+      fireEvent.click(queryByTestId("add-liste-submit"));
+    });
+
+    // tilføj, keyDown
     it("renders <AddListe /> og tilføjer en ny liste via onKeyDown", () => {
-      const { queryByTestId } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
 
       fireEvent.change(queryByTestId("add-liste-navn"), {
@@ -76,7 +122,30 @@ describe("<AddListe />", () => {
     });
     // Præcis samme som ovenstående, bare med click i stedet for keyDown.
     it("renders <AddListe /> og tilføjer en ny liste via onClick", () => {
-      const { queryByTestId } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+      const setLister = jest.fn();
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
 
       fireEvent.change(queryByTestId("add-liste-navn"), {
@@ -90,9 +159,32 @@ describe("<AddListe />", () => {
       fireEvent.click(queryByTestId("add-liste-submit"));
     });
 
-    // keyPressed(Enter)
+    // keyPressed(Enter), tilføj
     it("renders <AddListe />, tilføjer ny liste onKeyPress Enter (if + else)", () => {
-      const { queryByTestId } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+      const setLister = jest.fn();
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
 
       fireEvent.change(queryByTestId("add-liste-navn"), {
@@ -119,29 +211,98 @@ describe("<AddListe />", () => {
 
     //onClick cancel
     it("Luk 'Tilføj-AddListe' ved tryk på 'Fortryd' via onClick ", () => {
-      const { queryByTestId, getByText } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+      const setLister = jest.fn();
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
 
-      fireEvent.click(getByText("Fortryd"));
+      fireEvent.click(queryByTestId("add-liste-fortryd"));
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeFalsy();
     });
 
     // keyDown cancel
     it("Luk 'Tilføj-AddListe' ved tryk på 'Fortryd' via onKeyDown ", () => {
-      const { queryByTestId, getByText } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+      const setLister = jest.fn();
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
 
-      fireEvent.keyDown(getByText("Fortryd"));
+      fireEvent.keyDown(queryByTestId("add-liste-fortryd"));
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeFalsy();
     });
 
     // onClick - Luk -Tilføj
     it("'Luk 'Tilføj-AddListe' ved tryk på '-tilføj' via onClick ", () => {
-      const { queryByTestId, getByText } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+      const setLister = jest.fn();
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
 
@@ -152,7 +313,30 @@ describe("<AddListe />", () => {
 
     // onKeyDown - Luk -Tilføj
     it("'Luk 'Tilføj-AddListe' ved tryk på '-tilføj' via onKeyDown ", () => {
-      const { queryByTestId, getByText } = render(<AddListe defaultVis />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const valgtListe = "someListe";
+      const currentUser = {
+        email: "user@email.com",
+        updateProfile: jest.fn(),
+        displayName: "user"
+      };
+      const setLister = jest.fn();
+
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ valgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <AddListe defaultVis={true} />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
 
