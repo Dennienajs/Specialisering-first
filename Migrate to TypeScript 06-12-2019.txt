@@ -1,0 +1,15 @@
+Migrate to TypeScript
+https://frontendmasters.com/courses/intermediate-react-v2/typescript-configuration-for-react/
+
+npm i -D typescript // instals typescript
+npx tsc --init // generates tsconfig.json file
+
+We want types: use library DefinitelyTyped
+npm install -D @types/react @types/react-dom @types/react-router-dom
+npm i @firebase/firestore-types
+
+
+Migrate to TSLint
+- npm uninstall eslint babel-eslint eslint-config-prettier eslint-plugin-import eslint-plugin-jsx-a11y eslint-plugin-react eslint-plugin-react-hooks
+
+- npm i -D tslint tslint-react tslint-config-prettier
