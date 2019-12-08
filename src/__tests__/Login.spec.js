@@ -2,7 +2,7 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Login from "../containers/Pages/Login";
-import { AuthProvider, AuthContext } from "../context";
+import { AuthContext } from "../context";
 
 beforeEach(cleanup);
 
