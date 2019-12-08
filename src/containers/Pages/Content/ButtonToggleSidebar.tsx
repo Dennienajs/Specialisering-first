@@ -13,6 +13,7 @@ const ButtonToggleSidebar: React.FC<ButtonToggleSidebarProps> = ({
     <div className="content__toggle-sidebar">
       <label className="switch">
         <input
+          data-testid="toggle-sidebar"
           type="checkbox"
           checked={visSidebar}
           onChange={() => setVisSidebar(!visSidebar)}
