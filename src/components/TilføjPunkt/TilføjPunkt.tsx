@@ -8,6 +8,7 @@ import "react-toastify/dist/ReactToastify.css";
 
 export const TilføjPunkt = () => {
   const [punkt, setPunkt] = useState("");
+  // @ts-ignore TODO: FIX LATER ***
   const { valgtListe } = useValgtListeValue();
   const { currentUser } = useContext(AuthContext);
 

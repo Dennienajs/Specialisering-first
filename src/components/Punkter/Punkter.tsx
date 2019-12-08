@@ -20,6 +20,7 @@ interface PunktProps {
 }
 
 export const Punkter: React.FC<PunkterProps> = ({ visSidebar }) => {
+  // @ts-ignore TODO: FIX LATER ***
   const { valgtListe } = useValgtListeValue();
   const { theme } = useContext(ThemeContext);
   const { currentUser } = useContext(AuthContext);
