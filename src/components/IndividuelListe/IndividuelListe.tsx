@@ -62,9 +62,12 @@ export const IndividuelListe: React.FC<IndividuelListeProps> = ({
       <span>
         <FaStar />
       </span>
-      <span>{liste.navn}</span>
+      <span data-testid="individuel-liste">{liste.navn}</span>
       {aktivListe === liste.listeId && (
-        <span onClick={() => confirmSletListe()}>
+        <span
+          data-testid="individuel-liste-delete"
+          onClick={() => confirmSletListe()}
+        >
           <Trash />
         </span>
       )}
