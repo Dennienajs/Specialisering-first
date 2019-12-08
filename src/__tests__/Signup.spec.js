@@ -2,16 +2,22 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Signup from "../containers/Pages/Signup";
-import { AuthProvider } from "../context";
 
 beforeEach(cleanup);
 
+jest.mock("../firebase", () => ({
+  firebase: {
+    auth: jest.fn(() => ({
+      createUserWithEmailAndPassword: jest.fn(
+        () => Promise.reject("Promise rejected ..") // rammer catchen
+      )
+    }))
+  }
+}));
+
 describe("<Signup />", () => {
   describe("Success", () => {
-    // Kan ikke få den til at ramme history.push("/");
-    it("renders the signup page uden en user, udfylder felterne og logger ind.", () => {
-      //   const history = { push: jest.fn() };
-      //   const pushSpy = jest.spyOn(history, "push");
+    it("renders the signup page uden en user, udfylder felterne og trykker submit", () => {
       const { queryByTestId } = render(
         <Router>
           <Signup />
@@ -37,9 +43,6 @@ describe("<Signup />", () => {
 
       // Submitter formen
       fireEvent.submit(queryByTestId("form-input-submit"));
-
-      //   expect(pushSpy).toHaveBeenCalled();
-      //   pushSpy.mockRestore();
     });
   });
 });
