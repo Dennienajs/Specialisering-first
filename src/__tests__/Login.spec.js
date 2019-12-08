@@ -9,8 +9,8 @@ beforeEach(cleanup);
 jest.mock("../firebase", () => ({
   firebase: {
     auth: jest.fn(() => ({
-      signInWithEmailAndPassword: jest.fn(
-        () => Promise.reject("Promise rejected ..") // rammer catchen
+      signInWithEmailAndPassword: jest.fn(() =>
+        Promise.reject("Promise rejected ..")
       ),
       signInWithPopup: jest.fn(() => Promise.reject("Promise rejected .."))
     }))
