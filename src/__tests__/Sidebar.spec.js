@@ -1,40 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import {
-  render,
-  cleanup,
-  fireEvent,
-  queryByText,
-  getByText
-} from "@testing-library/react";
-import Sidebar from "../containers/Sidebar";
-import { useValgtListeValue, useListerValue } from "../context";
-import {
-  AuthProvider,
-  AuthContext,
-  ThemeContext,
-  ThemeProvider
-} from "../context";
-import { BrowserRouter as Router } from "react-router-dom";
+import { render, cleanup, fireEvent } from "@testing-library/react";
 
-// Context mock - useValgtListeValue, useListerValue
-// Samme mock fra Punkter.spec.js
-jest.mock("../context", () => ({
-  useValgtListeValue: jest.fn(() => ({
-    setValgtListe: jest.fn(() => "")
-  })),
-  useListerValue: jest.fn(() => ({
-    setListe: jest.fn(),
-    lister: [
-      {
-        navn: "001",
-        listeId: "1",
-        brugerId: "1234567890"
-      }
-    ]
-  })),
-  AuthProvider: jest.fn(() => "")
-}));
+import Sidebar from "../containers/Sidebar";
+
+import {
+  ListerContext,
+  ValgtListeContext,
+  AuthContext,
+  ThemeContext
+} from "../context";
 
 beforeEach(cleanup);
 
@@ -45,18 +20,22 @@ describe("<Sidebar />", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  // VIRKER IKKE EFTER DIVERSE KODE-IMPROVEMENTS  .. FIX LATER
+
   describe("Success", () => {
-    it("renders the <Sidebar />", () => {
-      const currentUser = {};
+    it("render <Sidebar />", () => {
       const theme = {};
       const dark = true;
       const toggle = jest.fn();
+      const lister = [{}];
       const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
-          <ThemeContext.Provider value={{ theme, dark, toggle }}>
-            <Sidebar />
-          </ThemeContext.Provider>
+          <ListerContext.Provider value={{ lister }}>
+            <ValgtListeContext.Provider value="">
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
@@ -66,8 +45,38 @@ describe("<Sidebar />", () => {
 
     // ALLE
     it("skifter den aktive liste til ALLE ('alle')", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
+      expect(queryByTestId("alle")).toBeTruthy();
       fireEvent.click(queryByTestId("alle-action"));
       fireEvent.keyDown(queryByTestId("alle-action"));
 
@@ -93,7 +102,36 @@ describe("<Sidebar />", () => {
 
     // I DAG
     it("skifter den aktive liste til IDAG ('idag')", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("idag-action"));
       fireEvent.keyDown(queryByTestId("idag-action"));
@@ -120,7 +158,36 @@ describe("<Sidebar />", () => {
 
     // DENNEUGE
     it("skifter den aktive liste til DENNEUGE ('denneUge')", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("denneUge-action"));
       fireEvent.keyDown(queryByTestId("denneUge-action"));
@@ -147,7 +214,36 @@ describe("<Sidebar />", () => {
 
     // TODO
     it("skifter den aktive liste til TODO ('todo')", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("todo-action"));
       fireEvent.keyDown(queryByTestId("todo-action"));
@@ -174,7 +270,36 @@ describe("<Sidebar />", () => {
 
     // BUGS
     it("skifter den aktive liste til BUGS ('bugs')", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("bugs-action"));
       fireEvent.keyDown(queryByTestId("bugs-action"));
@@ -201,7 +326,36 @@ describe("<Sidebar />", () => {
 
     // BUGS
     it("skifter den aktive liste til INDKØB ('indkøb')", () => {
-      const { queryByTestId } = render(<Sidebar />);
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
       fireEvent.click(queryByTestId("indkøb-action"));
       fireEvent.keyDown(queryByTestId("indkøb-action"));
@@ -226,32 +380,176 @@ describe("<Sidebar />", () => {
       ).toBeTruthy();
     });
 
-    // ***** COPY-PASTE END *****
-
-    it("Open and close sidebar 'egne lister' with onClick", () => {
-      const { queryByTestId } = render(<Sidebar />);
+    it("Open and close sidebar 'sidebar-toggle-egne-lister' with onClick", () => {
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
 
       // Åben Lister
-      fireEvent.click(queryByTestId("sidebar-egne-lister"));
-      expect(queryByTestId("add-liste")).toBeTruthy();
-
+      fireEvent.click(queryByTestId("sidebar-toggle-egne-lister"));
       // close igen
-      fireEvent.click(queryByTestId("sidebar-egne-lister"));
-      expect(queryByTestId("add-liste")).toBeFalsy();
+      fireEvent.click(queryByTestId("sidebar-toggle-egne-lister"));
     });
 
-    it("Open and close sidebar 'egne lister' with onKeyPress", () => {
-      const { queryByTestId } = render(<Sidebar />);
+    //
+    //
+    //
+
+    it("Open and close sidebar 'sidebar-toggle-egne-lister' with onKeyPress", () => {
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const visLister = true;
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe,
+                visLister
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
       expect(queryByTestId("sidebar")).toBeTruthy();
 
       // Åben Lister
-      fireEvent.keyDown(queryByTestId("sidebar-egne-lister"));
-      expect(queryByTestId("add-liste")).toBeTruthy();
-
+      fireEvent.keyDown(queryByTestId("sidebar-toggle-egne-lister"));
       // close igen
+      fireEvent.keyDown(queryByTestId("sidebar-toggle-egne-lister"));
+    });
+
+    //
+    //
+    //
+    //
+
+    it("Select egne-lister with onClick && onKeyDown", () => {
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+      expect(queryByTestId("sidebar")).toBeTruthy();
+
+      // Select egen liste som aktiv.
+      expect(queryByTestId("sidebar-egne-lister")).toBeTruthy();
+      fireEvent.click(queryByTestId("sidebar-egne-lister"));
       fireEvent.keyDown(queryByTestId("sidebar-egne-lister"));
-      expect(queryByTestId("add-liste")).toBeFalsy();
+    });
+    //
+    //
+    //
+    //
+
+    it("Render <Sidebar /> MED en currentUser - viser <AddListe />", () => {
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      const lister = [{}];
+      const setValgtListe = jest.fn(); // fireEvent.click "alle-action"
+      const currentUser = {
+        email: "user@email.com"
+        // updateProfile: jest.fn(),
+        // emailVerified: true,
+      };
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <ListerContext.Provider
+            value={{
+              lister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Sidebar />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+      expect(queryByTestId("sidebar")).toBeTruthy();
+      expect(queryByTestId("add-liste")).toBeTruthy();
     });
   });
 });

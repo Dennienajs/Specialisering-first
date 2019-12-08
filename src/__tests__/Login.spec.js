@@ -2,9 +2,20 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Login from "../containers/Pages/Login";
-import { AuthProvider } from "../context";
+import { AuthContext } from "../context";
 
 beforeEach(cleanup);
+
+jest.mock("../firebase", () => ({
+  firebase: {
+    auth: jest.fn(() => ({
+      signInWithEmailAndPassword: jest.fn(() =>
+        Promise.reject("Promise rejected ..")
+      ),
+      signInWithPopup: jest.fn(() => Promise.reject("Promise rejected .."))
+    }))
+  }
+}));
 
 describe("<Login />", () => {
   afterEach(() => {
@@ -13,14 +24,13 @@ describe("<Login />", () => {
 
   // Kan ikke få den til at ramme history.push("/");
   describe("Success", () => {
-    it("renders the login page uden en user, udfylder felterne og logger ind.", () => {
-      const currentUser = false;
+    it("render <Login /> page UDEN en currentUser, udfylder felterne og logger ind.", () => {
       const { queryByTestId } = render(
-        <Router>
-          <AuthProvider value={currentUser}>
+        <AuthContext.Provider value={{}}>
+          <Router>
             <Login />
-          </AuthProvider>
-        </Router>
+          </Router>
+        </AuthContext.Provider>
       );
 
       expect(queryByTestId("login")).toBeTruthy();
@@ -46,19 +56,34 @@ describe("<Login />", () => {
     });
 
     // Med en user ***Kan ikke få den til at ramme currentUser = true (Redirect to="/")
-    it("renders the login page MED en user", () => {
-      const { currentUser } = {
+    it("render <Login /> page MED en currentUser", () => {
+      const currentUser = {
         name: "123",
         email: "123@mail.com"
       };
       const { queryByTestId } = render(
         <Router>
-          <AuthProvider value={currentUser}>
+          <AuthContext.Provider value={{ currentUser }}>
             <Login />
-          </AuthProvider>
+          </AuthContext.Provider>
         </Router>
       );
-      expect(queryByTestId("login")).toBeTruthy();
+      // Redirects to "/" if(currentUser)
+      expect(queryByTestId("login")).toBeNull();
+    });
+
+    it("render <Login /> og trykker 'login med google', Promise rejected", () => {
+      const currentUser = null;
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <Router>
+            <Login />
+          </Router>
+        </AuthContext.Provider>
+      );
+
+      expect(queryByTestId("google-login-button")).toBeTruthy();
+      fireEvent.click(queryByTestId("google-login-button"));
     });
   });
 });

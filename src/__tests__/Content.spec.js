@@ -2,85 +2,120 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-import { Content } from "../containers/Pages/Content";
+import Content from "../containers/Pages/Content";
 import {
-  ListerContext,
-  ListerProvider,
-  useListerValue,
-  ValgtListeContext,
-  ValgtListeProvider,
-  useValgtListeValue,
-  AuthProvider,
   AuthContext,
-  ThemeProvider,
-  ThemeContext
+  ThemeContext,
+  ListerContext,
+  ValgtListeContext
 } from "../context";
+import ButtonToggleSidebar from "../containers/Pages/Content/ButtonToggleSidebar";
 
-import PrivateRoute from "../PrivateRoute";
+import { PrivateRoute } from "../PrivateRoute";
+import { debug } from "util";
 
 beforeEach(cleanup);
-
-jest.mock("../context", () => ({
-  useValgtListeValue: jest.fn(() => ({
-    setValgtListe: jest.fn(() => "")
-  })),
-  useListerValue: jest.fn(() => ({
-    lister: [
-      {
-        name: "123",
-        listeId: "1",
-        userId: "1234567890",
-        docId: "dennie"
-      }
-    ]
-  })),
-  AuthContext: jest.fn(() => ""),
-  ThemeContext: jest.fn(() => ""),
-  ListerContext: jest.fn(() => ""),
-  ValgtListeContext: jest.fn(() => "")
-}));
 
 describe("<Content />", () => {
   afterEach(() => {
     jest.clearAllMocks();
   });
-  const currentUserMock = true;
-  const valgtListeMock = "";
 
   describe("Success", () => {
-    // ERROR:
-    /*Invariant Violation: Element type is invalid: expected a string
-     (for built-in components) or a class/function (for composite components) but got: 
-     undefined. You likely forgot to export your component from the file it's defined in, 
-     or you might have mixed up default and named imports.
-     */
-    it("renders the Content page with user", () => {
+    it("render <Content /> page MED a currentUser", () => {
+      // Auth
+      const currentUser = {
+        email: "user@email.com",
+        uid: "123"
+      };
+      // Lister
+      const lister = [{}];
+      const setLister = jest.fn();
+      // ValgtListe
+      const valgtListe = "someListe"; // Cannot read toLowerCase of undefined.
+      const setValgtListe = jest.fn();
+      // Theme
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      // IndiciduelListe
+
       const { queryByTestId } = render(
-        <ValgtListeContext.Provider value="">
-          <ListerContext.Provider value={[]}>
-            <AuthContext.Provider value={{ currentUserMock }}>
+        <AuthContext.Provider
+          value={{
+            currentUser
+          }}
+        >
+          <ListerContext.Provider
+            value={{
+              lister,
+              setLister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                valgtListe,
+                setValgtListe
+              }}
+            >
               <ThemeContext.Provider
-                value={{ theme: "", dark: "", toggle: "" }}
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
+              >
+                <Content />
+              </ThemeContext.Provider>
+            </ValgtListeContext.Provider>
+          </ListerContext.Provider>
+        </AuthContext.Provider>
+      );
+      expect(queryByTestId("content")).toBeTruthy();
+    });
+
+    // !currentUser = Link til /login & /signup
+    it("render <Content /> UDEN en currentUser", () => {
+      // Lister
+      const lister = [{}];
+      const setLister = jest.fn();
+      // ValgtListe
+      const setValgtListe = jest.fn();
+      // Theme
+      const theme = {};
+      const dark = true;
+      const toggle = jest.fn();
+      // IndiciduelListe
+
+      const { queryByTestId, debug } = render(
+        <AuthContext.Provider value={{}}>
+          <ListerContext.Provider
+            value={{
+              lister,
+              setLister
+            }}
+          >
+            <ValgtListeContext.Provider
+              value={{
+                setValgtListe
+              }}
+            >
+              <ThemeContext.Provider
+                value={{
+                  theme,
+                  dark,
+                  toggle
+                }}
               >
                 <Router>
                   <Content />
                 </Router>
               </ThemeContext.Provider>
-            </AuthContext.Provider>
+            </ValgtListeContext.Provider>
           </ListerContext.Provider>
-        </ValgtListeContext.Provider>
+        </AuthContext.Provider>
       );
-      expect(queryByTestId("content")).toBeTruthy();
-    });
-
-    it("renders the Content page without user", () => {
-      const { queryByTestId } = render(
-        <Router>
-          <AuthProvider value="false">
-            <Content />
-          </AuthProvider>
-        </Router>
-      );
+      debug();
       expect(queryByTestId("content")).toBeTruthy();
     });
   });
