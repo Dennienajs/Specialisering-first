@@ -85,6 +85,7 @@ const Login = () => {
         </div>
         <div className="form-group google">
           <button
+            data-testid="google-login-button"
             className="form-button google-button"
             onClick={handleLoginWithGoogle}
           >
