@@ -12,7 +12,7 @@ let uid = ""; // brugerens unikke id
 
 export const usePunkter = (valgtListe: string) => {
   const { currentUser } = useContext(AuthContext);
-  const [punkter, setPunkter] = useState([]); //
+  const [punkter, setPunkter]: any = useState([]); // Skal være [] for tests ikke failer. TODO: FIX ANY.. (fjerne fejl på linie 50.)
   const [loadingPunkter, setLoadingPunkter] = useState(true);
   const [arkiveretPunkter] = useState([]); // arkiveret = true (line through)
   // Firebase henter indhold: punkter ud fra brugerId
@@ -36,10 +36,11 @@ export const usePunkter = (valgtListe: string) => {
 
     // Mapper gennem punkterne
     // Snapshot fordi det er den data "at that point in time"
+    // @ts-ignore TODO: FIX LATER
     unsubscribe = unsubscribe.onSnapshot(snapshot => {
       const nyePunkter = snapshot.docs.map(punkt => ({
-        id: punkt.id,
-        ...punkt.data()
+        ...punkt.data(),
+        id: punkt.id
       }));
 
       // Sætter punkter og loading done.
@@ -48,15 +49,20 @@ export const usePunkter = (valgtListe: string) => {
     });
 
     // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" rammes.
+    // @ts-ignore TODO: FIX LATER
     return () => unsubscribe();
   }, [valgtListe, currentUser]); // ListeSkift + user login/signout
 
   // retunerer "ikke-arkiveret" punkter + ArkiveretPunkter.
-  return { punkter, arkiveretPunkter, loadingPunkter };
+  return {
+    punkter,
+    arkiveretPunkter,
+    loadingPunkter
+  };
 };
 
 export const useLister = () => {
-  const [lister, setLister] = useState([]);
+  const [lister, setLister]: any = useState([]); // TODO: fix any ??? (fjerne fejl på linie 91 )
   const [loadingLister, setLoadingLister] = useState(true);
   const { currentUser } = useContext(AuthContext);
 
