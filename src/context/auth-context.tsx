@@ -5,7 +5,7 @@ interface ChildProps {
   children: React.ReactNode;
   // any other props that come into the component
 }
-
+// @ts-ignore TODO: FIX LATER ***
 export const AuthContext = createContext(); // Brokker sig over ingen defaultValue
 
 export const AuthProvider = ({ children }: ChildProps) => {

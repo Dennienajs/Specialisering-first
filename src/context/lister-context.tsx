@@ -5,14 +5,15 @@ interface ChildProps {
   children: React.ReactNode;
   // any other props that come into the component
 }
-interface ListerContextProps {
-  lister: object;
-  setLister: React.Dispatch<React.SetStateAction<object>>;
-  loadingLister: boolean;
-  setLoadingLister: React.Dispatch<React.SetStateAction<boolean>>;
-}
-
-export const ListerContext = createContext<ListerContextProps>(); // Brokker sig over ingen defaultValue
+// ** Fjernet fordi de allerede er sat i "useLister"
+// interface ListerContextProps {
+//   lister: object;
+//   setLister: React.Dispatch<React.SetStateAction<object>>;
+//   loadingLister: boolean;
+//   setLoadingLister: React.Dispatch<React.SetStateAction<boolean>>;
+// }
+// @ts-ignore TODO: FIX LATER ***
+export const ListerContext = createContext(); // Brokker sig over ingen defaultValue
 
 export const ListerProvider = ({ children }: ChildProps) => {
   // får dataen fra useLister hook (firebase query)
