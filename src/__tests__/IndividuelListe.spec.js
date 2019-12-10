@@ -7,6 +7,7 @@ import {
   ThemeContext
 } from "../context";
 import IndividuelListe from "../components/IndividuelListe";
+import { debug } from "util";
 
 beforeEach(cleanup);
 
@@ -22,10 +23,6 @@ jest.mock("../firebase", () => ({
     }))
   }
 }));
-
-// *****************************************
-// **** MANGLER CATCH-BLOCK I sletListe ****
-// *****************************************
 
 describe("<IndividuelListe />", () => {
   afterEach(() => {
@@ -43,7 +40,7 @@ describe("<IndividuelListe />", () => {
       const theme = {};
       const dark = true;
       const toggle = jest.fn();
-      // IndiciduelListe
+      // IndividuelListe
       const liste = { navn: "", docId: "", listeId: "" };
       const aktivListe = "";
       const setAktivListe = jest.fn();
@@ -67,9 +64,7 @@ describe("<IndividuelListe />", () => {
     // CONFIRM SLET SLET = TRUE
     it("render <IndividuelListe /> confirmer sletListe og sletter liste.", () => {
       // Auth
-      const currentUser = {
-        email: "user@email.com"
-      };
+      const currentUser = { email: "user@email.com", uid: "123" };
       // Lister
       const lister = [{}];
       const setLister = jest.fn();
@@ -90,26 +85,11 @@ describe("<IndividuelListe />", () => {
       // confirmSletListe
       window.confirm = jest.fn().mockImplementation(() => true);
 
-      const { queryByTestId } = render(
+      const { queryByTestId, debug } = render(
         <AuthContext.Provider value={{ currentUser }}>
-          <ListerContext.Provider
-            value={{
-              lister,
-              setLister
-            }}
-          >
-            <ValgtListeContext.Provider
-              value={{
-                setValgtListe
-              }}
-            >
-              <ThemeContext.Provider
-                value={{
-                  theme,
-                  dark,
-                  toggle
-                }}
-              >
+          <ListerContext.Provider value={{ lister, setLister }}>
+            <ValgtListeContext.Provider value={{ setValgtListe }}>
+              <ThemeContext.Provider value={{ theme, dark, toggle }}>
                 <IndividuelListe
                   liste={liste}
                   aktivListe={aktivListe}
@@ -120,8 +100,13 @@ describe("<IndividuelListe />", () => {
           </ListerContext.Provider>
         </AuthContext.Provider>
       );
+      // individuel-liste-delete = data-testid på listens slet-knap.
       expect(queryByTestId("individuel-liste-delete")).toBeTruthy();
+      debug();
+      // trykker på slet
       fireEvent.click(queryByTestId("individuel-liste-delete"));
+      debug();
+      expect(queryByTestId("individuel-liste-delete")).toBeTruthy();
     });
 
     // CONFIRM SLETLISTE = FALSE
