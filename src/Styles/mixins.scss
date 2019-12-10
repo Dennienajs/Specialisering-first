@@ -3,14 +3,16 @@
 
 // Disse mixins kan bruges af andre scss filer via @import './mixins.scss
 
-$maxWidth: 700px !important; // Punkter, header, content.
+// Punkter, header, content.
+$maxWidth: 700px !important;
 
 // Dejlige blå til Header, knapper, aktivListe
 $blue-generic: #8092e2;
+
 // punkter, sidebar, addListe
 $border-generic: 1px solid #a8a6a62f;
 
-// Tilføj knap - punkter + lister
+// Tilføj knap - (TilføjPunkt + AddListe)
 @mixin btnStyle() {
   cursor: pointer;
   width: 75px;
@@ -42,7 +44,7 @@ $border-generic: 1px solid #a8a6a62f;
   -moz-user-select: none;
   -ms-user-select: none;
   user-select: none !important;
-}
+} // fra mixins.scss main fil
 
 // align - center/left (hugget)
 @mixin verticalalign($va-align: center) {
