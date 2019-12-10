@@ -1,12 +1,9 @@
 import { useState, useEffect, useContext } from "react";
 import { firebase } from "../firebase";
 import { AuthContext } from "../context";
-// const brugerId = "1234567890"; // ALLE MINE PUNKTER. KAN SES AF ALLE BRUGERE.
-// const uid = "X2sqRONqqwabYmcQUP4lxJhRL8h2"; // DENNIE UID
 
 let uid = ""; // brugerens unikke id
 
-// passing valgtListe in like a regular function.
 // usePunkter giver adgang til alle puntker.
 // const { punkter } = usePunkter(valgtListe); (valgtListe = listeId)
 
@@ -14,7 +11,7 @@ export const usePunkter = (valgtListe: string) => {
   const { currentUser } = useContext(AuthContext);
   const [punkter, setPunkter]: any = useState([]); // Skal være [] for tests ikke failer. TODO: FIX ANY.. (fjerne fejl på linie 50.)
   const [loadingPunkter, setLoadingPunkter] = useState(true);
-  const [arkiveretPunkter] = useState([]); // arkiveret = true (line through)
+
   // Firebase henter indhold: punkter ud fra brugerId
   // - Real-time database, med brug af subscribe/unsubscribe
   useEffect(() => {
@@ -26,20 +23,20 @@ export const usePunkter = (valgtListe: string) => {
       .firestore()
       .collection("punkter")
       .orderBy("dato", "desc") // sorteret efter nyeste øverst.
-      .where("brugerId", "==", uid); // brugerId = mit id inden authentication, vil gerne beholde indtil videre.
-    // orderBy("dato") virker ikke (FIXED: manglede "firebase index")
+      .where("brugerId", "==", uid); // firebase.User.uid
 
-    // Er der valgt en liste, henter den punkter ud fra den liste.
-    unsubscribe = valgtListe // liste valgt i sidebaren (som ikke er "alle")
-      ? unsubscribe.where("listeId", "==", valgtListe) // Viser kun fra den valgte liste
-      : unsubscribe; // Ellers bare alle.
+    // Er der valgt en valgtListe, henter den punkter ud fra den liste.
+    // Der er fx ikke en valgtListe i "ALLE", derfor skal det i en if-statement.
+    if (valgtListe) {
+      unsubscribe = unsubscribe.where("listeId", "==", valgtListe);
+    }
 
     // Mapper gennem punkterne
     // Snapshot fordi det er den data "at that point in time"
     // @ts-ignore TODO: FIX LATER
     unsubscribe = unsubscribe.onSnapshot(snapshot => {
       const nyePunkter = snapshot.docs.map(punkt => ({
-        ...punkt.data(),
+        ...punkt.data(), // tager punkets data
         id: punkt.id
       }));
 
@@ -48,18 +45,20 @@ export const usePunkter = (valgtListe: string) => {
       setLoadingPunkter(false);
     });
 
-    // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" rammes.
+    // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" eller "currentUser" rammes.
     // @ts-ignore TODO: FIX LATER
-    return () => unsubscribe();
-  }, [valgtListe, currentUser]); // ListeSkift + user login/signout
+    return () => unsubscribe(); // Returerner alt de vi lige har bygget op ovenover
+  }, [valgtListe, currentUser]); // ListeSkift + user login/signout = rerun all this
 
-  // retunerer "ikke-arkiveret" punkter + ArkiveretPunkter.
-  return {
-    punkter,
-    arkiveretPunkter,
-    loadingPunkter
-  };
+  // retunerer punkter og loadingPunkter -staten
+  return { punkter, loadingPunkter };
+
+  // Eksempel: giver alle punkterne fra "Huskeliste" + loading staten
+  // const valgtListe = "Huskeliste"
+  // const { punkter, loadingPunkter } = usePunkter(valgtListe)
 };
+
+//
 
 export const useLister = () => {
   const [lister, setLister]: any = useState([]); // TODO: fix any ??? (fjerne fejl på linie 91 )
