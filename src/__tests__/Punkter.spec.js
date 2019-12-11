@@ -14,14 +14,16 @@ jest.mock("../hooks", () => ({
   usePunkter: () => ({
     punkter: [
       {
-        // id: "mx2taaXpF38vYqMGbVtY",
-        // arkiveret: false,
-        // dato: "21/07/2019",
-        // listeId: "1",
-        // punkt: "Learn some Jest testing or die tryin'",
-        // userId: "1234567890"
+        // kan sagtens udkommenteres
+        id: "mx2taaXpF38vYqMGbVtY",
+        arkiveret: true,
+        dato: "21/07/2019",
+        listeId: "1",
+        punkt: "Learn some Jest testing or die tryin'",
+        userId: "1234567890"
       }
     ],
+    // loadingPunkter: Math.random() > 0.5 ? true : false
     loadingPunkter: false
   })
 }));
