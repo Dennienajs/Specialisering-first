@@ -106,7 +106,6 @@ describe("<IndividuelListe />", () => {
       // trykker på slet
       fireEvent.click(queryByTestId("individuel-liste-delete"));
       debug();
-      expect(queryByTestId("individuel-liste-delete")).toBeTruthy();
     });
 
     // CONFIRM SLETLISTE = FALSE
