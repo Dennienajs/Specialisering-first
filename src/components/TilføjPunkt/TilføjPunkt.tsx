@@ -56,7 +56,7 @@ export const TilføjPunkt = () => {
             toastSuccess();
             setPunkt("");
           })
-          .catch(err => console.error("ERROR: " + err))
+          .catch((err: Error) => console.error("ERROR: " + err))
       );
     }
   };
