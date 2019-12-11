@@ -53,7 +53,7 @@ export const IndividuelListe: React.FC<IndividuelListeProps> = ({
         setAktivListe("alle");
         toastSletSuccess();
       })
-      .catch(err => {
+      .catch((err: Error) => {
         console.error("Error deleting liste: ", err);
         window.alert("Ooops, something went wrong. Please try again.");
       });
