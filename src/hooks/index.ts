@@ -46,6 +46,7 @@ export const usePunkter = (valgtListe: string) => {
     });
 
     // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" eller "currentUser" rammes.
+    // () => unsubscribe() er vores cleanup, så vi ikke lytter på opdateringer når det ikke er nødvendigt.
     // @ts-ignore TODO: FIX LATER
     return () => unsubscribe(); // Returerner alt de vi lige har bygget op ovenover
   }, [valgtListe, currentUser]); // ListeSkift + user login/signout = rerun all this
