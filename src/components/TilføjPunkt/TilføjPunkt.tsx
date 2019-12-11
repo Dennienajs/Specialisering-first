@@ -12,30 +12,25 @@ export const TilføjPunkt = () => {
   const { valgtListe } = useValgtListeValue();
   const { currentUser } = useContext(AuthContext);
 
+  // Popop when punkt added successfully.
+  const toastSuccess = () => {
+    toast.success(`☑ Tilføjet til ${valgtListe.toLowerCase()} ☑`, {
+      position: "top-center",
+      autoClose: 1700,
+      hideProgressBar: false,
+      closeOnClick: true,
+      pauseOnHover: false,
+      draggable: false
+    });
+  };
+
   const tilføjPunkt = () => {
     // Sætter dato til dagens dato.
     const dato = moment().format("YYYY/MM/DD HH:mm");
 
-    // Popop when punkt added successfully.
-    const toastSuccess = () => {
-      toast.success(`☑ Tilføjet til ${valgtListe.toLowerCase()} ☑`, {
-        position: "top-center",
-        autoClose: 1700,
-        hideProgressBar: false,
-        closeOnClick: true,
-        pauseOnHover: false,
-        draggable: false
-      });
-    };
-
     // Empty Punkt input = return.
     if (!punkt) {
       return;
-    }
-
-    // No user
-    if (!currentUser) {
-      return window.alert("Please login.");
     }
 
     if (currentUser) {
@@ -58,6 +53,8 @@ export const TilføjPunkt = () => {
           })
           .catch((err: Error) => console.error("ERROR: " + err))
       );
+    } else {
+      return window.alert("Please login.");
     }
   };
 
