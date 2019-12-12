@@ -7,7 +7,6 @@ import {
   FaBug,
   FaShoppingBasket
 } from "react-icons/fa";
-
 import { FiChevronsDown } from "react-icons/fi";
 import IndividuelListe from "../../components/IndividuelListe";
 import AddListe from "../../components/AddListe";
@@ -17,7 +16,6 @@ import {
   AuthContext,
   useListerValue
 } from "../../context";
-import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 
 export const Sidebar = () => {
   // @ts-ignore TODO: FIX LATER ***
