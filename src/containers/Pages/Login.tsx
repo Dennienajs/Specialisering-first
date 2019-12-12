@@ -75,7 +75,11 @@ const Login = () => {
           />
         </div>
         <div className="form-group">
-          <button className="form-button" type="submit">
+          <button
+            className="form-button"
+            type="submit"
+            aria-label="Login with email and password"
+          >
             <EmailIcon />
             <p>login med email & password</p>
           </button>
@@ -88,6 +92,7 @@ const Login = () => {
             data-testid="google-login-button"
             className="form-button google-button"
             onClick={handleLoginWithGoogle}
+            aria-label="Google login"
           >
             <img
               className="form-img google-img"

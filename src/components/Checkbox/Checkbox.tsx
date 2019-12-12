@@ -37,7 +37,7 @@ export const Checkbox: React.FC<CheckboxProps> = ({
           ? sletPunkt(id)
           : console.log("fejl")
       }
-      aria-label={`Mark ${indhold} as done?`}
+      aria-label={`Mark '${indhold}' as ${type}?`}
       role="button"
     >
       {type === "done" ? (

@@ -66,7 +66,11 @@ const Signup = () => {
           />
         </div>
         <div className="form-group">
-          <button className="form-button" type="submit">
+          <button
+            className="form-button"
+            type="submit"
+            aria-label="Opret Bruger"
+          >
             OPRET BRUGER
           </button>
         </div>

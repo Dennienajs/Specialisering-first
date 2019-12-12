@@ -111,7 +111,7 @@ export const Header = () => {
             </li>
             <li className="auth">
               {!currentUser ? (
-                <button data-testid="header-button-login">
+                <button data-testid="header-button-login" aria-label="login">
                   <Link to="/login">
                     <SignIn />
                   </Link>
@@ -119,6 +119,7 @@ export const Header = () => {
               ) : (
                 <button
                   data-testid="header-button-signout"
+                  aria-label="Sign out"
                   onClick={() => {
                     firebase.auth().signOut();
                     localStorage.removeItem("FBIdToken");

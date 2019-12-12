@@ -43,6 +43,7 @@ export const Sidebar = () => {
             className={aktivListe === liste.navn ? "aktivListe" : undefined}
           >
             <div
+              aria-label={`Vis punkter under ${liste.navn}`}
               data-testid={`${liste.navn}-action`}
               role="button"
               onClick={() => {
@@ -63,6 +64,7 @@ export const Sidebar = () => {
         {/**** TOGGLE EGNE LISTER KNAP ****/}
         <li>
           <div
+            aria-label="Vis/skjul egne lister"
             data-testid="sidebar-toggle-egne-lister"
             className="sidebar__liste-vis"
             role="button"
@@ -92,6 +94,7 @@ export const Sidebar = () => {
                 }
               >
                 <div
+                  aria-label={`Vis punkter under ${liste.navn}`}
                   data-testid="sidebar-egne-lister"
                   className="sidebar_liste__individuel-liste"
                   role="button"

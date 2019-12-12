@@ -80,6 +80,7 @@ export const TilføjPunkt = () => {
         onClick={() => tilføjPunkt()}
         onKeyDown={() => tilføjPunkt()}
         data-testid="tilføj-punkt-button"
+        aria-label="Tilføj Punkt"
       >
         Tilføj
       </button>

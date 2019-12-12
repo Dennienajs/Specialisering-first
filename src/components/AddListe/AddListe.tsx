@@ -53,6 +53,7 @@ export const AddListe = ({ defaultVis = false }) => {
             className="add-liste__submit"
             data-testid="add-liste-submit"
             type="button"
+            aria-label="Add Liste"
             onClick={() => addListe()}
           >
             Tilføj
@@ -72,6 +73,7 @@ export const AddListe = ({ defaultVis = false }) => {
       <div
         data-testid="add-liste--vis"
         className="add-liste__vis"
+        aria-label="vis/skjul Add Liste"
         onClick={() => setVis(!vis)}
         onKeyDown={() => setVis(!vis)}
         role="button"

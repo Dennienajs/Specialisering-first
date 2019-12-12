@@ -69,6 +69,7 @@ export const IndividuelListe: React.FC<IndividuelListeProps> = ({
         <span
           data-testid="individuel-liste-delete"
           onClick={() => confirmSletListe()}
+          aria-label="Slet Liste"
         >
           <Trash />
         </span>
