@@ -9,7 +9,6 @@ import {
   ThemeContext
 } from "../context";
 import { act } from "react-dom/test-utils";
-import { debug } from "util";
 
 // Samme mock som fra Punkter.spec.js
 jest.mock("../firebase", () => ({

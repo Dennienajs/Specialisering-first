@@ -3,7 +3,6 @@ import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Header from "../containers/Header";
 import { AuthContext, ValgtListeContext, ThemeContext } from "../context";
-import { debug } from "util";
 import { act } from "react-dom/test-utils";
 
 beforeEach(cleanup); // Cleans - Unmounts React trees that were mounted with render.

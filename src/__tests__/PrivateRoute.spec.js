@@ -4,7 +4,6 @@ import { BrowserRouter as Router } from "react-router-dom";
 import { PrivateRoute } from "../PrivateRoute";
 import Content from "../containers/Pages/Content";
 import { AuthContext, ValgtListeContext, ListerContext } from "../context";
-import { debug } from "util";
 
 beforeEach(cleanup);
 
