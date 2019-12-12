@@ -82,6 +82,7 @@ export const Header = () => {
           <ul>
             <li className="settings-add">
               <button
+                aria-label="no use"
                 data-testid="handle-click-display-name"
                 onClick={() => handleOnClickDisplayName()}
               >
@@ -94,6 +95,7 @@ export const Header = () => {
             </li>
             <li className="settings-add">
               <button
+                aria-label="no use"
                 data-testid="header-plus"
                 onClick={() => console.log("TODO: something..")}
               >
@@ -101,7 +103,11 @@ export const Header = () => {
               </button>
             </li>
             <li className="settings-darkmode">
-              <button onClick={toggle} data-testid="header-toggle-darkmode">
+              <button
+                onClick={toggle}
+                data-testid="header-toggle-darkmode"
+                aria-label={`Toggle theme dark/light`}
+              >
                 {dark ? (
                   <Sun data-testid="header-Sun" />
                 ) : (
