@@ -8,7 +8,7 @@ import {
   AuthContext,
   useListerValue
 } from "../../context";
-import { defaultSidebarLister } from "./defaultSidebarLister";
+import { defaultSidebarListerData } from "./defaultSidebarListerData";
 
 export const Sidebar = () => {
   // @ts-ignore TODO: FIX LATER ***
@@ -36,7 +36,7 @@ export const Sidebar = () => {
       }}
     >
       <ul className="sidebar_liste">
-        {defaultSidebarLister.map(liste => (
+        {defaultSidebarListerData.map(liste => (
           <li
             key={liste.listeId}
             data-testid={liste.navn}

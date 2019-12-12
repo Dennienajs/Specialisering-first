@@ -15,7 +15,7 @@ import {
 // Sidebar.spec.js blev omskrevet fra over 600 linjer til 200 linjers test kode.
 // Det er også nemmere at tilpasse default lister i fremtiden nu.
 
-export const defaultSidebarLister = [
+export const defaultSidebarListerData = [
   { navn: "alle", listeId: "", displayNavn: "Alle", icon: <FaRegListAlt /> },
   {
     navn: "idag",
