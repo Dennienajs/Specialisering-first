@@ -1,12 +1,4 @@
 import React, { useState, useContext } from "react";
-import {
-  FaRegListAlt,
-  FaCalendarDay,
-  FaCalendarAlt,
-  FaTasks,
-  FaBug,
-  FaShoppingBasket
-} from "react-icons/fa";
 import { FiChevronsDown } from "react-icons/fi";
 import IndividuelListe from "../../components/IndividuelListe";
 import AddListe from "../../components/AddListe";
@@ -16,6 +8,7 @@ import {
   AuthContext,
   useListerValue
 } from "../../context";
+import { defaultSidebarLister } from "./defaultSidebarLister";
 
 export const Sidebar = () => {
   // @ts-ignore TODO: FIX LATER ***
@@ -25,7 +18,7 @@ export const Sidebar = () => {
   const { theme } = useContext(ThemeContext); // darkmode
   const { currentUser } = useContext(AuthContext); // authentication/user info
   // @ts-ignore TODO: FIX LATER ***
-  const { lister, loadingLister } = useListerValue(); // brugerens egne lister
+  const { lister } = useListerValue(); // brugerens egne lister
 
   interface ListeProps {
     navn: string;
@@ -43,143 +36,29 @@ export const Sidebar = () => {
       }}
     >
       <ul className="sidebar_liste">
-        <li
-          data-testid="alle"
-          className={aktivListe === "alle" ? "aktivListe" : undefined}
-        >
-          <div
-            data-testid="alle-action"
-            role="button"
-            onClick={() => {
-              setAktivListe("alle"); // Den som skal "markeres"
-              setValgtListe(""); // punkterne med dette "id" skal vises. 1=id 1, ""=alle
-            }}
-            onKeyDown={() => {
-              setAktivListe("alle");
-              setValgtListe("");
-            }}
+        {defaultSidebarLister.map(liste => (
+          <li
+            key={liste.listeId}
+            data-testid={liste.navn}
+            className={aktivListe === liste.navn ? "aktivListe" : undefined}
           >
-            <span>
-              <FaRegListAlt />
-            </span>
-            <span>Alle</span>
-          </div>
-        </li>
-
-        <li
-          data-testid="idag"
-          className={aktivListe === "idag" ? "aktivListe" : undefined}
-        >
-          <div
-            data-testid="idag-action"
-            role="button"
-            onClick={() => {
-              setAktivListe("idag");
-              setValgtListe("IDAG");
-            }}
-            onKeyDown={() => {
-              setAktivListe("idag");
-              setValgtListe("IDAG");
-            }}
-          >
-            <span>
-              <FaCalendarDay />
-            </span>
-            <span>I dag</span>
-          </div>
-        </li>
-
-        <li
-          data-testid="denneUge"
-          className={aktivListe === "denneUge" ? "aktivListe" : undefined}
-        >
-          <div
-            data-testid="denneUge-action"
-            role="button"
-            onClick={() => {
-              setAktivListe("denneUge");
-              setValgtListe("DENNEUGE");
-            }}
-            onKeyDown={() => {
-              setAktivListe("denneUge");
-              setValgtListe("DENNEUGE");
-            }}
-          >
-            <span>
-              <FaCalendarAlt />
-            </span>
-            <span>Denne uge</span>
-          </div>
-        </li>
-
-        <li
-          data-testid="todo"
-          className={aktivListe === "todo" ? "aktivListe" : undefined}
-        >
-          <div
-            data-testid="todo-action"
-            role="button"
-            onClick={() => {
-              setAktivListe("todo");
-              setValgtListe("TODO");
-            }}
-            onKeyDown={() => {
-              setAktivListe("todo");
-              setValgtListe("TODO");
-            }}
-          >
-            <span>
-              <FaTasks />
-            </span>
-            <span>Todo</span>
-          </div>
-        </li>
-
-        <li
-          data-testid="bugs"
-          className={aktivListe === "bugs" ? "aktivListe" : undefined}
-        >
-          <div
-            data-testid="bugs-action"
-            role="button"
-            onClick={() => {
-              setAktivListe("bugs");
-              setValgtListe("BUGS");
-            }}
-            onKeyDown={() => {
-              setAktivListe("bugs");
-              setValgtListe("BUGS");
-            }}
-          >
-            <span>
-              <FaBug />
-            </span>
-            <span>Bugs</span>
-          </div>
-        </li>
-
-        <li
-          data-testid="indkøb"
-          className={aktivListe === "indkøb" ? "aktivListe" : undefined}
-        >
-          <div
-            data-testid="indkøb-action"
-            role="button"
-            onClick={() => {
-              setAktivListe("indkøb");
-              setValgtListe("INDKØB");
-            }}
-            onKeyDown={() => {
-              setAktivListe("indkøb");
-              setValgtListe("INDKØB");
-            }}
-          >
-            <span>
-              <FaShoppingBasket />
-            </span>
-            <span>Indkøb</span>
-          </div>
-        </li>
+            <div
+              data-testid={`${liste.navn}-action`}
+              role="button"
+              onClick={() => {
+                setAktivListe(liste.navn); // Den som skal "markeres"
+                setValgtListe(liste.listeId); // punkterne med dette "id" skal vises. 1=id 1, ""=alle
+              }}
+              onKeyDown={() => {
+                setAktivListe(liste.navn);
+                setValgtListe(liste.listeId);
+              }}
+            >
+              <span>{liste.icon}</span>
+              <span>{liste.displayNavn}</span>
+            </div>
+          </li>
+        ))}
 
         {/**** TOGGLE EGNE LISTER KNAP ****/}
         <li>
@@ -200,7 +79,6 @@ export const Sidebar = () => {
       </ul>
 
       <ul className="sidebar_liste">
-        {/* {!loadingLister ? null : <LinearProgress />} VIRKER IKKE */}
         {visLister
           ? lister.map((liste: ListeProps) => (
               <li
