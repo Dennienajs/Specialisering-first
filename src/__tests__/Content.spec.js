@@ -12,7 +12,6 @@ import {
 import ButtonToggleSidebar from "../containers/Pages/Content/ButtonToggleSidebar";
 
 import { PrivateRoute } from "../PrivateRoute";
-import { debug } from "util";
 
 beforeEach(cleanup);
 
@@ -87,7 +86,7 @@ describe("<Content />", () => {
       const toggle = jest.fn();
       // IndiciduelListe
 
-      const { queryByTestId, debug } = render(
+      const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
           <ListerContext.Provider
             value={{
@@ -115,7 +114,6 @@ describe("<Content />", () => {
           </ListerContext.Provider>
         </AuthContext.Provider>
       );
-      debug();
       expect(queryByTestId("content")).toBeTruthy();
     });
   });

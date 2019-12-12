@@ -7,7 +7,6 @@ import {
   ThemeContext
 } from "../context";
 import IndividuelListe from "../components/IndividuelListe";
-import { debug } from "util";
 
 beforeEach(cleanup);
 
@@ -85,7 +84,7 @@ describe("<IndividuelListe />", () => {
       // confirmSletListe
       window.confirm = jest.fn().mockImplementation(() => true);
 
-      const { queryByTestId, debug } = render(
+      const { queryByTestId } = render(
         <AuthContext.Provider value={{ currentUser }}>
           <ListerContext.Provider value={{ lister, setLister }}>
             <ValgtListeContext.Provider value={{ setValgtListe }}>
@@ -102,10 +101,8 @@ describe("<IndividuelListe />", () => {
       );
       // individuel-liste-delete = data-testid på listens slet-knap.
       expect(queryByTestId("individuel-liste-delete")).toBeTruthy();
-      debug();
       // trykker på slet
       fireEvent.click(queryByTestId("individuel-liste-delete"));
-      debug();
     });
 
     // CONFIRM SLETLISTE = FALSE
