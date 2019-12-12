@@ -42,6 +42,7 @@ export const Content = () => {
         <Punkter visSidebar={visSidebar} />
       ) : (
         <div
+          data-testid="content__not-signed-in"
           className="content__not-signed-in"
           style={{
             backgroundColor: theme.backgroundColor,
