@@ -7,6 +7,7 @@ import {
   ThemeContext
 } from "../context";
 import IndividuelListe from "../components/IndividuelListe";
+import { act } from "react-dom/test-utils";
 
 beforeEach(cleanup);
 
@@ -102,7 +103,9 @@ describe("<IndividuelListe />", () => {
       // individuel-liste-delete = data-testid på listens slet-knap.
       expect(queryByTestId("individuel-liste-delete")).toBeTruthy();
       // trykker på slet
-      fireEvent.click(queryByTestId("individuel-liste-delete"));
+      act(() => {
+        fireEvent.click(queryByTestId("individuel-liste-delete"));
+      });
     });
 
     // CONFIRM SLETLISTE = FALSE
@@ -162,7 +165,9 @@ describe("<IndividuelListe />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("individuel-liste-delete")).toBeTruthy();
-      fireEvent.click(queryByTestId("individuel-liste-delete"));
+      act(() => {
+        fireEvent.click(queryByTestId("individuel-liste-delete"));
+      });
     });
   });
 });

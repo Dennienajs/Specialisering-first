@@ -3,6 +3,8 @@ import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Header from "../containers/Header";
 import { AuthContext, ValgtListeContext, ThemeContext } from "../context";
+import { debug } from "util";
+import { act } from "react-dom/test-utils";
 
 beforeEach(cleanup); // Cleans - Unmounts React trees that were mounted with render.
 
@@ -16,9 +18,10 @@ beforeEach(cleanup); // Cleans - Unmounts React trees that were mounted with ren
 // ***************************************************************
 
 describe("<Header />", () => {
+  window.alert = jest.fn().mockImplementation();
   describe("Success", () => {
     // ingen user + login click
-    it("render <Header /> UDEN en currentUser, Darkmode enabled, og clicker login", () => {
+    it("render <Header /> UDEN en currentUser og clicker login", () => {
       const dark = false;
       const { queryByTestId } = render(
         <Router>
@@ -33,9 +36,9 @@ describe("<Header />", () => {
       );
       expect(queryByTestId("header")).toBeTruthy(); // Render header.
       expect(queryByTestId("header-button-login")).toBeTruthy(); // Login true = ingen user
-      fireEvent.click(queryByTestId("header-button-login"));
-
-      // Expect button login to have been clicked.... ???
+      act(() => {
+        fireEvent.click(queryByTestId("header-button-login"));
+      });
     });
 
     //
@@ -62,7 +65,9 @@ describe("<Header />", () => {
       expect(queryByTestId("header-button-signout")).toBeTruthy();
 
       // Clicks signout (setValgtListe("") bliver kaldt.)
-      fireEvent.click(queryByTestId("header-button-signout"));
+      act(() => {
+        fireEvent.click(queryByTestId("header-button-signout"));
+      });
     });
 
     //
@@ -87,8 +92,9 @@ describe("<Header />", () => {
       expect(queryByTestId("header")).toBeTruthy();
       expect(queryByTestId("header-button-login")).toBeFalsy();
       expect(queryByTestId("header-button-signout")).toBeTruthy();
-
-      fireEvent.click(queryByTestId("handle-click-display-name"));
+      act(() => {
+        fireEvent.click(queryByTestId("handle-click-display-name"));
+      });
     });
 
     //
@@ -114,7 +120,9 @@ describe("<Header />", () => {
       expect(queryByTestId("header-button-login")).toBeFalsy();
       expect(queryByTestId("header-button-signout")).toBeTruthy();
 
-      fireEvent.click(queryByTestId("handle-click-display-name"));
+      act(() => {
+        fireEvent.click(queryByTestId("handle-click-display-name"));
+      });
     });
 
     //
@@ -132,7 +140,9 @@ describe("<Header />", () => {
         </Router>
       );
       expect(queryByTestId("header")).toBeTruthy();
-      fireEvent.click(queryByTestId("header-plus"));
+      act(() => {
+        fireEvent.click(queryByTestId("header-plus"));
+      });
     });
 
     //

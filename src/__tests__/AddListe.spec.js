@@ -1,15 +1,15 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
 import AddListe from "../components/AddListe";
-
 import {
   ListerContext,
   ValgtListeContext,
   AuthContext,
   ThemeContext
 } from "../context";
+import { act } from "react-dom/test-utils";
+import { debug } from "util";
 
 // Samme mock som fra Punkter.spec.js
 jest.mock("../firebase", () => ({
@@ -21,6 +21,7 @@ jest.mock("../firebase", () => ({
     }))
   }
 }));
+console.log = jest.fn().mockImplementation();
 
 beforeEach(cleanup);
 
@@ -59,6 +60,8 @@ describe("<AddListe />", () => {
       const lister = [{}];
       const valgtListe = "someListe";
 
+      window.alert = jest.fn().mockImplementation();
+
       const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
           <ListerContext.Provider value={{ lister }}>
@@ -72,18 +75,24 @@ describe("<AddListe />", () => {
       );
       expect(queryByTestId("add-liste")).toBeTruthy();
 
+      // ændrer input
+      act(() => {});
       fireEvent.change(queryByTestId("add-liste-navn"), {
         target: {
           value: "React is fun, sometimes."
         }
       });
+      // input har ændret sig
       expect(queryByTestId("add-liste-navn").value).toBe(
         "React is fun, sometimes."
       );
-      fireEvent.click(queryByTestId("add-liste-submit"));
+      // submitter
+      act(() => {
+        fireEvent.click(queryByTestId("add-liste-submit"));
+      });
     });
 
-    // tilføj, keyDown
+    // Tilføj via keyDown
     it("renders <AddListe /> og tilføjer en ny liste via onKeyDown", () => {
       const theme = {};
       const dark = true;
@@ -110,15 +119,22 @@ describe("<AddListe />", () => {
 
       expect(queryByTestId("add-liste")).toBeTruthy();
 
-      fireEvent.change(queryByTestId("add-liste-navn"), {
-        target: {
-          value: "React is fun, sometimes."
-        }
+      // ændrer input
+      act(() => {
+        fireEvent.change(queryByTestId("add-liste-navn"), {
+          target: {
+            value: "React is fun, sometimes."
+          }
+        });
       });
+      // input ændret
       expect(queryByTestId("add-liste-navn").value).toBe(
         "React is fun, sometimes."
       );
-      fireEvent.keyDown(queryByTestId("add-liste-submit"));
+      //
+      act(() => {
+        fireEvent.keyDown(queryByTestId("add-liste-submit"));
+      });
     });
     // Præcis samme som ovenstående, bare med click i stedet for keyDown.
     it("renders <AddListe /> og tilføjer en ny liste via onClick", () => {
@@ -148,15 +164,19 @@ describe("<AddListe />", () => {
 
       expect(queryByTestId("add-liste")).toBeTruthy();
 
-      fireEvent.change(queryByTestId("add-liste-navn"), {
-        target: {
-          value: "React is fun, sometimes."
-        }
+      act(() => {
+        fireEvent.change(queryByTestId("add-liste-navn"), {
+          target: {
+            value: "React is fun, sometimes."
+          }
+        });
       });
       expect(queryByTestId("add-liste-navn").value).toBe(
         "React is fun, sometimes."
       );
-      fireEvent.click(queryByTestId("add-liste-submit"));
+      act(() => {
+        fireEvent.click(queryByTestId("add-liste-submit"));
+      });
     });
 
     // keyPressed(Enter), tilføj
@@ -173,7 +193,7 @@ describe("<AddListe />", () => {
       };
       const setLister = jest.fn();
 
-      const { queryByTestId } = render(
+      const { queryByTestId, debug } = render(
         <AuthContext.Provider value={{ currentUser }}>
           <ListerContext.Provider value={{ lister, setLister }}>
             <ValgtListeContext.Provider value={{ valgtListe }}>
@@ -184,29 +204,36 @@ describe("<AddListe />", () => {
           </ListerContext.Provider>
         </AuthContext.Provider>
       );
-
       expect(queryByTestId("add-liste")).toBeTruthy();
 
-      fireEvent.change(queryByTestId("add-liste-navn"), {
-        target: {
-          value: "React is fun, sometimes."
-        }
+      act(() => {
+        fireEvent.change(queryByTestId("add-liste-navn"), {
+          target: {
+            value: "React is fun, sometimes."
+          }
+        });
       });
       expect(queryByTestId("add-liste-navn").value).toBe(
         "React is fun, sometimes."
       );
+
       // if Enter
-      fireEvent.keyPress(queryByTestId("add-liste-navn"), {
-        key: "Enter",
-        code: 13,
-        charCode: 13
+      act(() => {
+        fireEvent.keyPress(queryByTestId("add-liste-navn"), {
+          key: "Enter",
+          code: 13,
+          charCode: 13
+        });
       });
       // else (!enter)
-      fireEvent.keyPress(queryByTestId("add-liste-navn"), {
-        key: "0",
-        code: 48, // 48 = "0"
-        charCode: 48 // 48 = "0"
+      act(() => {
+        fireEvent.keyPress(queryByTestId("add-liste-navn"), {
+          key: "0",
+          code: 48, // 48 = "0"
+          charCode: 48 // 48 = "0"
+        });
       });
+      debug();
     });
 
     //onClick cancel
@@ -236,11 +263,13 @@ describe("<AddListe />", () => {
       );
 
       expect(queryByTestId("add-liste")).toBeTruthy();
-      expect(queryByTestId("add-liste-input")).toBeTruthy();
+      expect(queryByTestId("add-liste-input")).toBeTruthy(); // true
 
-      fireEvent.click(queryByTestId("add-liste-fortryd"));
+      act(() => {
+        fireEvent.click(queryByTestId("add-liste-fortryd"));
+      });
       expect(queryByTestId("add-liste")).toBeTruthy();
-      expect(queryByTestId("add-liste-input")).toBeFalsy();
+      expect(queryByTestId("add-liste-input")).toBeFalsy(); // false efter click
     });
 
     // keyDown cancel
@@ -271,8 +300,9 @@ describe("<AddListe />", () => {
 
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
-
-      fireEvent.keyDown(queryByTestId("add-liste-fortryd"));
+      act(() => {
+        fireEvent.keyDown(queryByTestId("add-liste-fortryd"));
+      });
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeFalsy();
     });
@@ -305,8 +335,9 @@ describe("<AddListe />", () => {
 
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
-
-      fireEvent.click(queryByTestId("add-liste-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("add-liste-action"));
+      });
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeFalsy();
     });
@@ -339,8 +370,9 @@ describe("<AddListe />", () => {
 
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeTruthy();
-
-      fireEvent.keyDown(queryByTestId("add-liste-action"));
+      act(() => {
+        fireEvent.keyDown(queryByTestId("add-liste-action"));
+      });
       expect(queryByTestId("add-liste")).toBeTruthy();
       expect(queryByTestId("add-liste-input")).toBeFalsy();
     });

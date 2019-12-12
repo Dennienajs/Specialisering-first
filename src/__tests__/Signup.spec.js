@@ -17,7 +17,9 @@ jest.mock("../firebase", () => ({
 
 describe("<Signup />", () => {
   describe("Success", () => {
-    it("renders the signup page uden en user, udfylder felterne og trykker submit", () => {
+    it("renders <Signup /> page UDEN currentUser, udfylder felterne og trykker submit", () => {
+      window.alert = jest.fn().mockImplementation();
+
       const { queryByTestId } = render(
         <Router>
           <Signup />

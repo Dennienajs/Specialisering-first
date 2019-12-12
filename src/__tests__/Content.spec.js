@@ -1,6 +1,6 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
-import { render, cleanup, fireEvent } from "@testing-library/react";
+import { render, cleanup } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Content from "../containers/Pages/Content";
 import {
@@ -9,9 +9,6 @@ import {
   ListerContext,
   ValgtListeContext
 } from "../context";
-import ButtonToggleSidebar from "../containers/Pages/Content/ButtonToggleSidebar";
-
-import { PrivateRoute } from "../PrivateRoute";
 
 beforeEach(cleanup);
 
@@ -71,6 +68,8 @@ describe("<Content />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("content")).toBeTruthy();
+      expect(queryByTestId("idag-action")).toBeTruthy();
+      expect(queryByTestId("content__not-signed-in")).toBeFalsy();
     });
 
     // !currentUser = Link til /login & /signup
@@ -86,7 +85,7 @@ describe("<Content />", () => {
       const toggle = jest.fn();
       // IndiciduelListe
 
-      const { queryByTestId } = render(
+      const { queryByTestId, debug } = render(
         <AuthContext.Provider value={{}}>
           <ListerContext.Provider
             value={{
@@ -115,6 +114,8 @@ describe("<Content />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("content")).toBeTruthy();
+      expect(queryByTestId("idag-action")).toBeFalsy();
+      expect(queryByTestId("content__not-signed-in")).toBeTruthy();
     });
   });
 });

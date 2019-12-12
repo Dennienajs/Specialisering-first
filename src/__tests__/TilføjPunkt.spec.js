@@ -9,6 +9,7 @@ import {
   AuthContext,
   ThemeContext
 } from "../context";
+import { act } from "react-dom/test-utils";
 
 beforeEach(cleanup);
 
@@ -59,6 +60,7 @@ describe("<TilføjPunkt />", () => {
       const toggle = jest.fn();
       const lister = [{}];
       const valgtListe = "someListe";
+
       const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
           <ListerContext.Provider value={{ lister }}>
@@ -71,7 +73,9 @@ describe("<TilføjPunkt />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("tilføj-punkt")).toBeTruthy();
-      fireEvent.click(queryByTestId("tilføj-punkt-button"));
+      act(() => {
+        fireEvent.click(queryByTestId("tilføj-punkt-button"));
+      });
     });
 
     // Uden currentUser, tilføjer punkt (fejl)
@@ -109,13 +113,17 @@ describe("<TilføjPunkt />", () => {
       expect(queryByTestId("tilføj-punkt")).toBeTruthy();
 
       // Ændrer staten i input feltet (skriver noget...)
-      fireEvent.change(queryByTestId("tilføj-punkt-input"), {
-        target: {
-          value: "nyt punkt" // Input har ændret sig
-        }
+      act(() => {
+        fireEvent.change(queryByTestId("tilføj-punkt-input"), {
+          target: {
+            value: "nyt punkt" // Input har ændret sig
+          }
+        });
       });
       expect(queryByTestId("tilføj-punkt-input").value).toBe("nyt punkt"); // data-testid="tilføj-punkt-input"
-      fireEvent.click(queryByTestId("tilføj-punkt-button"));
+      act(() => {
+        fireEvent.click(queryByTestId("tilføj-punkt-button"));
+      });
     });
 
     // Med currentUser, tilføjer punkt via enter og resolver promise (firebase mock i toppen.)

@@ -1,15 +1,14 @@
 /* eslint-disable no-unused-vars */
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
-
 import Sidebar from "../containers/Sidebar";
-
 import {
   ListerContext,
   ValgtListeContext,
   AuthContext,
   ThemeContext
 } from "../context";
+import { act } from "react-dom/test-utils";
 
 beforeEach(cleanup);
 
@@ -40,8 +39,6 @@ describe("<Sidebar />", () => {
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
     });
-
-    // ***** COPY-PASTE START *****
 
     // ALLE
     it("skifter den aktive liste til ALLE ('alle')", () => {
@@ -77,8 +74,10 @@ describe("<Sidebar />", () => {
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
       expect(queryByTestId("alle")).toBeTruthy();
-      fireEvent.click(queryByTestId("alle-action"));
-      fireEvent.keyDown(queryByTestId("alle-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("alle-action"));
+        fireEvent.keyDown(queryByTestId("alle-action"));
+      });
 
       expect(
         queryByTestId("alle").classList.contains("aktivListe")
@@ -133,8 +132,10 @@ describe("<Sidebar />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
-      fireEvent.click(queryByTestId("idag-action"));
-      fireEvent.keyDown(queryByTestId("idag-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("idag-action"));
+        fireEvent.keyDown(queryByTestId("idag-action"));
+      });
 
       expect(
         queryByTestId("alle").classList.contains("aktivListe")
@@ -189,8 +190,10 @@ describe("<Sidebar />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
-      fireEvent.click(queryByTestId("denneUge-action"));
-      fireEvent.keyDown(queryByTestId("denneUge-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("denneUge-action"));
+        fireEvent.keyDown(queryByTestId("denneUge-action"));
+      });
 
       expect(
         queryByTestId("alle").classList.contains("aktivListe")
@@ -245,8 +248,10 @@ describe("<Sidebar />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
-      fireEvent.click(queryByTestId("todo-action"));
-      fireEvent.keyDown(queryByTestId("todo-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("todo-action"));
+        fireEvent.keyDown(queryByTestId("todo-action"));
+      });
 
       expect(
         queryByTestId("alle").classList.contains("aktivListe")
@@ -301,8 +306,10 @@ describe("<Sidebar />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
-      fireEvent.click(queryByTestId("bugs-action"));
-      fireEvent.keyDown(queryByTestId("bugs-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("bugs-action"));
+        fireEvent.keyDown(queryByTestId("bugs-action"));
+      });
 
       expect(
         queryByTestId("alle").classList.contains("aktivListe")
@@ -357,8 +364,10 @@ describe("<Sidebar />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
-      fireEvent.click(queryByTestId("indkøb-action"));
-      fireEvent.keyDown(queryByTestId("indkøb-action"));
+      act(() => {
+        fireEvent.click(queryByTestId("indkøb-action"));
+        fireEvent.keyDown(queryByTestId("indkøb-action"));
+      });
 
       expect(
         queryByTestId("alle").classList.contains("aktivListe")
@@ -414,9 +423,11 @@ describe("<Sidebar />", () => {
       expect(queryByTestId("sidebar")).toBeTruthy();
 
       // Åben Lister
-      fireEvent.click(queryByTestId("sidebar-toggle-egne-lister"));
-      // close igen
-      fireEvent.click(queryByTestId("sidebar-toggle-egne-lister"));
+      act(() => {
+        fireEvent.click(queryByTestId("sidebar-toggle-egne-lister"));
+        // close igen
+        fireEvent.click(queryByTestId("sidebar-toggle-egne-lister"));
+      });
     });
 
     //
@@ -458,10 +469,12 @@ describe("<Sidebar />", () => {
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
 
-      // Åben Lister
-      fireEvent.keyDown(queryByTestId("sidebar-toggle-egne-lister"));
-      // close igen
-      fireEvent.keyDown(queryByTestId("sidebar-toggle-egne-lister"));
+      act(() => {
+        // Åben Lister
+        fireEvent.keyDown(queryByTestId("sidebar-toggle-egne-lister"));
+        // close igen
+        fireEvent.keyDown(queryByTestId("sidebar-toggle-egne-lister"));
+      });
     });
 
     //
@@ -504,8 +517,10 @@ describe("<Sidebar />", () => {
 
       // Select egen liste som aktiv.
       expect(queryByTestId("sidebar-egne-lister")).toBeTruthy();
-      fireEvent.click(queryByTestId("sidebar-egne-lister"));
-      fireEvent.keyDown(queryByTestId("sidebar-egne-lister"));
+      act(() => {
+        fireEvent.click(queryByTestId("sidebar-egne-lister"));
+        fireEvent.keyDown(queryByTestId("sidebar-egne-lister"));
+      });
     });
     //
     //

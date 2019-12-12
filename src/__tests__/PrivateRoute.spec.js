@@ -1,10 +1,10 @@
 import React from "react";
 import { render, cleanup } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
-
 import { PrivateRoute } from "../PrivateRoute";
 import Content from "../containers/Pages/Content";
 import { AuthContext, ValgtListeContext, ListerContext } from "../context";
+import { debug } from "util";
 
 beforeEach(cleanup);
 
@@ -49,6 +49,7 @@ describe("<PrivateRoute />", () => {
         </ListerContext.Provider>
       );
       // data-testid="content" findes i <Content />
+      // man ryger kun igennem til Content når man er logged ind.
       expect(queryByTestId("content")).toBeTruthy();
     });
 
@@ -56,13 +57,14 @@ describe("<PrivateRoute />", () => {
     //
 
     // Rammer <Redirect to={"/login"} />
-    it("render <PrivateRoute /> UDEN en currentUser", () => {
+    it("render (ikke) <PrivateRoute component={Content} /> UDEN en currentUser", () => {
       const { queryByTestId } = render(
         <Router>
-          <PrivateRoute />
+          <PrivateRoute component={Content} />
         </Router>
       );
-      expect(queryByTestId("private-route")).toBeFalsy(); // Reciever null
+      // render ikke content
+      expect(queryByTestId("content")).toBeFalsy();
     });
   });
 });
