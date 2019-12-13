@@ -2,7 +2,6 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import TilføjPunkt from "../components/TilføjPunkt";
-
 import {
   ListerContext,
   ValgtListeContext,
@@ -11,18 +10,20 @@ import {
 } from "../context";
 import { act } from "react-dom/test-utils";
 
+import { firebase } from "../firebase";
+
 beforeEach(cleanup);
 
 // NOTE: HVORDAN RAMMER JEG CATCH MED MOCKEN? Jeg kan sagtens ramme én af resolve/reject,
 // men ikke dem begge når mocken er sat her? Kan ændre forneden, men ikke ramme begge samtidigt i to forskellige tests???
 // MOCK "tilføjPunkt" - firebase query, add punkt.
 
+// resolver som default her i mocken.
 jest.mock("../firebase", () => ({
   firebase: {
     firestore: jest.fn(() => ({
       collection: jest.fn(() => ({
-        add: jest.fn(() => Promise.resolve())
-        // add: jest.fn(() => Promise.reject("Promise rejected .."))
+        add: jest.fn(() => Promise.resolve("Promise resolved."))
       }))
     }))
   }
@@ -130,6 +131,14 @@ describe("<TilføjPunkt />", () => {
 
     // Med currentUser, tilføjer punkt via enter og resolver promise (firebase mock i toppen.)
     it("renders <TilføjPunkt /> MED currentUser og tilføjer punkt med Enter-key", () => {
+      // Mocker implementation til at rejecte (rammer catch.)
+      firebase.firestore.mockImplementation(() => ({
+        collection: jest.fn(() => ({
+          add: jest.fn(() => Promise.reject("Promise rejected."))
+          // add: jest.fn(() => Promise.reject("Promise rejected .."))
+        }))
+      }));
+
       const theme = {};
       const dark = true;
       const toggle = jest.fn();
@@ -169,7 +178,8 @@ describe("<TilføjPunkt />", () => {
           code: 13,
           charCode: 13
         });
-
+      });
+      act(() => {
         // else path på keyDown (!Enter)
         fireEvent.keyPress(queryByTestId("tilføj-punkt-input"), {
           key: "0",
@@ -181,6 +191,13 @@ describe("<TilføjPunkt />", () => {
 
     // Med currentUser, tilføjer punkt via onKeyDown og resolver promise (firebase mock i toppen.)
     it("renders <TilføjPunkt /> MED currentUser og tilføjer punkt via onKeyDOwn", () => {
+      // Mocker implementation til at resolve (rammer .then.)
+      firebase.firestore.mockImplementation(() => ({
+        collection: jest.fn(() => ({
+          add: jest.fn(() => Promise.resolve("Promise resolved."))
+        }))
+      }));
+
       const theme = {};
       const dark = true;
       const toggle = jest.fn();
