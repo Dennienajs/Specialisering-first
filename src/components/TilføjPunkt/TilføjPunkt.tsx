@@ -35,7 +35,6 @@ export const TilføjPunkt = () => {
 
     if (currentUser) {
       return (
-        punkt &&
         punkt.length > 0 &&
         firebase
           .firestore()
