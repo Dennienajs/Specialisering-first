@@ -45,17 +45,14 @@ export const Punkter: React.FC<PunkterProps> = ({ visSidebar }) => {
       className="punkter"
       data-testid="punkter"
       style={
+        { backgroundColor: theme.backgroundColor, color: theme.color } &&
         visSidebar
           ? {
-              marginLeft: "139px", // Sidebar toggle = ryk punkterne så de fylder det hele.
-              backgroundColor: theme.backgroundColor,
-              color: theme.color
+              marginLeft: "139px" // Sidebar toggle = ryk punkterne så de fylder det hele.
             }
           : {
               marginLeft: "20px",
-              marginRight: "20px",
-              backgroundColor: theme.backgroundColor,
-              color: theme.color
+              marginRight: "20px"
             }
       }
     >
