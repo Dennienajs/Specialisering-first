@@ -17,12 +17,6 @@ export const Header = () => {
   // @ts-ignore TODO: FIX LATER ***
   const { setValgtListe } = useValgtListeValue(); // Ændre valgtListe til "" ved signout.
 
-  console.log(
-    currentUser
-      ? `currentUser: ${currentUser.displayName}, email verified: ${currentUser.emailVerified}`
-      : "no user"
-  );
-
   // HANDLES EMAIL VERIFICATION
   useEffect(() => {
     if (currentUser && !currentUser.emailVerified) {
@@ -37,11 +31,9 @@ export const Header = () => {
             .sendEmailVerification()
             .then(() => {
               alert("Verification email sent to: " + currentUser.email);
-              console.log("Verification email sent to: " + currentUser.email);
             })
             .catch((err: Error) => {
-              console.error(err);
-              console.log("Error sending verification email");
+              console.error("Error: " + err);
             })
         : console.log("currentUser: " + currentUser);
     }
@@ -54,11 +46,11 @@ export const Header = () => {
       currentUser.updateProfile({
         displayName: capitalizeString(emailDisplay.toString())
       });
-      console.log(currentUser.displayName);
     }
   }, [currentUser]);
 
   // Til debug og test. Tjekker om email er verified.
+  // Har ikke en feature til denne knap endnu...
   const handleOnClickDisplayName = () => {
     if (currentUser && !currentUser.emailVerified) {
       console.log("email not verified");
