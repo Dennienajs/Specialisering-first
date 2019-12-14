@@ -92,9 +92,7 @@ export const useLister = () => {
       });
     setLoadingLister(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
-  }, [lister, currentUser]); // jeg sætter uid her for at rerender brugerens "egne lister" ved login. // TODO: REMOVE COMMENT LATER WHEN BUG FIX CONFIRMED.
-  // Det er det nemmere sted at fixe det. Listerne bliver kun renderet ud fra uid og uid bliver ændret når brugeren logger ind.
-  // Hvis uid ikke er her, skal man F5 siden for at få listerne frem. Dette fixes med denne ene dependency added.
+  }, [lister, currentUser]);
 
   return { lister, setLister, loadingLister, setLoadingLister };
 };
