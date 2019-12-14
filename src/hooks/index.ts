@@ -49,6 +49,7 @@ export const usePunkter = (valgtListe: string) => {
     // () => unsubscribe() er vores cleanup, så vi ikke lytter på opdateringer når det ikke er nødvendigt.
     // @ts-ignore TODO: FIX LATER
     return () => unsubscribe(); // Returerner alt de vi lige har bygget op ovenover
+    // man kan sige at vi subscriber til usePunkter, altså dataen vi lytter på. Derfor er det vigtigt vi unsubscriber, så vi ikke introducerer et "memory leak"
   }, [valgtListe, currentUser]); // ListeSkift + user login/signout = rerun all this
 
   // retunerer punkter og loadingPunkter -staten
