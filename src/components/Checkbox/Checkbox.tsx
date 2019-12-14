@@ -17,26 +17,28 @@ export const Checkbox: React.FC<CheckboxProps> = ({
 }) => {
   // Type = done -> line-through + update arkiveret felt i firebase = true/false.
   // Type = delete -> slet punkt fra firebase.
+  const handleCheckboxClick = () => {
+    switch (type) {
+      case "done":
+        checkPunktDone(arkiveret, id); // checkPunktDone flyttet til /helpers
+        break;
 
-  // Kunne også laves i en switch for readability, men jeg elsker ternary operators.
+      case "delete":
+        sletPunkt(id); // sletPunkt flyttet til /helpers
+        break;
+
+      default:
+        console.log("Fejl ...");
+        break;
+    }
+  };
+
   return (
     <div
       className="checkbox-holder"
       data-testid="checkbox-action"
-      onClick={() =>
-        type === "done"
-          ? checkPunktDone(arkiveret, id)
-          : type === "delete"
-          ? sletPunkt(id)
-          : console.log("fejl")
-      }
-      onKeyDown={() =>
-        type === "done"
-          ? checkPunktDone(arkiveret, id)
-          : type === "delete"
-          ? sletPunkt(id)
-          : console.log("fejl")
-      }
+      onClick={() => handleCheckboxClick()}
+      onKeyDown={() => handleCheckboxClick()}
       aria-label={`Mark '${indhold}' as ${type}?`}
       role="button"
     >
