@@ -81,6 +81,7 @@ export const useLister = () => {
       .get() // kan også returnere cached data eller faile hvis offline.
       .then(snapshot => {
         const alleLister = snapshot.docs.map(liste => ({
+          // docs = An array of all the documents in the QuerySnapshot.
           ...liste.data(),
           docId: liste.id
         }));
