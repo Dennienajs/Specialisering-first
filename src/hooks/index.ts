@@ -44,12 +44,13 @@ export const usePunkter = (valgtListe: string) => {
       setPunkter(nyePunkter);
       setLoadingPunkter(false);
     });
-
-    // Vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" eller "currentUser" rammes.
-    // () => unsubscribe() er vores cleanup, så vi ikke lytter på opdateringer når det ikke er nødvendigt.
+    // - unsubscribe.onSnapshot - er en listener for querySnapshot event.
+    // - man canceler listeneren ved at kalde functionen "unsubscribe()", som kalder .onSnapshot til at starte med.,
+    // - dette er altså vores "cleanup" function i denne useEffect. Ved at cleanup undgår vi at introducere memory leaks.
+    // - vi subscriber altså til usePunkter og lytter på punkterne i databasen.
+    // - vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" eller "currentUser" rammes.
     // @ts-ignore TODO: FIX LATER
-    return () => unsubscribe(); // Returerner alt de vi lige har bygget op ovenover
-    // man kan sige at vi subscriber til usePunkter, altså dataen vi lytter på. Derfor er det vigtigt vi unsubscriber, så vi ikke introducerer et "memory leak"
+    return () => unsubscribe();
   }, [valgtListe, currentUser]); // ListeSkift + user login/signout = rerun all this
 
   // retunerer punkter og loadingPunkter -staten
@@ -77,7 +78,7 @@ export const useLister = () => {
       .firestore()
       .collection("lister")
       .where("brugerId", "==", uid) // "in" = ligesom at sige where ... OR where ... , altså indeholder hvilken som helst af værdierne i arrayet
-      .get()
+      .get() // kan også returnere cached data eller faile hvis offline.
       .then(snapshot => {
         const alleLister = snapshot.docs.map(liste => ({
           ...liste.data(),
