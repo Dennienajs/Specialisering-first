@@ -17,6 +17,7 @@ const ButtonToggleSidebar: React.FC<ButtonToggleSidebarProps> = ({
           type="checkbox"
           checked={visSidebar}
           onChange={() => setVisSidebar(!visSidebar)}
+          aria-label="vis/skjul sidebar"
         />
         <span className="slider" />
       </label>
