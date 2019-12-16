@@ -72,6 +72,7 @@ export const TilføjPunkt = () => {
           }
         }}
         data-testid="tilføj-punkt-input"
+        aria-label="tilføj punkt indhold"
       />
       <button
         type="button"

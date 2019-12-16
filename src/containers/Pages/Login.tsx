@@ -61,6 +61,7 @@ const Login = () => {
             placeholder="Email"
             required={true}
             data-testid="form-input-email"
+            aria-label="email input"
           />
         </div>
         <div className="form-group">
@@ -72,6 +73,7 @@ const Login = () => {
             placeholder="Password"
             required={true}
             data-testid="form-input-password"
+            aria-label="password input"
           />
         </div>
         <div className="form-group">

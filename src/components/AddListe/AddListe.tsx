@@ -48,6 +48,7 @@ export const AddListe = ({ defaultVis = false }) => {
             data-testid="add-liste-navn"
             placeholder="Liste Navn"
             onKeyPress={keyPressed}
+            aria-label="Tilføj listenavn"
           />
           <button
             className="add-liste__submit"
