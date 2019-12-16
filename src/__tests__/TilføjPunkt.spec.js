@@ -64,6 +64,8 @@ describe("<TilføjPunkt />", () => {
       const lister = [{}];
       const valgtListe = "someListe";
 
+      console.error = jest.fn(); // så vi ikke får error'en i consolen
+
       const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
           <ListerContext.Provider value={{ lister }}>
@@ -135,10 +137,10 @@ describe("<TilføjPunkt />", () => {
       firebase.firestore.mockImplementation(() => ({
         collection: jest.fn(() => ({
           add: jest.fn(() => Promise.reject("Promise rejected."))
-          // add: jest.fn(() => Promise.reject("Promise rejected .."))
         }))
       }));
-
+      console.error = jest.fn().mockImplementation(); // så vi ikke får noget i consolen
+      window.alert = jest.fn().mockImplementation(); // så vi ikke får noget i consolen
       const theme = {};
       const dark = true;
       const toggle = jest.fn();

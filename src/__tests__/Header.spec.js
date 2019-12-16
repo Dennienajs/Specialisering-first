@@ -17,7 +17,6 @@ beforeEach(cleanup); // Cleans - Unmounts React trees that were mounted with ren
 // ***************************************************************
 
 describe("<Header />", () => {
-  window.alert = jest.fn().mockImplementation();
   describe("Success", () => {
     // ingen user + login click
     it("render <Header /> UDEN en currentUser og clicker login", () => {
@@ -49,6 +48,8 @@ describe("<Header />", () => {
         displayName: "user"
       };
       const setValgtListe = jest.fn();
+      console.log = jest.fn().mockImplementation(); // så vi ikke får logs i console
+      window.confirm = jest.fn().mockImplementation(); // så vi ikke får logs i console
 
       const { queryByTestId } = render(
         <Router>
@@ -78,6 +79,9 @@ describe("<Header />", () => {
         emailVerified: true
       };
       const setValgtListe = jest.fn();
+      console.error = jest.fn().mockImplementation(); // så vi ikke får logs i console
+      window.alert = jest.fn().mockImplementation();
+      console.log = jest.fn().mockImplementation(); // så vi ikke får logs i console
 
       const { queryByTestId } = render(
         <Router>
@@ -105,7 +109,8 @@ describe("<Header />", () => {
         emailVerified: false
       };
       const setValgtListe = jest.fn();
-
+      console.log = jest.fn().mockImplementation(); // så vi ikke får logs i console
+      window.confirm = jest.fn().mockImplementation(); // så vi ikke får logs i console
       const { queryByTestId } = render(
         <Router>
           <AuthContext.Provider value={{ currentUser }}>
@@ -128,6 +133,7 @@ describe("<Header />", () => {
     // handleOnClickDisplayName + emailVerified: false + click Plus-icon
     it("render <Header /> UDEN en currentUser og clicker header-plus (Plus-icon)", () => {
       const setValgtListe = jest.fn();
+      console.log = jest.fn().mockImplementation(); // så vi ikke får logs i console
 
       const { queryByTestId } = render(
         <Router>
@@ -148,6 +154,7 @@ describe("<Header />", () => {
     // Send email confirmation (resolve promise)
     it("render <Header /> UDEN en currentUser, sender emailConfirmation", () => {
       const setValgtListe = jest.fn();
+      window.confirm = jest.fn(() => true); // så vi ikke får logs i console
       const currentUser = {
         email: "user@email.com",
         updateProfile: jest.fn(),
@@ -156,8 +163,6 @@ describe("<Header />", () => {
           Promise.resolve("Promise resolved ..")
         )
       };
-
-      window.confirm = jest.fn().mockImplementation(() => true);
 
       const { queryByTestId } = render(
         <Router>
@@ -175,6 +180,9 @@ describe("<Header />", () => {
     // Catch email confirmation (reject promise)
     it("render <Header /> UDEN en currentUser, catcher emailConfirmation", () => {
       const setValgtListe = jest.fn();
+      window.confirm = jest.fn(() => true);
+
+      console.error = jest.fn().mockImplementation();
       const currentUser = {
         email: "user@email.com",
         updateProfile: jest.fn(),
@@ -183,8 +191,6 @@ describe("<Header />", () => {
           Promise.reject("Promise rejected ..")
         )
       };
-
-      window.confirm = jest.fn().mockImplementation(() => true);
 
       const { queryByTestId } = render(
         <Router>

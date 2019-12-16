@@ -25,6 +25,7 @@ describe("<Login />", () => {
 
   describe("Success", () => {
     it("render <Login /> page UDEN en currentUser, udfylder felterne og logger ind.", () => {
+      window.alert = jest.fn(); // så vi ikke får error'en i consolen
       const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
           <Router>
@@ -80,6 +81,7 @@ describe("<Login />", () => {
 
     it("render <Login /> og trykker 'login med google', Promise rejected", () => {
       const currentUser = null;
+      window.alert = jest.fn(); // så vi ikke får error'en i consolen
       const { queryByTestId } = render(
         <AuthContext.Provider value={{ currentUser }}>
           <Router>

@@ -124,6 +124,8 @@ describe("<IndividuelListe />", () => {
           }))
         }))
       }));
+      window.alert = jest.fn().mockImplementation(); // til reject, catch
+      console.error = jest.fn().mockImplementation(); // så vi ikke får noget i consolen
       // Auth
       const currentUser = { email: "user@email.com", uid: "123" };
       // Lister
