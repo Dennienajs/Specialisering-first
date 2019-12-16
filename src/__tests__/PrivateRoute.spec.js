@@ -11,6 +11,7 @@ describe("<PrivateRoute />", () => {
   describe("Success", () => {
     // Render faktisk <Content /> via <PrivateRoute />
     it("render <PrivateRoute component={Content} /> MED en currentUser", () => {
+      console.error = jest.fn().mockImplementation();
       const currentUser = {
         email: "user@email.com",
         uid: "001"

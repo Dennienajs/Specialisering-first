@@ -19,6 +19,7 @@ describe("<Content />", () => {
 
   describe("Success", () => {
     it("render <Content /> page MED a currentUser", () => {
+      console.error = jest.fn().mockImplementation();
       // Auth
       const currentUser = {
         email: "user@email.com",

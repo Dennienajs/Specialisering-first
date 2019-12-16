@@ -15,6 +15,7 @@ beforeEach(cleanup);
 describe("<Sidebar />", () => {
   describe("Success", () => {
     it("render <Sidebar />", () => {
+      console.error = jest.fn().mockImplementation();
       const theme = {};
       const dark = true;
       const toggle = jest.fn();
