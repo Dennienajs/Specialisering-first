@@ -12,7 +12,7 @@ export const Content = () => {
 
   // Sjkuler sidebaren ved første render, hvis man ikke er logget ind.
   useEffect(() => {
-    currentUser ? setVisSidebar(true) : setVisSidebar(!visSidebar);
+    currentUser ? setVisSidebar(true) : setVisSidebar(false);
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [currentUser]); // Den vil have "visSidebar" i denpendency arrayet, men det vil give et infinite loop. Logikken virker som den skal nu.
 
