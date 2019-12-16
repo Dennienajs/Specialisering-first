@@ -60,6 +60,7 @@ describe("<AddListe />", () => {
       const valgtListe = "someListe";
 
       window.alert = jest.fn().mockImplementation();
+      console.error = jest.fn().mockImplementation(); // så vi ikke logger til console
 
       const { queryByTestId } = render(
         <AuthContext.Provider value={{}}>
