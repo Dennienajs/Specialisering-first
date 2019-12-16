@@ -56,10 +56,14 @@ describe("<PrivateRoute />", () => {
     //
 
     // Rammer <Redirect to={"/login"} />
-    it("render (ikke) <PrivateRoute component={Content} /> UDEN en currentUser", () => {
+    it("render <PrivateRoute component={Content} /> UDEN en currentUser og viser IKKE Content.", () => {
       const { queryByTestId } = render(
         <Router>
-          <PrivateRoute component={Content} />
+          <AuthContext.Provider value={{}}>
+            <Router>
+              <PrivateRoute component={Content} />
+            </Router>
+          </AuthContext.Provider>
         </Router>
       );
       // render ikke content
