@@ -16,7 +16,7 @@ jest.mock("../hooks", () => ({
       {
         // kan sagtens udkommenteres
         id: "mx2taaXpF38vYqMGbVtY",
-        arkiveret: true,
+        arkiveret: Math.random() > 0.5 ? true : false, // snydekode ??
         dato: "21/07/2019",
         listeId: "1",
         punkt: "Learn some Jest testing or die tryin'",

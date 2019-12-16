@@ -26,7 +26,7 @@ describe("<Checkbox />", () => {
   describe("Success", () => {
     it("renders <Checkbox />", () => {
       const { queryByTestId } = render(
-        <Checkbox id="1" indhold="'Make great testing!'" />
+        <Checkbox id="1" indhold="'Make great testing!'" arkiveret={true} />
       );
       expect(queryByTestId("checkbox-action")).toBeTruthy(); // data-testid="checkbox-action"
     });
@@ -76,7 +76,7 @@ describe("<Checkbox />", () => {
             id="1"
             indhold="'Make great testing!'"
             type="done"
-            arkiveret="false"
+            arkiveret={false}
           />
         </AuthContext.Provider>
       );
