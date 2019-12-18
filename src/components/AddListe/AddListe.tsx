@@ -1,4 +1,4 @@
-import React, { useState, useContext, KeyboardEvent } from "react";
+import React, { useState, useContext } from "react";
 import uuid from "uuid";
 import { firebase } from "../../firebase";
 import { useListerValue, AuthContext } from "../../context";
@@ -30,7 +30,7 @@ export const AddListe = ({ defaultVis = false }) => {
   };
 
   // Tilføj via enter
-  const keyPressed = (event: KeyboardEvent) => {
+  const keyPressed = (event: React.KeyboardEvent<HTMLElement>): void => {
     if (event.key === "Enter" && listeNavn.length > 0) {
       addListe();
     }
