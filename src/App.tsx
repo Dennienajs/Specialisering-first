@@ -30,8 +30,9 @@ export const App = () => {
             <Router>
               <Header />
               <PrivateRoute exact={true} path="/" component={Content} />
-              <Route exact={true} path="/login" component={Login} />
-              <Route exact={true} path="/signup" component={Signup} />
+              <Route path="/login" component={Login} />
+              <Route path="/signup" component={Signup} />
+              <Route component={Login} />
             </Router>
           </main>
         </ValgtListeProvider>
