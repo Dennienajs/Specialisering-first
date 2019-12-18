@@ -32,7 +32,6 @@ export const App = () => {
               <PrivateRoute exact={true} path="/" component={Content} />
               <Route path="/login" component={Login} />
               <Route path="/signup" component={Signup} />
-              <Route component={Login} />
             </Router>
           </main>
         </ValgtListeProvider>
