@@ -1,4 +1,5 @@
 /* eslint-disable react/jsx-pascal-case */
+// @ts-nocheck
 import React, { useEffect, useContext } from "react";
 import moment from "moment";
 import { usePunkter } from "../../hooks";
@@ -58,7 +59,7 @@ export const Punkter: React.FC<PunkterProps> = ({ visSidebar }) => {
     >
       <div className="punkter-overskrift">
         <h2 data-testid="liste-navn">
-          {listeNavn === "" ? (listeNavn = "ALLE") : listeNavn}
+          {listeNavn === "" ? (listeNavn = "All") : listeNavn}
         </h2>
       </div>
       <ul className="punkter__liste">
@@ -98,7 +99,11 @@ export const Punkter: React.FC<PunkterProps> = ({ visSidebar }) => {
                 <span className="punkt-punkt">{punkt.punkt}</span>
                 <span className="punkt-dato">
                   ~ {moment([punkt.dato], "YYYY/MM/DD HH:mm").fromNow()}
-                  {listeNavn === "ALLE" ? " @" + punkt.listeId : ""}
+                  {listeNavn === "All" ||
+                  listeNavn === "Today" ||
+                  listeNavn === "Last 7 Days"
+                    ? " @" + punkt.listeId
+                    : ""}
                 </span>
               </li>
             </div>

@@ -1,11 +1,10 @@
+//@ts-nocheck TODO FIX
 import { useState, useEffect, useContext } from "react";
 import { firebase } from "../firebase";
 import { AuthContext } from "../context";
-
+import { findDefaultListeMatch } from "../helpers";
+import moment from "moment";
 let uid = ""; // brugerens unikke id
-
-// usePunkter giver adgang til alle puntker.
-// const { punkter } = usePunkter(valgtListe); (valgtListe = listeId)
 
 export const usePunkter = (valgtListe: string) => {
   const { currentUser } = useContext(AuthContext);
@@ -27,7 +26,7 @@ export const usePunkter = (valgtListe: string) => {
 
     // Er der valgt en valgtListe, henter den punkter ud fra den liste.
     // Der er fx ikke en valgtListe i "ALLE", derfor skal det i en if-statement.
-    if (valgtListe) {
+    if (valgtListe && !findDefaultListeMatch(valgtListe)) {
       unsubscribe = unsubscribe.where("listeId", "==", valgtListe);
     }
 
@@ -40,8 +39,18 @@ export const usePunkter = (valgtListe: string) => {
         id: punkt.id
       }));
 
-      // Sætter punkter og loading done.
-      setPunkter(nyePunkter);
+      const now = moment(); // date time now til sammenligning af punkt.dato
+      setPunkter(
+        //  ADDED WITHIN LAST 24 HOURS
+        valgtListe === "Today"
+          ? nyePunkter.filter(punkt => now.diff(punkt.dato, "hours") <= 24)
+          : // ADDED WITHIN LAST 7 DAYS
+          valgtListe === "Last 7 Days"
+          ? nyePunkter.filter(punkt => now.diff(punkt.dato, "hours") <= 168)
+          : // ALL
+            nyePunkter
+      );
+
       setLoadingPunkter(false);
     });
     // - unsubscribe.onSnapshot - er en listener for querySnapshot event.
@@ -93,7 +102,6 @@ export const useLister = () => {
         }
       });
     setLoadingLister(false);
-    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [lister, currentUser]);
 
   return { lister, setLister, loadingLister, setLoadingLister };
