@@ -69,7 +69,6 @@ describe("<Content />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("content")).toBeTruthy();
-      expect(queryByTestId("idag-action")).toBeTruthy();
       expect(queryByTestId("content__not-signed-in")).toBeFalsy();
     });
 

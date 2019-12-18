@@ -136,6 +136,6 @@ describe("<Punkter />", () => {
     );
     expect(queryByTestId("tilføj-punkt")).toBeTruthy();
     expect(queryByTestId("punkter")).toBeTruthy();
-    expect(queryByTestId("liste-navn").textContent).toBe("ALLE"); // const valgtListe = "ALLE";
+    expect(queryByTestId("liste-navn").textContent).toBe("All"); // const valgtListe = "All";
   });
 });

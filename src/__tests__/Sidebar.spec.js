@@ -67,30 +67,14 @@ describe("<Sidebar />", () => {
         </AuthContext.Provider>
       );
       expect(queryByTestId("sidebar")).toBeTruthy();
-      expect(queryByTestId("alle-action")).toBeTruthy();
       act(() => {
-        fireEvent.click(queryByTestId("alle-action"));
-        fireEvent.keyDown(queryByTestId("alle-action"));
+        fireEvent.click(queryByTestId("All-action"));
+        fireEvent.keyDown(queryByTestId("All-action"));
       });
 
       expect(
-        queryByTestId("alle").classList.contains("aktivListe")
+        queryByTestId("All").classList.contains("aktivListe")
       ).toBeTruthy();
-      expect(
-        queryByTestId("idag").classList.contains("aktivListe")
-      ).toBeFalsy();
-      expect(
-        queryByTestId("denneUge").classList.contains("aktivListe")
-      ).toBeFalsy();
-      expect(
-        queryByTestId("todo").classList.contains("aktivListe")
-      ).toBeFalsy();
-      expect(
-        queryByTestId("bugs").classList.contains("aktivListe")
-      ).toBeFalsy();
-      expect(
-        queryByTestId("indkøb").classList.contains("aktivListe")
-      ).toBeFalsy();
     });
 
     it("Open and close sidebar 'sidebar-toggle-egne-lister' with onClick", () => {
