@@ -1,4 +1,5 @@
 import { firebase } from "../firebase";
+import { defaultSidebarLister } from "../containers/Sidebar/defaultSidebarListerData";
 
 // 06-12-2019 - removed unused + migrated to typescript.
 
@@ -10,6 +11,11 @@ import { firebase } from "../firebase";
 // ***************************************************
 // ***************************************************
 
+// Finder ud af om valgtListe existerer i DefaultLister
+export const findDefaultListeMatch = (valgtListe: string) =>
+  defaultSidebarLister.find(liste => liste.listeId === valgtListe);
+
+//
 // SLETPUNKT (Checkbox component)
 export const sletPunkt = (id: string) => {
   const confirmation = window.confirm(
