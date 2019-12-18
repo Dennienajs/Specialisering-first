@@ -27,7 +27,8 @@ const Login = () => {
   const handleLoginWithGoogle = useCallback(async event => {
     event.preventDefault();
     try {
-      await firebase.auth().signInWithPopup(googleProvider);
+      // await firebase.auth().signInWithPopup(googleProvider);
+      await firebase.auth().signInWithRedirect(googleProvider);
     } catch (err) {
       alert(err);
     }
@@ -50,7 +51,7 @@ const Login = () => {
         className="form"
         data-testid="form-input-submit"
       >
-        <h3 className="form-header">LOGIN PAGE</h3>
+        <h3 className="form-header">LOG IN</h3>
 
         <div className="form-group">
           <input
@@ -83,11 +84,11 @@ const Login = () => {
             aria-label="Login with email and password"
           >
             <EmailIcon />
-            <p>login med email & password</p>
+            <p>login with email & password</p>
           </button>
         </div>
         <div className="form-group">
-          <span>Eller</span>
+          <span>OR</span>
         </div>
         <div className="form-group google">
           <button
@@ -101,17 +102,17 @@ const Login = () => {
               src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
               alt="google icon"
             />
-            <p>login med google</p>
+            <p>login with google</p>
           </button>
         </div>
         <div className="form-footer">
-          Ingen bruger?
+          New?
           <Link
             style={{
               color: theme.color
             }}
             to="/signup"
-          >{` Opret dig`}</Link>
+          >{` Create an account`}</Link>
         </div>
       </form>
     </div>
