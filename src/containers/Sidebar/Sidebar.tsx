@@ -8,12 +8,12 @@ import {
   AuthContext,
   useListerValue
 } from "../../context";
-import { defaultSidebarListerData } from "./defaultSidebarListerData";
+import { defaultSidebarLister } from "./defaultSidebarListerData";
 
 export const Sidebar = () => {
   // @ts-ignore TODO: FIX LATER ***
   const { setValgtListe } = useValgtListeValue(); // Hvilken liste/punkter der vises til brugeren
-  const [aktivListe, setAktivListe] = useState("alle"); // Markerer og viser liste
+  const [aktivListe, setAktivListe] = useState("All"); // Markerer og viser liste
   const [visLister, setVisLister] = useState(true); // Toggle egne lister
   const { theme } = useContext(ThemeContext); // darkmode
   const { currentUser } = useContext(AuthContext); // authentication/user info
@@ -36,7 +36,7 @@ export const Sidebar = () => {
       }}
     >
       <ul className="sidebar_liste">
-        {defaultSidebarListerData.map(liste => (
+        {defaultSidebarLister.map(liste => (
           <li
             key={liste.listeId}
             data-testid={liste.navn}
@@ -56,7 +56,7 @@ export const Sidebar = () => {
               }}
             >
               <span>{liste.icon}</span>
-              <span>{liste.displayNavn}</span>
+              <span>{liste.navn}</span>
             </div>
           </li>
         ))}
