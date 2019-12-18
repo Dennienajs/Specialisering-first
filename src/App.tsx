@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import "./App.scss";
-import { BrowserRouter as Router, Route } from "react-router-dom";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
 import Header from "./containers/Header";
 import Login from "./containers/Pages/Login";
 import Signup from "./containers/Pages/Signup";
@@ -29,9 +29,12 @@ export const App = () => {
           >
             <Router>
               <Header />
-              <PrivateRoute exact={true} path="/" component={Content} />
-              <Route path="/login" component={Login} />
-              <Route path="/signup" component={Signup} />
+              <Switch>
+                <PrivateRoute exact={true} path="/" component={Content} />
+                <Route exact path="/login" component={Login} />
+                <Route exact path="/signup" component={Signup} />
+                <Route component={Login} />
+              </Switch>
             </Router>
           </main>
         </ValgtListeProvider>
