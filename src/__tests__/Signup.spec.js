@@ -2,6 +2,8 @@ import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { BrowserRouter as Router } from "react-router-dom";
 import Signup from "../containers/Pages/Signup";
+import { AuthContext } from "../context";
+import { act } from "react-dom/test-utils";
 
 beforeEach(cleanup);
 
@@ -21,9 +23,11 @@ describe("<Signup />", () => {
       window.alert = jest.fn().mockImplementation();
 
       const { queryByTestId } = render(
-        <Router>
-          <Signup />
-        </Router>
+        <AuthContext.Provider value={{}}>
+          <Router>
+            <Signup />
+          </Router>
+        </AuthContext.Provider>
       );
       expect(queryByTestId("signup")).toBeTruthy();
 
@@ -45,6 +49,40 @@ describe("<Signup />", () => {
 
       // Submitter formen
       fireEvent.submit(queryByTestId("form-input-submit"));
+    });
+
+    // Med en user ***Kan ikke få den til at ramme currentUser = true (Redirect to="/")
+    it("render <Signup /> page MED en currentUser", () => {
+      const currentUser = {
+        name: "123",
+        email: "123@mail.com"
+      };
+      const { queryByTestId } = render(
+        <Router>
+          <AuthContext.Provider value={{ currentUser }}>
+            <Signup />
+          </AuthContext.Provider>
+        </Router>
+      );
+      // Redirects to "/" if(currentUser)
+      expect(queryByTestId("signup")).toBeNull();
+    });
+
+    it("render <Signup /> og trykker 'login med google', Promise rejected", () => {
+      const currentUser = null;
+      window.alert = jest.fn(); // så vi ikke får error'en i consolen
+      const { queryByTestId } = render(
+        <AuthContext.Provider value={{ currentUser }}>
+          <Router>
+            <Signup />
+          </Router>
+        </AuthContext.Provider>
+      );
+
+      expect(queryByTestId("google-login-button")).toBeTruthy();
+      act(() => {
+        fireEvent.click(queryByTestId("google-login-button"));
+      });
     });
   });
 });
