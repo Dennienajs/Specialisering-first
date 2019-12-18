@@ -1,34 +1,48 @@
-import React, { useCallback } from "react";
-import { withRouter } from "react-router";
-import { firebase } from "../../firebase";
+import React, { useCallback, useContext } from "react";
+import { withRouter, Redirect } from "react-router";
+import { firebase, googleProvider } from "../../firebase";
 import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
-import { ThemeContext } from "../../context";
+import { ThemeContext, AuthContext } from "../../context";
+import { MdEmail as EmailIcon } from "react-icons/md";
 
 // removed {history}
 const Signup = () => {
   const { theme } = React.useContext(ThemeContext);
+
+  const { currentUser } = useContext(AuthContext);
+
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
-  const handleSignup = useCallback(
-    async event => {
-      event.preventDefault();
-      const { email, password } = event.target.elements; // deconstructs from the event (form below)
+  const handleSignupWithEmailAndPassword = useCallback(async event => {
+    event.preventDefault();
+    const { email, password } = event.target.elements; // deconstructs from the event (form below)
 
-      // Creates user and redirects to home
-      try {
-        await firebase
-          .auth()
-          .createUserWithEmailAndPassword(email.value, password.value);
-        // history.push("/");
-      } catch (err) {
-        // Hvis man prøvet at oprette en bruger med email, hvor emailen allerede er i brug,
-        // får man "Error: The email address is already in use by another account."
-        alert(err);
-      }
-    },
-    [] // removed history
-  );
+    // Creates user and redirects to home
+    try {
+      await firebase
+        .auth()
+        .createUserWithEmailAndPassword(email.value, password.value);
+    } catch (err) {
+      // Hvis man prøvet at oprette en bruger med email, hvor emailen allerede er i brug,
+      // får man "Error: The email address is already in use by another account."
+      alert(err);
+    }
+  }, []);
+
+  const handleLoginWithGoogle = useCallback(async event => {
+    event.preventDefault();
+    try {
+      // await firebase.auth().signInWithPopup(googleProvider);
+      await firebase.auth().signInWithRedirect(googleProvider);
+    } catch (err) {
+      alert(err);
+    }
+  }, []);
+
+  if (currentUser) {
+    return <Redirect to="/" />;
+  }
 
   return (
     <div className="wrap" data-testid="signup">
@@ -37,11 +51,11 @@ const Signup = () => {
           backgroundColor: theme.backgroundColor,
           color: theme.color
         }}
-        onSubmit={handleSignup}
+        onSubmit={handleSignupWithEmailAndPassword}
         className="form"
         data-testid="form-input-submit"
       >
-        <h3 className="form-header">SIGNUP PAGE</h3>
+        <h3 className="form-header">REGISTER</h3>
 
         <div className="form-group">
           <input
@@ -73,18 +87,37 @@ const Signup = () => {
             type="submit"
             aria-label="Opret Bruger"
           >
-            OPRET BRUGER
+            <EmailIcon />
+            <p>Register with email & password</p>
+          </button>
+        </div>
+        <div className="form-group">
+          <span>OR</span>
+        </div>
+        <div className="form-group google">
+          <button
+            data-testid="google-login-button"
+            className="form-button google-button"
+            onClick={handleLoginWithGoogle}
+            aria-label="Google login"
+          >
+            <img
+              className="form-img google-img"
+              src="https://upload.wikimedia.org/wikipedia/commons/5/53/Google_%22G%22_Logo.svg"
+              alt="google icon"
+            />
+            <p>login with google</p>
           </button>
         </div>
         <div className="form-footer">
-          Allerede bruger?
+          Have an account?
           <Link
             style={{
               color: theme.color
             }}
             to="/login"
           >
-            {` Log in`}{" "}
+            {` Log in`}
           </Link>
         </div>
       </form>
