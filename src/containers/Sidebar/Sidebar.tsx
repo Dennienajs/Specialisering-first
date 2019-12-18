@@ -75,7 +75,7 @@ export const Sidebar = () => {
             <span>
               <FiChevronsDown className={!visLister ? "skjult" : undefined} />
             </span>
-            <h2>Lister</h2>
+            <h3>Personal Lists</h3>
           </div>
         </li>
       </ul>

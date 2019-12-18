@@ -46,7 +46,7 @@ export const AddListe = ({ defaultVis = false }) => {
             type="text"
             className="add-liste__navn"
             data-testid="add-liste-navn"
-            placeholder="Liste Navn"
+            placeholder="list name"
             onKeyPress={keyPressed}
             aria-label="Tilføj listenavn"
           />
@@ -57,7 +57,7 @@ export const AddListe = ({ defaultVis = false }) => {
             aria-label="Add Liste"
             onClick={() => addListe()}
           >
-            Tilføj
+            Add List
           </button>
           <span
             className="add-liste__fortryd"
@@ -67,7 +67,7 @@ export const AddListe = ({ defaultVis = false }) => {
             role="button"
             tabIndex={0}
           >
-            Fortryd
+            Cancel
           </span>
         </div>
       )}
@@ -84,7 +84,7 @@ export const AddListe = ({ defaultVis = false }) => {
           {vis ? <FaMinus /> : <FaPlus />}
         </span>
         <span className="add-liste__vis-setVis" data-testid="add-liste-action">
-          Tilføj
+          Add List
         </span>
       </div>
     </div>

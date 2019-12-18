@@ -65,7 +65,7 @@ export const TilføjPunkt = () => {
         className="tilføj-punkt__input"
         value={punkt}
         onChange={event => setPunkt(event.target.value)}
-        placeholder={`tilføj til ${valgtListe.toLowerCase()}`}
+        placeholder={`add to ${valgtListe.toLowerCase()}`}
         onKeyPress={event => {
           if (event.key === "Enter" && punkt.length > 0) {
             tilføjPunkt();
@@ -82,7 +82,7 @@ export const TilføjPunkt = () => {
         data-testid="tilføj-punkt-button"
         aria-label="Tilføj Punkt"
       >
-        Tilføj
+        Add
       </button>
       <ToastContainer style={{ textAlign: "center" }} />
     </div>
