@@ -27,12 +27,24 @@ const Login = () => {
   const handleLoginWithGoogle = useCallback(async event => {
     event.preventDefault();
     try {
-      // await firebase.auth().signInWithPopup(googleProvider);
-      await firebase.auth().signInWithRedirect(googleProvider);
+      if (detectMobile()) {
+        await firebase.auth().signInWithRedirect(googleProvider);
+      } else {
+        await firebase.auth().signInWithPopup(googleProvider);
+      }
     } catch (err) {
       alert(err);
     }
   }, []);
+
+  // Mobil hvis skærmstørrelsen er:
+  const detectMobile = () => {
+    if (window.innerWidth <= 600 && window.innerHeight <= 800) {
+      return true;
+    } else {
+      return false;
+    }
+  };
 
   const { currentUser } = useContext(AuthContext);
 
