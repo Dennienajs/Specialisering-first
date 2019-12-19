@@ -28,7 +28,6 @@ export const Checkbox: React.FC<CheckboxProps> = ({
         break;
 
       default:
-        console.log("Fejl ...");
         break;
     }
   };

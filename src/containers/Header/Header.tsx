@@ -26,16 +26,16 @@ export const Header = () => {
           currentUser.email
       );
       // Hvis man accepterer popop, sendes verification email.
-      confirmation
-        ? currentUser
-            .sendEmailVerification()
-            .then(() => {
-              alert("Verification email sent to: " + currentUser.email);
-            })
-            .catch((err: Error) => {
-              console.error("Error: " + err);
-            })
-        : console.log("currentUser: " + currentUser);
+      if (confirmation) {
+        currentUser
+          .sendEmailVerification()
+          .then(() => {
+            alert("Verification email sent to: " + currentUser.email);
+          })
+          .catch((err: Error) => {
+            console.error("Error: " + err);
+          });
+      }
     }
   }, [currentUser]);
 
@@ -52,13 +52,7 @@ export const Header = () => {
   // Til debug og test. Tjekker om email er verified.
   // Har ikke en feature til denne knap endnu...
   const handleOnClickDisplayName = () => {
-    if (currentUser && !currentUser.emailVerified) {
-      console.log("email not verified");
-    }
-    if (currentUser && currentUser.emailVerified) {
-      console.log("email is verified");
-    }
-    console.log(currentUser);
+    //Find på noget ???
   };
 
   return (
@@ -89,7 +83,7 @@ export const Header = () => {
               <button
                 aria-label="no use"
                 data-testid="header-plus"
-                onClick={() => console.log("TODO: something..")}
+                onClick={() => "" /* Find på noget ??? */}
               >
                 <Plus />
               </button>
@@ -122,8 +116,6 @@ export const Header = () => {
                     firebase.auth().signOut();
                     localStorage.removeItem("FBIdToken");
                     setValgtListe("");
-                    console.log("Signed out");
-                    console.log("FBIdToken removed");
                   }}
                 >
                   <SignOut />
