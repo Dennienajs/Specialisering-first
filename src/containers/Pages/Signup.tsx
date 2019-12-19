@@ -5,11 +5,11 @@ import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
 import { ThemeContext, AuthContext } from "../../context";
 import { MdEmail as EmailIcon } from "react-icons/md";
+import { detectMobile } from "./googleLoginHelper";
 
 // removed {history}
 const Signup = () => {
   const { theme } = React.useContext(ThemeContext);
-
   const { currentUser } = useContext(AuthContext);
 
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
@@ -33,8 +33,11 @@ const Signup = () => {
   const handleLoginWithGoogle = useCallback(async event => {
     event.preventDefault();
     try {
-      // await firebase.auth().signInWithPopup(googleProvider);
-      await firebase.auth().signInWithRedirect(googleProvider);
+      if (detectMobile()) {
+        await firebase.auth().signInWithRedirect(googleProvider);
+      } else {
+        await firebase.auth().signInWithPopup(googleProvider);
+      }
     } catch (err) {
       alert(err);
     }

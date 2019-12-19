@@ -5,10 +5,13 @@ import { AuthContext, ThemeContext } from "../../context";
 import "./Shared-login-signup.scss";
 import { Link } from "react-router-dom";
 import { MdEmail as EmailIcon } from "react-icons/md";
+import { detectMobile } from "./googleLoginHelper";
 
 // Removed {history}
 const Login = () => {
   const { theme } = useContext(ThemeContext);
+  const { currentUser } = useContext(AuthContext);
+
   // callback to return a memoized version of the callback, that only changes when the dependencies has.
   // prevents unnecessary renders
   const handleLoginWithEmailAndPassword = useCallback(async event => {
@@ -36,17 +39,6 @@ const Login = () => {
       alert(err);
     }
   }, []);
-
-  // Mobil hvis skærmstørrelsen er:
-  const detectMobile = () => {
-    if (window.innerWidth <= 600 && window.innerHeight <= 800) {
-      return true;
-    } else {
-      return false;
-    }
-  };
-
-  const { currentUser } = useContext(AuthContext);
 
   if (currentUser) {
     return <Redirect to="/" />;
