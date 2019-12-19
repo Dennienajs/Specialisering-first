@@ -19,24 +19,24 @@ export const App = () => {
     <AuthProvider>
       <ListerProvider>
         <ValgtListeProvider>
-          <main
-            data-testid="application"
-            className="App"
-            style={{
-              backgroundColor: theme.backgroundColor,
-              color: theme.color
-            }}
-          >
-            <Router>
+          <Router>
+            <main
+              data-testid="application"
+              className="App"
+              style={{
+                backgroundColor: theme.backgroundColor,
+                color: theme.color
+              }}
+            >
               <Header />
               <Switch>
                 <PrivateRoute exact={true} path="/" component={Content} />
-                <Route exact path="/login" component={Login} />
-                <Route exact path="/signup" component={Signup} />
+                <Route path="/login" component={Login} />
+                <Route path="/signup" component={Signup} />
                 <Route component={Login} />
               </Switch>
-            </Router>
-          </main>
+            </main>
+          </Router>
         </ValgtListeProvider>
       </ListerProvider>
     </AuthProvider>
