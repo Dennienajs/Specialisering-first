@@ -6,17 +6,26 @@
     "jsx": "react",
     "esModuleInterop": true,
     "forceConsistentCasingInFileNames": true,
-    "lib": ["dom", "dom.iterable", "esnext"],
+    "lib": [
+      "dom",
+      "dom.iterable",
+      "esnext"
+    ],
     "allowJs": true,
     "skipLibCheck": true,
     "allowSyntheticDefaultImports": true,
     "moduleResolution": "node",
     "resolveJsonModule": true,
     "removeComments": false,
-    "isolatedModules": false,
+    "isolatedModules": true,
     "noEmit": true,
     "strict": true,
     "noImplicitAny": true
   },
-  "include": ["src", "App", "PrivateRoute", "cypress"]
+  "include": [
+    "src",
+    "App",
+    "PrivateRoute",
+    "cypress"
+  ]
 }
