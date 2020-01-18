@@ -1,6 +1,7 @@
-    I'm just a student learning React by doing some projects for fun.
 
-PROJECT LIVE AT:
-https://listeapp.netlify.com/
+Just a student learning React.
 
-https://twitter.com/najsGG
+Feel free to give it a try at - https://listeapp.netlify.com/
+
+Please let me know if you do - https://twitter.com/najsGG
+
