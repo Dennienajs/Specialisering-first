@@ -18,9 +18,7 @@ export const findDefaultListeMatch = (valgtListe: string) =>
 //
 // SLETPUNKT (Checkbox component)
 export const sletPunkt = (id: string) => {
-  const confirmation = window.confirm(
-    "Er du sikker på du vil fjerne dette punkt?"
-  );
+  const confirmation = window.confirm("Delete this todo?");
   if (confirmation) {
     // ændret fra ternary, da TSLint brokkede sig.
     firebase

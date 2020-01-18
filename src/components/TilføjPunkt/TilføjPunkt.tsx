@@ -14,7 +14,7 @@ export const TilføjPunkt = () => {
 
   // Popop when punkt added successfully.
   const toastSuccess = () => {
-    toast.success(`☑ Tilføjet til ${valgtListe.toLowerCase()} ☑`, {
+    toast.success(`☑ Added to ${valgtListe.toLowerCase()} ☑`, {
       position: "top-center",
       autoClose: 1700,
       hideProgressBar: false,

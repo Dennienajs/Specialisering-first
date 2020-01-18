@@ -22,7 +22,7 @@ export const IndividuelListe: React.FC<IndividuelListeProps> = ({
   const { setValgtListe } = useValgtListeValue(); // hvilke punkter som vises.
 
   const toastSletSuccess = () => {
-    toast.success(`${liste.navn} blev slettet. ❌`, {
+    toast.success(`${liste.navn} deleted ❌`, {
       position: "top-center",
       autoClose: 2500,
       hideProgressBar: false,
@@ -34,7 +34,7 @@ export const IndividuelListe: React.FC<IndividuelListeProps> = ({
 
   const confirmSletListe = () => {
     const confirmation = window.confirm(
-      `Er du sikker på du vil slette: '${liste.navn}'?`
+      `You are about to delete list: '${liste.navn}'?`
     );
     if (confirmation) {
       sletListe();
@@ -69,7 +69,7 @@ export const IndividuelListe: React.FC<IndividuelListeProps> = ({
         <span
           data-testid="individuel-liste-delete"
           onClick={() => confirmSletListe()}
-          aria-label="Slet Liste"
+          aria-label="Delete List"
         >
           <Trash />
         </span>
