@@ -5,11 +5,13 @@
   },
   "extends": [
     "eslint:recommended",
-    "plugin:@typescript-eslint/eslint-recommended"
+    "plugin:@typescript-eslint/eslint-recommended",
+    "plugin:cypress/recommended"
   ],
   "globals": {
     "Atomics": "readonly",
-    "SharedArrayBuffer": "readonly"
+    "SharedArrayBuffer": "readonly",
+    "cy": true
   },
   "parser": "@typescript-eslint/parser",
   "parserOptions": {
@@ -28,7 +30,10 @@
     "react/jsx-no-duplicate-props": 2,
     "react/jsx-no-undef": 2,
     "react/no-multi-comp": 2,
-    "react/jsx-indent-props": ["error", 2]
+    "react/jsx-indent-props": ["error", 2],
+    "cypress/no-assigning-return-values": "error",
+    "cypress/no-unnecessary-waiting": "error",
+    "cypress/assertion-before-screenshot": "warn"
   },
   "settings": {
     "react": {
@@ -39,7 +44,8 @@
     {
       "files": ["**/*.spec.js", "**/*.spec.jsx"],
       "env": {
-        "jest": true
+        "jest": true,
+        "cypress/globals": true
       }
     }
   ]
