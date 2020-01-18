@@ -42,12 +42,3 @@ export const App = () => {
     </AuthProvider>
   );
 };
-
-// ************
-/*
-AuthProvider giver access til "currentUser" gennem Context API
- - bliver ændret ved login/signout.
-
-now --prod  // updates: https://specialisering-1st.dennienajs.now.sh/
-npm run test -- --coverage  // Tests
-*/
