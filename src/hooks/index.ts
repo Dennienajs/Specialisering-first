@@ -100,7 +100,8 @@ export const useLister = () => {
         if (JSON.stringify(alleLister) !== JSON.stringify(lister)) {
           setLister(alleLister);
         }
-      });
+      })
+      .catch(err => console.error("Error: ", err));
     setLoadingLister(false);
   }, [lister, currentUser]);
 
