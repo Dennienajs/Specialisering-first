@@ -2,5 +2,9 @@
   "viewportHeight": 600,
   "viewportWidth": 500,
   "baseUrl": "http://localhost:3000",
-  "projectId": "knmcqt"
+  "projectId": "knmcqt",
+  "env": {
+    "email": "dennie.dc@hotmail.com",
+    "pass": "thisIsMyTestAccount123"
+  }
 }

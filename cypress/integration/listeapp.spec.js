@@ -1,12 +1,12 @@
-const w8 = 100;
+const w8 = 500;
+const email = Cypress.env("email");
+const password = Cypress.env("pass");
 
 describe("listeapp", () => {
   it("Visits localhost:3000", () => {
     cy.visit("/").wait(w8);
   });
 
-  /* 
-Testet og derefter slettet.
   it("Logs in", () => {
     cy.url().should("include", "/login");
 
@@ -20,8 +20,6 @@ Testet og derefter slettet.
       .type("{enter}")
       .wait(w8);
   });
-
-  */
 
   it("Redirects to home when visiting /login", () => {
     cy.visit("/login").wait(w8);
@@ -170,8 +168,6 @@ Testet og derefter slettet.
       .wait(2000);
   });
 
-  /*
-  Testet. Gider ikke logge ind i tests, så logger ikke ud her mere.
   it("Signs out", () => {
     cy.get("[data-testid=header-button-signout] > svg").click();
     cy.get("[data-testid=handle-click-display-name]").should(
@@ -179,7 +175,6 @@ Testet og derefter slettet.
       "Not signed in"
     );
   });
-  */
 
   it("Toggles light theme", () => {
     cy.get("[data-testid=header-toggle-darkmode]").click();
