@@ -4,7 +4,7 @@ const password = Cypress.env("pass");
 
 describe("listeapp", () => {
   it("Visits localhost:3000", () => {
-    cy.visit("/").wait(w8);
+    cy.visit("").wait(w8);
   });
 
   it("Logs in", () => {
@@ -15,10 +15,10 @@ describe("listeapp", () => {
       .wait(w8);
 
     cy.get("[data-testid=form-input-password]")
-      .type(`${password}`)
-      .wait(w8)
-      .type("{enter}")
+      .type(`${password}{enter}`)
       .wait(w8);
+
+    cy.url().should("not.include", "/login");
   });
 
   it("Redirects to home when visiting /login", () => {
