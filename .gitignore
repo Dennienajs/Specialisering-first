@@ -25,4 +25,4 @@ npm-debug.log*
 
 # cypress
 /cypress/integration/examples
-/cypress/videos/listeapp.spec.js
+cypress/videos/listeapp.spec.js.mp4
