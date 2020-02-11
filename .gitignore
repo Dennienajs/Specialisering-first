@@ -10,10 +10,6 @@
 # testing
 /coverage
 
-# production
-/build
-/lib
-
 # misc
 .DS_Store
 .env.local
@@ -25,4 +21,3 @@ npm-debug.log*
 
 # cypress
 /cypress/integration/examples
-cypress/videos/listeapp.spec.js.mp4
