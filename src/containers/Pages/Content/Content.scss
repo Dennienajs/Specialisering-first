@@ -11,8 +11,7 @@
   // BOX SHADOW - OM HELE SIDEN
   // border: 1px solid rgb(218, 218, 218);
   // *********** SIDEBAR TOGGLE BUTTON ***************
-  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3),
-    0 6px 20px 0 rgba(36, 35, 35, 0.15);
+  box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.3), 0 6px 20px 0 rgba(36, 35, 35, 0.15);
   min-height: calc(100vh);
   // *********** ----------------------***************
 
@@ -42,7 +41,7 @@
     padding: 50px 5px 10px 0px;
     display: flex;
     justify-content: flex-end;
-    opacity: 75%;
+    // opacity: 75%;
 
     .switch {
       cursor: pointer;
@@ -116,7 +115,7 @@
     display: flex;
     justify-content: flex-end;
     padding: 0;
-    opacity: 75%;
+    // opacity: 75%;
 
     max-width: 90%;
 
