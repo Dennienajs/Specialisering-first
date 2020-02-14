@@ -24,10 +24,7 @@ describe("listeapp", () => {
   it("Redirects to home when visiting /login", () => {
     cy.visit("/login").wait(w8);
     cy.url().should("not.include", "/login");
-    cy.get("[data-testid=handle-click-display-name]").should(
-      "contain",
-      "Dennie"
-    );
+    cy.get("[data-testid=handle-click-display-name]").should("contain", "Dennie");
   });
   it("Hides sidebar", () => {
     cy.get(".slider").click();
@@ -43,9 +40,7 @@ describe("listeapp", () => {
       .wait(w8)
       .type("{enter}");
 
-    cy.get(
-      ":nth-child(1) > .punkter__liste-container-li > .punkt-punkt"
-    ).should("contain", "hackerman");
+    cy.get(":nth-child(1) > .punkter__liste-container-li > .punkt-punkt").should("contain", "hackerman");
 
     cy.get("[data-testid=tilføj-punkt-input]").should("be.empty");
 
@@ -53,16 +48,12 @@ describe("listeapp", () => {
   });
 
   it("Completes todo", () => {
-    cy.get(
-      `:nth-child(1) > [aria-label="Mark 'hackerman todo' as done?"] > [data-testid=checkbox-tick]`
-    )
+    cy.get(`:nth-child(1) > [aria-label="Mark 'hackerman todo' as done?"] > [data-testid=checkbox-tick]`)
       .click()
       .wait(w8);
   });
   it("Deletes todo", () => {
-    cy.get(
-      `:nth-child(1) > [aria-label="Mark 'hackerman todo' as delete?"] > [data-testid=checkbox-delete]`
-    ).click();
+    cy.get(`:nth-child(1) > [aria-label="Mark 'hackerman todo' as delete?"] > [data-testid=checkbox-delete]`).click();
   });
 
   it("Shows sidebar", () => {
@@ -83,7 +74,7 @@ describe("listeapp", () => {
       .wait(w8);
   });
 
-  it("Adds todo to personal list", () => {
+  it("Adds todos to personal todo list", () => {
     cy.get(":nth-child(1) > [data-testid=sidebar-egne-lister]")
       .should("contain", "Todo")
       .click();
@@ -96,6 +87,54 @@ describe("listeapp", () => {
       .type("test listeapp with cypress!")
       .wait(w8)
       .type("{enter}");
+
+    cy.get("[data-testid=tilføj-punkt-input]")
+      .should("have.attr", "placeholder", "add to todo")
+      .click()
+      .wait(w8)
+      .type("this is so cool")
+      .wait(w8)
+      .type("{enter}");
+
+    cy.get("[data-testid=tilføj-punkt-input]")
+      .should("have.attr", "placeholder", "add to todo")
+      .click()
+      .wait(w8)
+      .type("make great testing!")
+      .wait(w8)
+      .type("{enter}");
+
+    cy.get(`[aria-label="Mark 'test listeapp with cypress!' as done?"] > [data-testid=checkbox-tick]`).click({
+      multiple: true
+    });
+  });
+
+  it("Sorts list ", () => {
+    cy.get("[data-testid=punkter]").should("contain", "test listeapp with cypress!");
+    cy.get("[data-testid=punkter]").should("contain", "make great testing!");
+    cy.get("[data-testid=punkter]").should("contain", "this is so cool");
+
+    // Sorts DONE
+    cy.get("[data-testid=sort-by]")
+      .select("Done")
+      .wait(w8);
+
+    cy.get("[data-testid=punkter]").should("contain", "test listeapp with cypress!");
+    cy.get("[data-testid=punkter]").should("not.contain", "make great testing!");
+    cy.get("[data-testid=punkter]").should("not.contain", "this is so cool");
+
+    // Sorts ACTIVE
+    cy.get("[data-testid=sort-by]")
+      .select("Active")
+      .wait(w8);
+
+    cy.get("[data-testid=punkter]").should("not.contain", "test listeapp with cypress!");
+    cy.get("[data-testid=punkter]").should("contain", "make great testing!");
+    cy.get("[data-testid=punkter]").should("contain", "this is so cool");
+
+    cy.get("[data-testid=sort-by]")
+      .select("All")
+      .wait(w8);
   });
 
   it("Added todo should be visible in 'All'", () => {
@@ -103,37 +142,34 @@ describe("listeapp", () => {
       .click()
       .wait(w8);
     cy.get(".punkter-overskrift").should("contain", "All");
-    cy.get("[data-testid=punkter]").should(
-      "contain",
-      "test listeapp with cypress!"
-    );
+    cy.get("[data-testid=punkter]").should("contain", "test listeapp with cypress!");
   });
   it("Added todo should be visible in 'Today'", () => {
     cy.get("[data-testid=Today-action]")
       .click()
       .wait(w8);
     cy.get(".punkter-overskrift").should("contain", "Today");
-    cy.get("[data-testid=punkter]").should(
-      "contain",
-      "test listeapp with cypress!"
-    );
+    cy.get("[data-testid=punkter]").should("contain", "test listeapp with cypress!");
   });
   it("Added todo should be visible in 'Last 7 days'", () => {
     cy.get('[data-testid="Last 7 Days-action"]')
       .click()
       .wait(w8);
     cy.get(".punkter-overskrift").should("contain", "Last 7 Days");
-    cy.get("[data-testid=punkter]").should(
-      "contain",
-      "test listeapp with cypress!"
-    );
+    cy.get("[data-testid=punkter]").should("contain", "test listeapp with cypress!");
   });
 
-  it("Deletes todo", () => {
-    cy.get(
-      `:nth-child(1) > [aria-label="Mark 'test listeapp with cypress!' as delete?"] > [data-testid=checkbox-delete]`
-    )
-      .click()
+  it("Deletes all todos", () => {
+    cy.get(`[aria-label="Mark 'make great testing!' as delete?"] > [data-testid=checkbox-delete]`)
+      .click({ multiple: true })
+      .wait(w8);
+
+    cy.get(`[aria-label="Mark 'test listeapp with cypress!' as delete?"] > [data-testid=checkbox-delete]`)
+      .click({ multiple: true })
+      .wait(w8);
+
+    cy.get(`[aria-label="Mark 'this is so cool' as delete?"] > [data-testid=checkbox-delete]`)
+      .click({ multiple: true })
       .wait(w8);
   });
 
@@ -156,10 +192,7 @@ describe("listeapp", () => {
       .click()
       .wait(w8);
 
-    cy.get("[data-testid=punkter]").should(
-      "not.contain",
-      "test listeapp with cypress!"
-    );
+    cy.get("[data-testid=punkter]").should("not.contain", "test listeapp with cypress!");
 
     cy.get("[data-testid=individuel-liste-delete] > svg").click();
 
@@ -170,13 +203,12 @@ describe("listeapp", () => {
 
   it("Signs out", () => {
     cy.get("[data-testid=header-button-signout] > svg").click();
-    cy.get("[data-testid=handle-click-display-name]").should(
-      "contain",
-      "Not signed in"
-    );
+    cy.get("[data-testid=handle-click-display-name]").should("contain", "Not signed in");
   });
 
   it("Toggles light theme", () => {
-    cy.get("[data-testid=header-toggle-darkmode]").click();
+    cy.get("[data-testid=header-toggle-darkmode]")
+      .wait(w8)
+      .click();
   });
 });

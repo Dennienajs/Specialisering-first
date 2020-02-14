@@ -11,21 +11,16 @@ import LinearProgress from "@material-ui/core/LinearProgress"; // Loading
 
 interface PunkterProps {
   visSidebar: boolean;
-}
-interface PunktProps {
-  id: string;
-  punkt: string;
-  arkiveret: boolean;
-  dato: string;
-  listeId: string;
+  sortBy: string;
+  setSortBy: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const Punkter: React.FC<PunkterProps> = ({ visSidebar }) => {
+export const Punkter: React.FC<PunkterProps> = ({ visSidebar, sortBy }) => {
   // @ts-ignore TODO: FIX LATER ***
   const { valgtListe } = useValgtListeValue();
   const { theme } = useContext(ThemeContext);
   const { currentUser } = useContext(AuthContext);
-  const { punkter, loadingPunkter } = usePunkter(valgtListe); // Henter alle punkter ud fra listeId (valgtListe). hent alle punktervalgtListe = "".
+  const { punkter, loadingPunkter } = usePunkter(valgtListe, sortBy); // Henter alle punkter ud fra listeId (valgtListe). hent alle punktervalgtListe = "".
   let listeNavn = valgtListe; // let fordi den ændres ved liste skift.
 
   // DOCUMENT TITLE: displayName, listeNavn, punkter.length

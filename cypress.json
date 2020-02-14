@@ -1,6 +1,6 @@
 {
-  "viewportHeight": 600,
-  "viewportWidth": 500,
+  "viewportHeight": 736,
+  "viewportWidth": 414,
   "baseUrl": "http://localhost:3000",
   "projectId": "knmcqt",
   "env": {

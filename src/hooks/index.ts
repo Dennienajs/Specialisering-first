@@ -3,12 +3,13 @@ import { useState, useEffect, useContext } from "react";
 import { firebase } from "../firebase";
 import { AuthContext } from "../context";
 import { findDefaultListeMatch } from "../helpers";
+import { PunktProps } from "../types";
 import moment from "moment";
 let uid = ""; // brugerens unikke id
 
-export const usePunkter = (valgtListe: string) => {
+export const usePunkter = (valgtListe: string, sortBy: string) => {
   const { currentUser } = useContext(AuthContext);
-  const [punkter, setPunkter]: any = useState([]); // Skal være [] for tests ikke failer. TODO: FIX ANY.. (fjerne fejl på linie 50.)
+  const [punkter, setPunkter] = useState<PunktProps>([]); // Skal være [] for tests ikke failer. TODO: FIX ANY.. (fjerne fejl på linie 50.)
   const [loadingPunkter, setLoadingPunkter] = useState(true);
 
   // Firebase henter indhold: punkter ud fra brugerId
@@ -34,23 +35,35 @@ export const usePunkter = (valgtListe: string) => {
     // Snapshot fordi det er den data "at that point in time"
     // @ts-ignore TODO: FIX LATER
     unsubscribe = unsubscribe.onSnapshot(snapshot => {
-      const nyePunkter = snapshot.docs.map(punkt => ({
+      const nyePunkter = snapshot.docs.map((punkt: PunktProps) => ({
         ...punkt.data(), // tager punkets data
         id: punkt.id
       }));
 
       const now = moment(); // date time now til sammenligning af punkt.dato
-      setPunkter(
-        //  ADDED WITHIN LAST 24 HOURS
+      //  ADDED WITHIN LAST 24 HOURS
+      const punkterByListe =
         valgtListe === "Today"
           ? nyePunkter.filter(punkt => now.diff(punkt.dato, "hours") <= 24)
           : // ADDED WITHIN LAST 7 DAYS
           valgtListe === "Last 7 Days"
           ? nyePunkter.filter(punkt => now.diff(punkt.dato, "hours") <= 168)
           : // ALL
-            nyePunkter
-      );
+            nyePunkter;
 
+      console.log(sortBy);
+      // Sorts by SortedPunkter component.
+      const punkterSortedBy =
+        sortBy === "Active"
+          ? punkterByListe.filter(punkt => !punkt.arkiveret) // Active
+          : sortBy === "Done"
+          ? punkterByListe.filter(punkt => punkt.arkiveret) // Done
+          : punkterByListe; // All
+
+      console.log("punkterSortedBy");
+      console.log(punkterSortedBy);
+
+      setPunkter(punkterSortedBy);
       setLoadingPunkter(false);
     });
     // - unsubscribe.onSnapshot - er en listener for querySnapshot event.
@@ -60,7 +73,7 @@ export const usePunkter = (valgtListe: string) => {
     // - vi vil unsubscribe så vi ikke tjekker på opdateringer hele tiden, men kun når "valgtListe" eller "currentUser" rammes.
     // @ts-ignore TODO: FIX LATER
     return () => unsubscribe();
-  }, [valgtListe, currentUser]); // ListeSkift + user login/signout = rerun all this
+  }, [valgtListe, currentUser, sortBy]); // ListeSkift + user login/signout = rerun all this
 
   // retunerer punkter og loadingPunkter -staten
   return { punkter, loadingPunkter };
@@ -101,7 +114,18 @@ export const useLister = () => {
           setLister(alleLister);
         }
       })
-      .catch(err => console.error("Error: ", err));
+      .catch((err: Error) => {
+        switch (err.message) {
+          case "Quota exceeded.":
+            return console.error("Firebase error caught: 'quota exceeded'");
+
+          default:
+            console.error("default ERROR: " + err);
+            console.log("message " + err.message);
+            console.log("name " + err.name);
+            console.log("stack " + err.stack);
+        }
+      });
     setLoadingLister(false);
   }, [lister, currentUser]);
 

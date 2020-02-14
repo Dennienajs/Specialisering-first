@@ -4,11 +4,13 @@ import Punkter from "../../../components/Punkter";
 import ButtonToggleSidebar from "./ButtonToggleSidebar";
 import { ThemeContext, AuthContext } from "../../../context";
 import { Link } from "react-router-dom";
+import { SortPunkter } from "../../../components/SortPunkter";
 
 export const Content = () => {
   const { currentUser } = useContext(AuthContext);
   const [visSidebar, setVisSidebar] = useState(true);
   const { theme } = useContext(ThemeContext);
+  const [sortBy, setSortBy] = useState("All"); // "All", "Done", "Active"
 
   // Sjkuler sidebaren ved første render, hvis man ikke er logget ind.
   useEffect(() => {
@@ -28,11 +30,18 @@ export const Content = () => {
         visSidebar={visSidebar}
         setVisSidebar={setVisSidebar}
       />
+      <SortPunkter sortBy={sortBy} setSortBy={setSortBy} />
 
       {visSidebar ? <Sidebar /> : null}
 
       {currentUser ? (
-        <Punkter visSidebar={visSidebar} />
+        <>
+          <Punkter
+            sortBy={sortBy}
+            setSortBy={setSortBy}
+            visSidebar={visSidebar}
+          />
+        </>
       ) : (
         <div
           data-testid="content__not-signed-in"

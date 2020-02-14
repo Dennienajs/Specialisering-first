@@ -41,7 +41,8 @@
     "eject": "react-scripts eject",
     "lint": "eslint \"src/**\"",
     "typecheck": "tsc --noEmit",
-    "cypress": "cypress open"
+    "cy:run": "cypress run",
+    "cy:open": "cypress open"
   },
   "jest": {
     "collectCoverageFrom": [
