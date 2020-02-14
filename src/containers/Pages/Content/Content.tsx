@@ -4,7 +4,7 @@ import Punkter from "../../../components/Punkter";
 import ButtonToggleSidebar from "./ButtonToggleSidebar";
 import { ThemeContext, AuthContext } from "../../../context";
 import { Link } from "react-router-dom";
-import { SortPunkter } from "../../../components/SortPunkter";
+import { SortPunkterDropdown } from "./SortPunkterDropdown";
 
 export const Content = () => {
   const { currentUser } = useContext(AuthContext);
@@ -26,21 +26,14 @@ export const Content = () => {
         color: theme.color
       }}
     >
-      <ButtonToggleSidebar
-        visSidebar={visSidebar}
-        setVisSidebar={setVisSidebar}
-      />
-      <SortPunkter sortBy={sortBy} setSortBy={setSortBy} />
+      <ButtonToggleSidebar visSidebar={visSidebar} setVisSidebar={setVisSidebar} />
+      <SortPunkterDropdown sortBy={sortBy} setSortBy={setSortBy} />
 
       {visSidebar ? <Sidebar /> : null}
 
       {currentUser ? (
         <>
-          <Punkter
-            sortBy={sortBy}
-            setSortBy={setSortBy}
-            visSidebar={visSidebar}
-          />
+          <Punkter sortBy={sortBy} setSortBy={setSortBy} visSidebar={visSidebar} />
         </>
       ) : (
         <div

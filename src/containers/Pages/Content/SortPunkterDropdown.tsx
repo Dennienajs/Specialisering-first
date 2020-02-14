@@ -5,7 +5,7 @@ interface Props {
   setSortBy: React.Dispatch<React.SetStateAction<string>>;
 }
 
-export const SortPunkter: React.FC<Props> = ({ sortBy, setSortBy }) => {
+export const SortPunkterDropdown: React.FC<Props> = ({ sortBy, setSortBy }) => {
   return (
     <div className="content__sort-by">
       <div className="content__sort-by-inner">

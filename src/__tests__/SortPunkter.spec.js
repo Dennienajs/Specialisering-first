@@ -1,7 +1,7 @@
 import React from "react";
 import { render, cleanup, fireEvent } from "@testing-library/react";
 import { act } from "react-dom/test-utils";
-import { SortPunkter } from "../components/SortPunkter";
+import { SortPunkterDropdown } from "../containers/Pages/Content/SortPunkterDropdown";
 
 beforeEach(cleanup);
 
@@ -12,16 +12,10 @@ describe("<SortPunkter />", () => {
 
   describe("Success", () => {
     it("render og trykker på <SortPunkter />", () => {
-      const { queryByTestId } = render(
-        <SortPunkter sortBy setSortBy={() => jest.fn()} />
-      );
+      const { queryByTestId } = render(<SortPunkterDropdown sortBy setSortBy={() => jest.fn()} />);
 
-      // ButtonToggleSidebar er rendered
-      //   expect(queryByTestId("toggle-sidebar")).toBeTruthy();
       expect(queryByTestId("sort-by")).toBeTruthy();
-      // Toggler sidebaren via onClick
       act(() => {
-        // fireEvent.click(queryByTestId("toggle-sidebar"));
         fireEvent.change(queryByTestId("sort-by"));
       });
     });
