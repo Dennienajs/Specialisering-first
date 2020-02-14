@@ -121,6 +121,7 @@
 
     &-inner {
       position: fixed;
+      text-align: center;
 
       label {
       }
@@ -129,6 +130,7 @@
         -moz-appearance: none;
         appearance: none; /* Remove default arrow */
         text-align: center;
+        text-align-last: center;
         font-weight: bold;
         background-color: $blue-generic;
         color: white;
