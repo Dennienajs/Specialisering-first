@@ -123,9 +123,14 @@
       position: fixed;
       text-align: center;
 
-      label {
-      }
       select {
+        // why does this not remove the focused outline? .......
+        &:focus,
+        &:active {
+          outline: none;
+          box-shadow: none;
+          // color: red; // Obviously targets it right
+        }
         -webkit-appearance: none;
         -moz-appearance: none;
         appearance: none; /* Remove default arrow */
@@ -141,8 +146,7 @@
         cursor: pointer;
         position: relative;
         top: -10px;
-      }
-      option {
+        font-size: 13px;
       }
     }
   }
