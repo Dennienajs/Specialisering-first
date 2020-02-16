@@ -51,7 +51,6 @@ export const usePunkter = (valgtListe: string, sortBy: string) => {
           : // ALL
             nyePunkter;
 
-      console.log(sortBy);
       // Sorts by SortedPunkter component.
       const punkterSortedBy =
         sortBy === "Active"
@@ -59,9 +58,6 @@ export const usePunkter = (valgtListe: string, sortBy: string) => {
           : sortBy === "Done"
           ? punkterByListe.filter(punkt => punkt.arkiveret) // Done
           : punkterByListe; // All
-
-      console.log("punkterSortedBy");
-      console.log(punkterSortedBy);
 
       setPunkter(punkterSortedBy);
       setLoadingPunkter(false);
@@ -121,9 +117,9 @@ export const useLister = () => {
 
           default:
             console.error("default ERROR: " + err);
-            console.log("message " + err.message);
-            console.log("name " + err.name);
-            console.log("stack " + err.stack);
+            console.error("message " + err.message);
+            console.error("name " + err.name);
+            console.error("stack " + err.stack);
         }
       });
     setLoadingLister(false);
